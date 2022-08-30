@@ -205,23 +205,6 @@ library(ggpubr)
 <br>
 
 
-#### 6: Study design  {-}
-
-Leave a blank line, and create a new heading called Module 2 Exercises. Leave a blank line afterwards too.
-
-We’re going to work with a table of data that’s already pre-loaded into R inside the dplyr package (part of the [tidyverse](https://www.tidyverse.org/)). This dataset contains 87 rows, each one a starwars character from the [Star Wars API](https://swapi.dev/).
-
-Make sure you have run the library code chunk.  Now, type the ?starwars command in the console. This will bring up the help file. If it can’t find the dataset, you need to load the tidyverse-package using the library command or install either tidyverse or dplyr.
-
-```{r, eval=FALSE,include=FALSE}
-#https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
-```
-
-Now look at the data itself. In the **CONSOLE**, type View(starwars). This will open a new tab with the spreadsheet itself.  DO NOT PUT THE VIEW COMMAND IN A CODE CHUNK (it messes up you making your final file)
-
-
-
-If you want to make it neat, you can use sub headings, or bold/italic text (see that R cheatsheet). Press knit a lot! Check you haven’t made a mistake, check it all works.
 
 #### 6: Data summary  {-}
 
@@ -231,7 +214,11 @@ Leave a blank line, and create a new heading called *Car Analysis*.  Leave a bla
 
 We’re going to work with another table of data that’s already pre-loaded into R, this time inside the ggplot2 package. Make sure you have run the library code chunk.  Now, type the `?mpg` command in the console. This will bring up the help file. If it can't find the dataset, you need to load the ggplot2 package using the library command or install ggplot2.
 
-Now look at the data itself.  In the console, type `View(mpg)`.  This will open a new tab with the spreadsheet itself.  Also look at the summary statistics. Leave a blank line and create a new code chunk containing the following code
+Now look at the data itself. In the **CONSOLE**, type `View(mpg)`. This will open a new tab with the spreadsheet itself.  DO NOT PUT THE VIEW COMMAND IN A CODE CHUNK (it messes up you making your final file)
+
+
+
+Also look at the summary statistics. Leave a blank line and create a new code chunk containing the following code
 
 ```{r, eval=FALSE}
 # mpg comes from the ggplot2 package
@@ -346,9 +333,9 @@ You have described the lab late policy clearly in a way I could share with a new
 
 You have managed to successfully complete all the code challenges
  
-**CAR analysis: 40 MARKS** 
+**Car analysis: 30 MARKS** 
 
-You included all the code and successfully answered the questions, providing reasoning where appropriate
+You included all the code and successfully answered the 3 questions, providing reasoning where appropriate
 
 **Above and beyond: 4 MARKS**
  
