@@ -593,8 +593,90 @@ library(ggpubr)</code></pre>
 <p><br></p>
 </div>
 </div>
-<div id="data-analysis" class="section level4 unnumbered">
-<h4 class="unnumbered">6: Data analysis</h4>
+<div id="study-design" class="section level4 unnumbered">
+<h4 class="unnumbered">6: Study design</h4>
+<p>Leave a blank line, and create a new heading called Module 2
+Exercises. Leave a blank line afterwards too.</p>
+<p>We’re going to work with a table of data that’s already pre-loaded
+into R inside the dplyr package (part of the <a
+href="https://www.tidyverse.org/">tidyverse</a>). This dataset contains
+87 rows, each one a starwars character from the <a
+href="https://swapi.dev/">Star Wars API</a>.</p>
+<p>Make sure you have run the library code chunk. Now, type the
+?starwars command in the console. This will bring up the help file. If
+it can’t find the dataset, you need to load the tidyverse-package using
+the library command or install either tidyverse or dplyr.</p>
+<p>Now look at the data itself. In the <strong>CONSOLE</strong>, type
+View(starwars). This will open a new tab with the spreadsheet itself. DO
+NOT PUT THE VIEW COMMAND IN A CODE CHUNK (it messes up you making your
+final file)</p>
+<p>If you want to make it neat, you can use sub headings, or bold/italic
+text (see that R cheatsheet). Press knit a lot! Check you haven’t made a
+mistake, check it all works.</p>
+</div>
+<div id="data-summary" class="section level4 unnumbered">
+<h4 class="unnumbered">6: Data summary</h4>
+<p>Part 6 is taken from this tutorial (<a
+href="https://r4ds.had.co.nz/data-visualisation.html"
+class="uri">https://r4ds.had.co.nz/data-visualisation.html</a>).</p>
+<p>Leave a blank line, and create a new heading called <em>Car
+Analysis</em>. Leave a blank line afterwards too.</p>
+<p>We’re going to work with another table of data that’s already
+pre-loaded into R, this time inside the ggplot2 package. Make sure you
+have run the library code chunk. Now, type the <code>?mpg</code> command
+in the console. This will bring up the help file. If it can’t find the
+dataset, you need to load the ggplot2 package using the library command
+or install ggplot2.</p>
+<p>Now look at the data itself. In the console, type
+<code>View(mpg)</code>. This will open a new tab with the spreadsheet
+itself. Also look at the summary statistics. Leave a blank line and
+create a new code chunk containing the following code</p>
+<pre class="r"><code># mpg comes from the ggplot2 package
+# skim comes from the skimr package
+skim(mpg)</code></pre>
+<p>and finally, let’s make your first plot.</p>
+<p>Among the variables in the mpg dataset are:</p>
+<ul>
+<li><p><code>displ</code>, a car’s engine size, in litres.</p></li>
+<li><p><code>hwy</code>, a car’s fuel efficiency on the highway, in
+miles per gallon (mpg). A car with a low fuel efficiency consumes more
+fuel than a car with a high fuel efficiency when they travel the same
+distance.</p></li>
+<li><p><code>class</code>, the class of car e.g. mini, SUV, pick
+up..</p></li>
+</ul>
+<p>To make a nice looking plot, let’s use the ggplot package rather than
+the basic r commands.</p>
+<pre class="r"><code># ggplotly comes from the plotly package
+# Choose the dataset and tell R the columns to plot
+p &lt;- ggplot(data = mpg) +                  
+     geom_point(mapping = aes(x = displ, y = hwy, color = class)) 
+
+ggplotly(p)  # Plot interactively</code></pre>
+<p>Now below your code, answer the following questions. Make your
+answers neat using things like, ysub headings, or bold/italic text or
+bullet points (see that R cheatsheet).</p>
+<p>Press knit a lot! Check you haven’t made a mistake, check it all
+works.</p>
+<p><strong>QUESTION 6A</strong></p>
+<p>Based on this dataset, design me a study of your choice - completing
+this template. There are lots of possible studies, so choose your own!
+You do not have to do any analysis, I’m asking you to do this so you can
+prove you understand the concepts.</p>
+<ol style="list-style-type: decimal">
+<li>The object of observation:</li>
+<li>The object of analysis for your particular study:</li>
+<li>The population:</li>
+<li>List the available variables:</li>
+<li>Your response variable:</li>
+<li>What are you hoping to find out?</li>
+</ol>
+<p><strong>QUESTION 6B</strong></p>
+<p>What is the mean/average manufacturing year of the car models in the
+dataset?</p>
+<p><strong>QUESTION 6C</strong></p>
+<p>As fully as possible, describe the relationship between car’s engine
+size and its fuel efficiency on the highway</p>
 <p><br></p>
 </div>
 <div id="above-beyond" class="section level4 unnumbered">
@@ -611,12 +693,19 @@ some way.</strong></p>
 <li>You get 4/4 for something really impressive or multiple small
 things.</li>
 </ul>
-<p>Please tell us in your R script what you did!</p>
+<p><strong>Tell us at the end of your R script what you did or you do
+not get the marks!</strong></p>
 <p>Here in lab 1, maybe you added in different text formats to make your
 lab script more clear (bold/italic etc). Maybe you worked out how to add
 axis labels to ggplot (note, it’s a pain), maybe you used nested
 headings or sub-headings, or worked out how to add a table of
 contents.</p>
+<p>Or here are some ideas…</p>
+<ul>
+<li><a
+href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html"
+class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></li>
+</ul>
 <p><br> <br></p>
 </div>
 </div>
@@ -658,7 +747,7 @@ your answers are referring to.</p>
 with a new student.</p>
 <p><strong>Code Showcase: 20 MARKS</strong></p>
 <p>You have managed to successfully complete all the code challenges</p>
-<p><strong>Car/Normal analysis: 40 MARKS</strong></p>
+<p><strong>CAR analysis: 40 MARKS</strong></p>
 <p>You included all the code and successfully answered the questions,
 providing reasoning where appropriate</p>
 <p><strong>Above and beyond: 4 MARKS</strong></p>

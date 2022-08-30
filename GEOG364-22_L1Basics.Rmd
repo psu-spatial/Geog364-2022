@@ -205,7 +205,83 @@ library(ggpubr)
 <br>
 
 
-#### 6: Data analysis  {-}
+#### 6: Study design  {-}
+
+Leave a blank line, and create a new heading called Module 2 Exercises. Leave a blank line afterwards too.
+
+We’re going to work with a table of data that’s already pre-loaded into R inside the dplyr package (part of the [tidyverse](https://www.tidyverse.org/)). This dataset contains 87 rows, each one a starwars character from the [Star Wars API](https://swapi.dev/).
+
+Make sure you have run the library code chunk.  Now, type the ?starwars command in the console. This will bring up the help file. If it can’t find the dataset, you need to load the tidyverse-package using the library command or install either tidyverse or dplyr.
+
+```{r, eval=FALSE,include=FALSE}
+#https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+```
+
+Now look at the data itself. In the **CONSOLE**, type View(starwars). This will open a new tab with the spreadsheet itself.  DO NOT PUT THE VIEW COMMAND IN A CODE CHUNK (it messes up you making your final file)
+
+
+
+If you want to make it neat, you can use sub headings, or bold/italic text (see that R cheatsheet). Press knit a lot! Check you haven’t made a mistake, check it all works.
+
+#### 6: Data summary  {-}
+
+Part 6 is taken from this tutorial (https://r4ds.had.co.nz/data-visualisation.html). 
+
+Leave a blank line, and create a new heading called *Car Analysis*.  Leave a blank line afterwards too.  
+
+We’re going to work with another table of data that’s already pre-loaded into R, this time inside the ggplot2 package. Make sure you have run the library code chunk.  Now, type the `?mpg` command in the console. This will bring up the help file. If it can't find the dataset, you need to load the ggplot2 package using the library command or install ggplot2.
+
+Now look at the data itself.  In the console, type `View(mpg)`.  This will open a new tab with the spreadsheet itself.  Also look at the summary statistics. Leave a blank line and create a new code chunk containing the following code
+
+```{r, eval=FALSE}
+# mpg comes from the ggplot2 package
+# skim comes from the skimr package
+skim(mpg)
+```
+
+and finally, let's make your first plot.
+
+Among the variables in the mpg dataset are:
+
+ - `displ`, a car’s engine size, in litres.
+
+ - `hwy`, a car’s fuel efficiency on the highway, in miles per gallon (mpg). A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance.
+
+ - `class`, the class of car e.g. mini, SUV, pick up..
+ 
+To make a nice looking plot, let's use the ggplot package rather than the basic r commands.
+
+```{r,  eval=FALSE}
+# ggplotly comes from the plotly package
+# Choose the dataset and tell R the columns to plot
+p <- ggplot(data = mpg) +                  
+     geom_point(mapping = aes(x = displ, y = hwy, color = class)) 
+
+ggplotly(p)  # Plot interactively
+```
+
+Now below your code, answer the following questions. Make your answers neat using things like, ysub headings, or bold/italic text or bullet points (see that R cheatsheet). 
+
+Press knit a lot! Check you haven’t made a mistake, check it all works.
+
+**QUESTION 6A**
+
+Based on this dataset, design me a study of your choice - completing this template.  There are lots of possible studies, so choose your own!  You do not have to do any analysis, I'm asking you to do this so you can prove you understand the concepts.
+
+1. The object of observation:
+2. The object of analysis for your particular study:
+3. The population: 
+3. List the available variables:
+4. Your response variable:
+5. What are you hoping to find out?
+
+**QUESTION 6B**
+
+What is the mean/average manufacturing year of the car models in the dataset?
+
+**QUESTION 6C**
+
+As fully as possible, describe the relationship between car’s engine size and its fuel efficiency on the highway 
 
 
 
@@ -222,10 +298,14 @@ But here is your time to shine. Also, if you are struggling in another part of t
  - You get 2/4 for doing something new in any way
  - You get 4/4 for something really impressive or multiple small things.
  
-Please tell us in your R script what you did!
+**Tell us at the end of your R script what you did or you do not get the marks!**
 
 Here in lab 1, maybe you added in different text formats to make your lab script more clear (bold/italic etc).  Maybe you worked out how to add axis labels to ggplot (note, it's a pain), maybe you used nested headings or sub-headings, or worked out how to add a table of contents.   
- 
+
+Or here are some ideas...
+
+ - https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html 
+
 
 <br>
 <br>
@@ -266,7 +346,7 @@ You have described the lab late policy clearly in a way I could share with a new
 
 You have managed to successfully complete all the code challenges
  
-**Car/Normal analysis: 40 MARKS** 
+**CAR analysis: 40 MARKS** 
 
 You included all the code and successfully answered the questions, providing reasoning where appropriate
 
