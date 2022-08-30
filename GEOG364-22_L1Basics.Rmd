@@ -57,10 +57,6 @@ library(ggpubr)
 
 # Welcome to Lab 1!
 
-## Overview 
-
-There are 7 labs in this course. Each one will build on the last one, with support provided in a series of tutorials (see the tutorials tab).  You should NOT submit the tutorial work. We will work through the tutorials together and then your job is to submit the requirements on this page.
-
 By the end of this week's lab, you will be able to:
 
 1. Get comfortable with the lab format & how to work through them
@@ -69,6 +65,11 @@ By the end of this week's lab, you will be able to:
 3. Run your first programming commands
 4. Put everything together into an interactive markdown website (like this guide)
 5. Understand the process for submitting assignments
+
+
+## Overview 
+
+There are 7 labs in this course. Each one will build on the last one, with support provided in a series of tutorials (see the tutorials tab).  You should NOT submit the tutorial work. We will work through the tutorials together and then your job is to submit the requirements on this page.
 
  **If the labs are causing major problems with your computer or your computer hardware is struggling (or you have any other software issue), Talk to Dr Greatrex**. We can  fix this and there are other options for "online R" that you can use. 
  
@@ -150,7 +151,7 @@ You might find it easier to use the markdown visual text editor.  <br> Click the
 <br>  
 
 
-#### 4: Code showcase
+#### 4: Code showcase {-}
 
 
 ```{r, echo=FALSE}
@@ -174,7 +175,7 @@ Press "knit" at the top of the screen.  If you haven't made a mistake a pop up s
 
 <br>
 
-#### 5. Packages
+#### 5. Packages  {-}
 
 If you have run through the tutorials, you should have installed all the packages you need for this course.
 
@@ -204,13 +205,13 @@ library(ggpubr)
 <br>
 
 
-#### 6: Data analysis
+#### 6: Data analysis  {-}
 
 
 
 <br>
 
-#### 7. Above & beyond
+#### 7. Above & beyond  {-}
 
 Remember that an A is 94%, so you can ignore this section and still easily get an A.
 
