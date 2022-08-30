@@ -10,7 +10,7 @@ navbar:
     - text: "Labs"
       menu:
         - text: "Lab 1:R-Basics"
-          href: GEOG364_23_L1Basics.html  
+          href: GEOG364-22_L1Basics.html
 output:  
   html_document:  
     self_contained: no  
