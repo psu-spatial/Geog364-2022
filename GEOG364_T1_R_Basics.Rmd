@@ -400,6 +400,7 @@ install.packages(c("rmdformats", "stargazer","units","viridis","yarrr","vembedr"
 install.packages(c("beeswarm","corrplot","equatiomatic"))
 install.packages(c("ggExtra","ggridges","ggthemes","ztable"))
 install.packages(c("Stat2Data","USAboundaries","hrbrthemes"))
+install.packages(c("knitr" , "readxl", "remotes"))
 
 ```
 
@@ -408,7 +409,7 @@ install.packages(c("Stat2Data","USAboundaries","hrbrthemes"))
 # The ones below are where there are often errors so we will go more slowly
 install.packages(c("rgdal","rgeos","rmapshaper"))
 install.packages(c("sf","sp","raster","terra"))
-install.packages(c("tidycensus","tigris","tmap")
+install.packages(c("tidycensus","tigris","tmap"))
 
 ```
 
@@ -417,10 +418,10 @@ Sometimes you need to install a package from a different place, like github. To 
 ```{r, warnings=FALSE, message=FALSE, eval=FALSE}
 # Sometimes you need to install a package from a different place, like github. 
 # To do this we use a more complex command from the remotes library
+install.packages(c("knitr" , "readxl", "remotes"))
 remotes::install_github("ropensci/USAboundariesData")
 remotes::install_github("ropenscilabs/rnaturalearthhires")
 remotes::install_github("isciences/exactextractr")
-#install.packages(c("knitr" , "readxl", "remotes"))
 
 ```
 
