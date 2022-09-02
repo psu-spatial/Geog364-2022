@@ -807,11 +807,12 @@ install.packages(c(&quot;olsrr&quot;, &quot;plotly&quot;,&quot;RColorBrewer&quot
 install.packages(c(&quot;rmdformats&quot;, &quot;stargazer&quot;,&quot;units&quot;,&quot;viridis&quot;,&quot;yarrr&quot;,&quot;vembedr&quot;,&quot;GGally&quot;))
 install.packages(c(&quot;beeswarm&quot;,&quot;corrplot&quot;,&quot;equatiomatic&quot;))
 install.packages(c(&quot;ggExtra&quot;,&quot;ggridges&quot;,&quot;ggthemes&quot;,&quot;ztable&quot;))
-install.packages(c(&quot;Stat2Data&quot;,&quot;USAboundaries&quot;,&quot;hrbrthemes&quot;))</code></pre>
+install.packages(c(&quot;Stat2Data&quot;,&quot;USAboundaries&quot;,&quot;hrbrthemes&quot;))
+install.packages(c(&quot;knitr&quot; , &quot;readxl&quot;, &quot;remotes&quot;))</code></pre>
 <pre class="r"><code># The ones below are where there are often errors so we will go more slowly
 install.packages(c(&quot;rgdal&quot;,&quot;rgeos&quot;,&quot;rmapshaper&quot;))
 install.packages(c(&quot;sf&quot;,&quot;sp&quot;,&quot;raster&quot;,&quot;terra&quot;))
-install.packages(c(&quot;tidycensus&quot;,&quot;tigris&quot;,&quot;tmap&quot;)</code></pre>
+install.packages(c(&quot;tidycensus&quot;,&quot;tigris&quot;,&quot;tmap&quot;))</code></pre>
 <p>Sometimes you need to install a package from a different place, like
 github. To do this we use a more complex command from the remotes
 library. Sometimes when doing so, R will ask questions IN THE CONSOLE.
@@ -819,10 +820,10 @@ It will wait for your answer until you type it and press enter! Choose
 to install all sub-packages.</p>
 <pre class="r"><code># Sometimes you need to install a package from a different place, like github. 
 # To do this we use a more complex command from the remotes library
+install.packages(c(&quot;knitr&quot; , &quot;readxl&quot;, &quot;remotes&quot;))
 remotes::install_github(&quot;ropensci/USAboundariesData&quot;)
 remotes::install_github(&quot;ropenscilabs/rnaturalearthhires&quot;)
-remotes::install_github(&quot;isciences/exactextractr&quot;)
-#install.packages(c(&quot;knitr&quot; , &quot;readxl&quot;, &quot;remotes&quot;))</code></pre>
+remotes::install_github(&quot;isciences/exactextractr&quot;)</code></pre>
 <p><br> <br></p>
 </div>
 </div>
@@ -1668,79 +1669,6 @@ class="uri">https://mymodernmet.com/chris-mcveigh-chipmunk-adventures</a></em>
 href="http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/"
 class="uri">http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/</a>
 </strong></p>
-</div>
-<div id="inline-code" class="section level2" number="4.8">
-<h2><span class="header-section-number">4.8</span> Inline code</h2>
-<p>“Inline code” is where you also include snippets of R code in your
-report text itself. This makes it easy to update your report if your
-data changes and removes the chance of typos.</p>
-<p>The way to set up inline code is to contain it within SINGLE little
-back-apostrophes (the same symbol that you see at the start/end of a
-code chunk). Inside the back-apostrophes you put an r to say you want
-the code to be run in the R language. For example:</p>
-<p><img src="Figures/pg_Tut4_markdown_fig21.png" width="835" style="display: block; margin: auto;" />
-Beware! R likes to add in extra symbols to be helpful.</p>
-<p>When you are in the text/code editing window, it will not do the
-calculation; there is no way to “run” this code chunk. But when I press
-knit, it will automatically calculate the result from the code e.g. </p>
-<p>E.g. here is some text and I also want to include the answer to the
-sum 3 plus 3, which is equal to 6</p>
-<div id="best-practice" class="section level3" number="4.8.1">
-<h3><span class="header-section-number">4.8.1</span> Best practice</h3>
-<p>You can do all the workings inside an inline code chunk, but this is
-a pain and it’s easy to make a mistake. Instead, I normally do the
-following:</p>
-<ol style="list-style-type: decimal">
-<li><p>Do all the calculations I want in a normal code chunk (either
-visible or hidden from the reader depending on the report)</p></li>
-<li><p>Make a hidden code chunk where I assign my answer to a variable
-and do things like round the number of digits etc. To hide the code
-chunk, I use the include=FALSE code chunk option.</p></li>
-<li><p>Simply use the inline code chunk to print the result.</p></li>
-</ol>
-<p>For example</p>
-<p><img src="Figures/pg_Tut4_markdown_fig22.png" width="834" style="display: block; margin: auto;" /></p>
-<p>will print as :</p>
-<p>The mean height of my houseplants is 5.757 cm. Without rounding, it
-will look a mess! e.g. 5.7570602 cm.</p>
-<p>I highly recommend you use this technique instead of typing ANY
-numbers from your report.</p>
-<p>If you need something like a p-value from a t-test, you can often get
-it by saving the entire test to a variable, then using the $ sign.</p>
-<p>For example in your final report you might have.</p>
-<p><img src="Figures/pg_Tut4_markdown_fig23.png" width="848" style="display: block; margin: auto;" /></p>
-<p>which prints as:</p>
-<pre class="r"><code>t.test(HousesNY$Beds,mu=3)</code></pre>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  HousesNY$Beds
-## t = 3.6387, df = 52, p-value = 0.0006302
-## alternative hypothesis: true mean is not equal to 3
-## 95 percent confidence interval:
-##  3.177718 3.614734
-## sample estimates:
-## mean of x 
-##  3.396226</code></pre>
-<p>The T-test statistic of my house bedroom data is 31.189, which
-corresponds to a p-value of 0. E.g. there is a 0% chance of seeing this
-result from a random sample if our H<sub>0</sub> was true and the
-average house had 3 beds.</p>
-</div>
-<div id="more-support" class="section level3" number="4.8.2">
-<h3><span class="header-section-number">4.8.2</span> More support</h3>
-<p>These tutorials show more about to add inline code and to
-practice.</p>
-<ul>
-<li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html"
-class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html</a></li>
-<li><a
-href="https://www.njtierney.com/post/2019/07/10/jq-verbatim-inline-r/"
-class="uri">https://www.njtierney.com/post/2019/07/10/jq-verbatim-inline-r/</a></li>
-<li><a href="https://rmarkdown.rstudio.com/lesson-4.html"
-class="uri">https://rmarkdown.rstudio.com/lesson-4.html</a></li>
-</ul>
-</div>
 </div>
 </div>
 
