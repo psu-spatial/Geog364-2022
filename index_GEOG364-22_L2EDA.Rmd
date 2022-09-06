@@ -145,12 +145,11 @@ TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R
 
 ### Using R-CLOUD? {-}
 
-SEE TUTORIALXXX
+https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
 
 ### Using YOUR LAPTOP? {-}
 
-SEE TUTORIALXXX
-
+https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
 
 <br>
 <br>
@@ -211,6 +210,8 @@ library(plotly)
 ```
 
 If you get errors about the package not existing, then go to the Packages Menu in Help Quadrant, click **install** and download them.  
+
+IF YOU ARE ON CLOUD MORE CHANCE YOU WILL HAVE TO REINSTALL BUT JUST DO THESE 6.
 
 
 <br>
