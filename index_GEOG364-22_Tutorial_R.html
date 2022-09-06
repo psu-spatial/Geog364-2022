@@ -327,7 +327,10 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="GEOG364_T1_R_Basics.html">Tutorials</a>
+  <a href="GEOG364-22_T1_R_Basics.html">Original R tutorials</a>
+</li>
+<li>
+  <a href="index_GEOG364-22_Tutorial_R.html">NEW! R-TUTORIAL</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -337,7 +340,10 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="GEOG364-22_L1Basics.html">Lab 1:R-Basics</a>
+      <a href="index_GEOG364-22_L1Basics.html">Lab 1: R-Basics</a>
+    </li>
+    <li>
+      <a href="index_GEOG364-22_L2EDA.html">Lab 2: Exploratory Analysis</a>
     </li>
   </ul>
 </li>
@@ -368,224 +374,336 @@ border-radius: 5px;
 font-style: italic;
 }
 </style>
-<div id="Tut1_WhatisR" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Accessing R &amp;
-Settings</h1>
-<p><em>What are R and R-Studio?</em> <br> <em>How do I transfer things
-to and from R-Studio cloud?</em> <br> <em>What is a package and how do I
-install them?</em></p>
-<p><br></p>
-<div id="what-are-r-and-r-studio" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> What are R and
-R-Studio?</h2>
+<p><br> <br></p>
+<div id="read-this-first" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> READ THIS FIRST</h1>
+<p>In these labs, you can either use your own laptops/computers, or you
+can use a website called R-studio cloud on ANY computer. They do
+basically the same thing and you can switch between the two.</p>
+<ul>
+<li>DESKTOP: Means do this if you are using your own computer
+<br><br></li>
+<li>CLOUD: Means do this if you are using the website</li>
+</ul>
+<p><br> <br></p>
+<div id="all-about-r" class="section level2 tabset tabset-fade"
+number="1.1">
+<h2 class="tabset tabset-fade"><span
+class="header-section-number">1.1</span> All about R</h2>
+<div id="r-is-a-language" class="section level3 unnumbered">
+<h3 class="unnumbered">R is a LANGUAGE</h3>
 <p><strong>R</strong> is a free, open source statistical programming
-language. It is useful for data cleaning, analysis, and visualization.
-By a “programming language”, I mean it is a collection of commands that
-you can type into the computer in order to analyse and visualise data.
-The easiest way I find to think about R is that it is literally a
+language. It is useful for data cleaning, analysis, and
+visualization.</p>
+<p>By a “programming language”, I mean it is a collection of commands
+that you can type into the computer in order to analyse and visualise
+data.</p>
+<p>The easiest way I find to think about R is that it is literally a
 language, like Spanish or Hindi, that is spoken by your computer.
 Learning R means learning vocabulary and grammar in order to
 communicate. It also means it will get easier with experience and
 practice..</p>
-<p>When you install R on your computer, you are essentially instantly
-teaching your computer to “speak in R” with some very basic Notepad-like
-software where you can enter commands.</p>
 <p><br></p>
+</div>
+<div id="you-speak-r-in-a-console" class="section level3 unnumbered">
+<h3 class="unnumbered">You ‘speak’ R in a CONSOLE</h3>
+<p>You can “have a conversation” with your computer in the R-Langauge
+using a Console. There are many different ways you can access this,
+described later on.</p>
 <div class="figure" style="text-align: center">
-<img src="Figures/pg_Tut1_about_fig1.png" alt="*The basic R console. You write in blue, the computer replies in black. The &gt; means it is waiting for a command*" width="80%" />
+<img src="Figures/Tut_Fig2_markdown.png" alt="*The basic R console. You write in blue, the computer replies in black. The &gt; means it is waiting for a command*" width="80%" />
 <p class="caption">
 <em>The basic R console. You write in blue, the computer replies in
 black. The &gt; means it is waiting for a command</em>
 </p>
 </div>
 <p><br></p>
-<p>More recently, <strong>R-studio</strong> has been designed as a piece
-of software to make it easier to programme in R. It’s Microsoft Word is
-compared to notepad with many more options. For example, you can easily
-see help files, run code, see your output and create outputs like this
-lab book! R-Studio also allows us to make interactive documents called
-R-Markdown files.</p>
+</div>
+<div id="the-version-of-r-you-use-is-important"
+class="section level3 unnumbered">
+<h3 class="unnumbered">The “VERSION” of R you use is important!</h3>
+<p>Just like English has changed since Shakesperean times, the R
+language is always evolving. We keep track using Versions. For example,
+in the screenshot above, at the top of the console you can see it was
+made with <code>R version 4.1.0 Camp Pontanzen</code></p>
+<p><em>Because there are some important new spatial commands we will be
+using, we need the most up-to-date version of the R commands.</em></p>
+<p>The version of R I am using is :</p>
+<pre><code>## [1] &quot;R version 4.2.1 (2022-06-23) Funny-Looking Kid&quot;</code></pre>
+<p>As long as yours is above that you should be fine. The current most
+recent version of the language on the website is:</p>
+<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<p><br><br></p>
+</div>
+</div>
+<div id="all-about-r-studio" class="section level2 tabset tabset-fade"
+number="1.2">
+<h2 class="tabset tabset-fade"><span
+class="header-section-number">1.2</span> All about R-Studio</h2>
+<div id="r-studio-is-a-piece-of-software"
+class="section level3 unnumbered">
+<h3 class="unnumbered">R-STUDIO is a PIECE OF SOFTWARE</h3>
+<p><strong>R-studio</strong> is piece of software designed to make it
+easier to communicate/programme in R, just like Microsoft word is
+designed to make it easier to communicate in ‘human’.</p>
+<p>Just like word, it has many cool features. For example, you can
+easily see help files, run code, see your output and create outputs like
+this lab book! R-Studio also allows us to make interactive documents
+called R-Markdown files. We shall discuss this more in the
+TUTORIAL-LINK-MARKDOWNTUTORIAL.</p>
+<p>In fact this lab-book is written in R-Markdown</p>
 <p><br></p>
 <div class="figure" style="text-align: center">
-<img src="Figures/pg_Tut1_about_fig2.png" alt="*R-studio is much more sophisticated*" width="1424" />
+<img src="Figures/Tut_Fig2_markdown.png" alt="*R-studio is much more sophisticated*" width="1424" />
 <p class="caption">
 <em>R-studio is much more sophisticated</em>
 </p>
 </div>
 <p><br></p>
-<p>To learn more about R studio, see here: <a
+</div>
+<div id="to-do-watch-this" class="section level3 unnumbered">
+<h3 class="unnumbered">TO DO! Watch this</h3>
+<p>Watch this 1 minute video on R-Studio: <a
 href="https://www.rstudio.com/products/rstudio/"
-class="uri">https://www.rstudio.com/products/rstudio/</a> (1 minute
-video), or a slightly longer one here:</p>
+class="uri">https://www.rstudio.com/products/rstudio/</a></p>
+<p>Or, if you prefer, this 5 minute video</p>
 <div class="vembedr">
 <div>
 <iframe src="https://www.youtube.com/embed/SdMPh5uphO0" width="533" height="300" frameborder="0" allowfullscreen="" data-external="1"></iframe>
 </div>
 </div>
-<p><br> <br></p>
+<p><br></p>
+<hr />
+<p><br></p>
+<hr />
 </div>
-<div id="accessing-r-r-studio" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Accessing R &amp;
-R-Studio</h2>
-<p>For this course you will need TWO pieces of software, one called R
-and one called R studio. You have four options:</p>
+</div>
+</div>
+<div id="accessing-the-labs" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Accessing the labs</h1>
+<div id="deciding-on-options" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Deciding on
+options</h2>
+<p>These days there are MANY ways of accessing R-Studio.</p>
+<p>To make it easy to switch between them, we are going to be using
+“Projects”. These are self contained folders that contain all of your
+code, data and output. This makes it really easy to run R-studio and to
+move things around on your computer. (e.g. if you move the whole folder,
+it all still runs).</p>
+<p>For this course, I suggest one of two main options. Each of the
+sections below is dedicated to getting up and started.</p>
+<p><br></p>
+<hr />
+</div>
+<div id="r-studio-cloud-website"
+class="section level2 tabset tabset-fade" number="2.2">
+<h2 class="tabset tabset-fade"><span
+class="header-section-number">2.2</span> R-Studio CLOUD (website)</h2>
+<div id="about" class="section level3 unnumbered">
+<h3 class="unnumbered">About</h3>
+<p>There are many ways to access R-Studio. The easiest is to simply to
+use R Online at the R-Studio Cloud website</p>
+<p>Here you can log into an online version of R. and I believe is free
+for the first 25hrs each month. Like Jupiter Notebook, you can also
+programme in other langauges.</p>
 <ul>
-<li>Installing on your own computer (free and recommended)</li>
-<li>R-Studio Cloud - you can access R studio online, but only a certain
-number of hours are free</li>
-<li>The Penn State TLT server: (Not recommended as often crashes and
-loses work)</li>
-<li>Lab computers (not recommended, they are out of date and R will fill
-up your U-Drive)</li>
+<li>Advantages:
+<ul>
+<li>Super Easy. You will never have to worry about versions or
+updating.</li>
+<li>Projects are incredibly easy and I can debug things fast</li>
+<li>You can do your labs anywhere you have access to a webpage
+<br><br></li>
+</ul></li>
+<li>Disadvantages:
+<ul>
+<li>It’s not as powerful, you won’t be able to play will millions of
+data points</li>
+<li>You have to be online; bad internet connections make it harder</li>
+</ul></li>
 </ul>
-<p>More details here for each of them:</p>
-<p><br></p>
-<div id="Tut1Ba_Desktop" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> On your
-computer</h3>
-<p>R is free and having it on your own computer will give you a lot more
-freedom to complete the labs, especially if there is social distancing
-later in the semester.</p>
-<p class="comment">
-“<strong>Your R AND R-Studio MUST be up to date, or things wont’
-work</strong>. R should be a minimum of 4.1.2 (2021-11-01) –”Bird
-Hippie” and R-studio a minimum of Version 2021.09.1”
+<div id="signing-uplogging-in" class="section level4 unnumbered">
+<h4 class="unnumbered">Signing up/Logging in</h4>
+<p>To sign up, make an account at <a
+href="https://rstudio.cloud/plans/free"
+class="uri">https://rstudio.cloud/plans/free</a>, then click the tabs
+here to look around. Sadly there is no student pricing right now.</p>
+<hr />
+</div>
+</div>
+<div id="creating-projectsthe-workspace"
+class="section level3 unnumbered">
+<h3 class="unnumbered">Creating projects/the Workspace</h3>
+<p><a
+href="https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570"
+title="Why use R Projects"><img
+src="Figures/Tut_Fig7_ProjectVideo.png" alt="Rproject" /></a></p>
+<p>An R-project is a folder that will store everything to do with each
+lab in one place on your computer. This is incredibly useful - it means
+that if you switch from R-Cloud, to the lab computers, to your laptop,
+all you have to do is to move the folder and everything will just work.
+Learn more here.</p>
+<p>You will have a project for each Lab and I may share projects with
+example code.</p>
+<div id="how-to-create-a-project" class="section level4 unnumbered">
+<h4 class="unnumbered">How to create a project</h4>
+<p>Once you have logged in, you will get to a dashboard like this,
+called the R-studio workspace. You make a new project by clicking the
+button on the top right. You can open different projects in different
+tabs on your browser. You can also go back to the work-space at any
+time.</p>
+<p>You can get here from any web-browser, You do not need a special
+computer.</p>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig4_clouddash.png" alt="*The Cloud dashboard*" width="1003" />
+<p class="caption">
+<em>The Cloud dashboard</em>
 </p>
-<p class="comment">
-<strong>If you already have R and/or R-Studio, it is very important you
-update BOTH of them to the most recent version. The easiest way to do
-this is to first uninstall both programmes, then re-install
-fresh.</strong> If you are worried this will affect another class, chat
-with Dr Greatrex before starting out.
-</p>
-<div id="to-install-r" class="section level4 unnumbered">
-<h4 class="unnumbered">To install R:</h4>
-<ol style="list-style-type: decimal">
-<li><p>On a windows machine, go to: <a
-href="https://cloud.r-project.org/bin/windows/base/"
-class="uri">https://cloud.r-project.org/bin/windows/base/</a> , download
-R v 4.2.1 and double click to install (click next through all the
-options)</p></li>
-<li><p>On a Mac, go to: <a
-href="https://cloud.r-project.org/bin/macosx/"
-class="uri">https://cloud.r-project.org/bin/macosx/</a> ,download the R
-v 4.2.1 package and double click to install (click next through all the
-options)</p></li>
-<li><p>On anything else: <a href="https://cloud.r-project.org/bin"
-class="uri">https://cloud.r-project.org/bin</a></p></li>
-</ol>
-</div>
-<div id="to-install-r-studio" class="section level4 unnumbered">
-<h4 class="unnumbered">To install R-Studio:</h4>
-<ol style="list-style-type: decimal">
-<li><p>Go to the website here: <a
-href="https://www.rstudio.com/products/rstudio/download/#download"
-class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>
-and download the version for your operating system.</p>
-<p><em><strong>For Windows Users</strong>: Sometimes R asks you to
-download something called RTools. You can ignore this request as it is
-not relevant to our course. If you really want the warning to go away,
-you can download Rtools here <a
-href="https://cran.r-project.org/bin/windows/Rtools/"
-class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> Follow
-the instructions closely and ask if you need support.</em></p></li>
-</ol>
-<p><br></p>
 </div>
 </div>
-<div id="Tut1Bb_Cloud" class="section level3" number="1.2.2">
-<h3><span class="header-section-number">1.2.2</span> R-studio cloud</h3>
-<p>You can access both R and R-studio online without installing anything
-through R-studio cloud.</p>
-<p>This is a website where you can log into an online version of R. and
-I believe is free for the first 25hrs each month. To do this, make an
-account at <a href="https://rstudio.cloud/plans/free"
-class="uri">https://rstudio.cloud/plans/free</a>.</p>
-<p>You can also easily move files from the Cloud to your Desktop, so for
-example, you can work on the cloud during lab hours and on your desktop
-at home. Here’s how</p>
-<p><br></p>
-<div id="r-studio-cloud-to-your-computer"
-class="section level4 unnumbered">
-<h4 class="unnumbered">R-Studio Cloud to your computer</h4>
+</div>
+<div id="downloading-your-work" class="section level3 unnumbered">
+<h3 class="unnumbered">Downloading your work</h3>
+<p>Ignore this until later on and you need to submit your lab.</p>
+<p>You will need to submit two files for each lab, an “.Rmd” and a
+“.html”. More later on those, but here is how to download them so you
+can submit them</p>
 <ol style="list-style-type: decimal">
 <li>On your computer, go to your GEOG364 folder (or make one!)</li>
 <li>Make a subfolder named for that lab e.g. <em>Lab 1</em></li>
-<li>On your browser, open your project in R-studio cloud</li>
-<li>In the files quadrant/tab, select the checkbox of all the
-files.</li>
-<li>Click Export. This will zip them into a folder. Save that into your
-lab folder</li>
-<li>Unzip. Double click the project.RProj file to reopen your lab on
-your computer</li>
+<li>On the R-Studio Cloud website; inside your project, go to the files
+tab (next to Projects/Help in one quadrant) 4.Click the checkbox by the
+.RmD , click the cog-wheel and then export. Repeat for the html. (you
+can click, both it will download as a zip file).</li>
 </ol>
-<p><br></p>
-<p><img src="Figures/pg_Tut1_about_fig3.png" width="1358" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig5_export.png" alt="*Downloading the files*" width="1363" />
+<p class="caption">
+<em>Downloading the files</em>
+</p>
 </div>
-<div id="your-computer-to-r-studio-cloud"
-class="section level4 unnumbered">
-<h4 class="unnumbered">Your computer to R-Studio Cloud</h4>
+</div>
+<div id="uploading-to-the-cloud" class="section level3 unnumbered">
+<h3 class="unnumbered">Uploading to the cloud</h3>
+<p>Simply click the upload button inside your project in the files tab
+and upload your files. You do not need subfolders.</p>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig5_export.png" alt="*Look near the red circles*" width="1363" />
+<p class="caption">
+<em>Look near the red circles</em>
+</p>
+</div>
+<p><br><br></p>
+<hr />
+</div>
+</div>
+<div id="r-studio-desktop" class="section level2 tabset tabset-fade"
+number="2.3">
+<h2 class="tabset tabset-fade"><span
+class="header-section-number">2.3</span> R-Studio Desktop</h2>
+<div id="about-1" class="section level3 unnumbered">
+<h3 class="unnumbered">About</h3>
+<p>If you have your own computer, you can run R-Studio for free on
+there.</p>
+<ul>
+<li>Advantages:
+<ul>
+<li>Its really powerful and we will learn how to use and update it</li>
+<li>No need for the internet</li>
+<li>You can play with millions of data points <br></li>
+</ul></li>
+<li>Disadvantages:
+<ul>
+<li>It can be annoying to install and update, especially on old
+computers.</li>
+<li>You are tied to your laptop/computer (although you can uplaod your
+files to the cloud)</li>
+</ul></li>
+</ul>
+<p class="comment">
+**If you already have R and/or R-Studio, it is very important you update
+BOTH of them to the most recent version. To do so, pretend you are
+installing them from scratch. If you are worried this will affect
+another class, chat with Dr Greatrex before starting out.
+</p>
+<p><br></p>
+</div>
+<div id="downloading-rr-studio-on-a-pc"
+class="section level3 unnumbered">
+<h3 class="unnumbered">Downloading R/R-Studio on a PC:</h3>
+<p class="comment">
+**To make R-Studio run on your computer, you need to download TWO
+things: [1] A programme that teaches your computer the ability to
+“speak” in R and [2] The R studio software itself
+</p>
 <ol style="list-style-type: decimal">
-<li>On your browser, in R studio cloud make a new project and name it
-something relevant</li>
-<li>Click the upload button</li>
-<li>Navigate to the lab folder on your computer. Choose ONLY the .Rmd
-file(s) and any input data as appropriate (RStudio-Cloud will make the
-rest)</li>
-<li>Click on the .Rmd file name in the files in RStudio and you’re good
-to go</li>
+<li><p><strong>[STEP 1 of 2] Download &amp; install the R-language
+itself:</strong></p>
+<ul>
+<li>Go to: <a href="https://cloud.r-project.org/bin/windows/base/"
+class="uri">https://cloud.r-project.org/bin/windows/base/</a> ,</li>
+<li>download this version of R (the main download R for windows
+button)</li>
+</ul>
+<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<ul>
+<li>Run and click next through all the options</li>
+</ul></li>
+<li><p><strong>[STEP 2 of 2] Download &amp; install R
+studio:</strong></p>
+<ul>
+<li>Go to: <a
+href="https://www.rstudio.com/products/rstudio/download/#download"
+class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>&gt;
+,</li>
+<li>download R studio for windows</li>
+<li>Run and click next through all the options</li>
+</ul></li>
 </ol>
 <p><br></p>
-<p><img src="Figures/pg_Tut1_about_fig4.png" width="1453" style="display: block; margin: auto;" /></p>
-<p><br></p>
-<p><img src="Figures/pg_Tut1_about_fig5.png" width="70%" /></p>
-<p><br></p>
-<p><img src="Figures/pg_Tut1_about_fig6.png" width="90%" /></p>
+</div>
+<div id="downloading-rr-studio-on-a-mac"
+class="section level3 unnumbered">
+<h3 class="unnumbered">Downloading R/R-Studio on a Mac:</h3>
+<p class="comment">
+**To make R-Studio run on your computer, you need to download TWO
+things: [1] A programme that teaches your computer the ability to
+“speak” in R and [2] The R studio software itself
+</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>[STEP 1 of 2] Download &amp; install the R-language
+itself for mac:</strong></p>
+<ul>
+<li>Go to:<a href="https://cloud.r-project.org/bin/macosx/"
+class="uri">https://cloud.r-project.org/bin/macosx/</a> ,</li>
+<li>download this version of R (the .pkg file on the left menu)</li>
+</ul>
+<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<ul>
+<li>Run and click next through all the options</li>
+</ul></li>
+<li><p><strong>[STEP 2 of 2] Download &amp; install R studio for
+mac:</strong></p>
+<ul>
+<li>Go to: <a
+href="https://www.rstudio.com/products/rstudio/download/#download"
+class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>&gt;
+,</li>
+<li>download R studio for Mac</li>
+<li>Run and click next through all the options</li>
+</ul></li>
+</ol>
+<hr />
 <p><br> <br></p>
 </div>
 </div>
-<div id="Tut1Bc_Campus" class="section level3" number="1.2.3">
-<h3><span class="header-section-number">1.2.3</span> Lab computers/TLT
-server</h3>
-<p>There is a free version of R studio cloud hosted by Penn State, that
-you can access here: <a
-href="https://lat.tlt.psu.edu/home/remoteaccess/oss-web-apps/"
-class="uri">https://lat.tlt.psu.edu/home/remoteaccess/oss-web-apps/</a>
-. However, to access off campus you will need a VPN and it can be buggy
-and crash. Be warned and talk to Dr G first.</p>
-<p>The lab computers should have a recent version of R, but often the
-code “packages” you will later install fill up your U-drive. Equally,
-the version of R outside the lab room is going to be out of date and
-will likely cause issues. Be warned</p>
-<p><em>If you go down these routes, proceed with care and talk to Dr
-Greatrex first</em></p>
-<p><br> <br></p>
 </div>
-</div>
-<div id="Tut2A_Settings" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Getting started</h2>
-<p>Everything in this tutorial is a one-off to get R and R-studio set
-up.</p>
-<p><strong>IMPORTANT! In an easy to access place on your computer, make
-a folder called GEOG-364. This is where ALL your labs are going to
-live</strong></p>
-<div id="on-your-own-computer" class="section level4 unnumbered">
-<h4 class="unnumbered">On your own computer</h4>
-<p><strong>Now everything is installed, open R-studio (NOT
-R!)</strong>.</p>
-<p><br></p>
-<p><img src="Figures/pg_Tut2_startup_fig1.png" width="80%" style="display: block; margin: auto;" />
-<br></p>
-</div>
-<div id="on-r-studio-cloud" class="section level4 unnumbered">
-<h4 class="unnumbered">On R-studio Cloud</h4>
-<p>Create a new project (button on the top right).</p>
-<p><br></p>
-<p><img src="Figures/pg_Tut2_startup_fig1cloud.png" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="looking-around-r-studio" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Looking around
-R-studio</h3>
+<div id="initial-set-up" class="section level1 tabset tabset-fade"
+number="3">
+<h1 class="tabset tabset-fade"><span
+class="header-section-number">3</span> Initial set-up</h1>
+<div id="looking-around" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Looking around</h2>
 <p>You will be greeted by three panels:</p>
 <ul>
 <li>The interactive R console (entire left)</li>
@@ -593,13 +711,12 @@ R-studio</h3>
 <li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
 </ul>
 <p><br></p>
-<p><img src="Figures/pg_Tut2_startup_fig2.png" width="889" style="display: block; margin: auto;" /></p>
+<p><img src="Figures/Tut_Fig11_startup.png" width="889" style="display: block; margin: auto;" /></p>
 <p><br></p>
-If you wish to learn more about what these windows do, have a look at
+<p>If you wish to learn more about what these windows do, have a look at
 this resource, from the Pirates Guide to R: <a
 href="https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html"
-class="uri">https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html</a>.<br />
-
+class="uri">https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html</a>.</p>
 <p class="comment">
 If you have used R before, you might see that there are variables and
 plots etc already loaded**. It is always good to clear these before you
@@ -608,111 +725,137 @@ environment tab
 </p>
 <p><br></p>
 </div>
-<div id="moving-the-4-quadrants-around" class="section level3"
-number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> Moving the 4
-quadrants around</h3>
+<div id="moving-the-4-quadrants-around" class="section level2"
+number="3.2">
+<h2><span class="header-section-number">3.2</span> Moving the 4
+quadrants around</h2>
 <p>You might find you like the different quadrants in a different order.
 To change this, look at the menu at VERY TOP OF THE SCREEN.</p>
 <ul>
-<li><p>In the<code>View</code> menu, there is a
+<li>In the<code>View</code> menu, there is a
 <code>/Panes/Pane Layout</code> menu item, where you can move the
 on-screen quadrants around. I tend to like the console to be top left
 and scripts to be top right, with the plots and environment on the
-bottom - but this is personal choice.</p></li>
-<li><p>There should also be a menu called <code>Help</code><br>Useful
-for R-studio version and Markdown cheatsheets.</p></li>
+bottom - but this is personal choice.</li>
+</ul>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig12_panes.png" alt="My preferred set up" width="610" />
+<p class="caption">
+My preferred set up
+</p>
+</div>
+<ul>
+<li>There should also be a menu called <code>Help</code><br>Useful for
+R-studio version and Markdown cheatsheets.</li>
 </ul>
 <p><br></p>
 </div>
-<div id="changing-a-few-settings-lab-1-important" class="section level3"
-number="1.3.3">
-<h3><span class="header-section-number">1.3.3</span> Changing a few
-settings (LAB 1 IMPORTANT)</h3>
+<div id="changing-settings-lab-1-important" class="section level2"
+number="3.3">
+<h2><span class="header-section-number">3.3</span> Changing settings
+(LAB 1 IMPORTANT)</h2>
 <p>R-studio wants to be helpful and will try to re-load exactly where
 you were in a project when you log back in. This can get confusing, so
 we are going to turn this off.</p>
-<ul>
-<li><p><strong>ON A MAC:</strong> Click on the R-studio menu button on
-the top left of the screen, then click Preferences.</p></li>
-<li><p><strong>ON A PC/R-Studio Cloud:</strong> Click on Tools-&gt;
-Global Options -&gt; Preferences</p></li>
-</ul>
+<p>There are two places you might find the options. Depending on how you
+are using R-studio, you will EITHER find it by:</p>
+<ol style="list-style-type: decimal">
+<li>Click on the R-studio menu button on the top left of the screen,
+then click Preferences.</li>
+</ol>
+<p>OR</p>
+<ol style="list-style-type: decimal">
+<li>Click on the tools menu button on the top right of the screen,-&gt;
+Global Options</li>
+</ol>
 <p>Now:</p>
 <ul>
-<li>UNCLICK “Restore most recently opened project at startup”</li>
-<li>UNCLICK “Restore .RData into workspace on startup”</li>
-<li>Set “Save workspace to .RData on” exit to Never</li>
-<li>UNCLICK “Restore previously open source documents on startup”</li>
-<li>You can also click the appearances tab to change how the screen
-looks.</li>
+<li><p>UNCLICK “Restore most recently opened project at
+startup”</p></li>
+<li><p>UNCLICK “Restore .RData into workspace on startup”</p></li>
+<li><p>Set “Save workspace to .RData on” exit to Never</p></li>
+<li><p>UNCLICK “Restore previously open source documents on
+startup”</p></li>
+<li><p>You can also click the appearances tab to change how the screen
+looks.</p></li>
 </ul>
-<p><br> <br> <br></p>
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
 </div>
-</div>
-<div id="Tut2C_Project" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> R-Projects &amp;
-Packages</h1>
-<div id="projects" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Projects</h2>
-<p class="comment">
-<strong>You need to make a new project before you start EVERY
-lab!</strong>
-</p>
-<p>An R-project is a special folder that will store everything to do
-with each lab in one place on your computer. This is incredibly useful -
-it means that if you switch from R-Cloud, to the lab computers, to your
-laptop, all you have to do is to move the folder and everything will
-just work. Learn more here.</p>
+<div id="r-projects-one-for-each-lab"
+class="section level1 tabset tabset-fade" number="4">
+<h1 class="tabset tabset-fade"><span
+class="header-section-number">4</span> R-Projects (one for each
+lab)</h1>
+<div id="what-are-projects" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> What are
+Projects?</h2>
 <p><a
 href="https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570"
-title="Why use R Projects"><img src="./Figures/pg_Tut2_startup_fig3.png"
-alt="Rproject" /></a></p>
-<p><br> <br></p>
-<div id="Tut2Bb_CreateRproj" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Creating an
-R-project</h3>
-<p>This step is needed for EVERY lab.</p>
-<div id="on-r-studio-cloud-1" class="section level5" number="2.1.1.0.1">
-<h5><span class="header-section-number">2.1.1.0.1</span> <strong>On
-R-Studio Cloud:</strong></h5>
-<p>Note, if you are running R-Studio Cloud, you just need to click
-“Create Project” and name it.</p>
+title="Why use R Projects"><img
+src="Figures/Tut_Fig7_ProjectVideo.png" alt="Rproject" /></a></p>
+<p>An R-project is a folder that will store everything to do with each
+lab in one place on your computer. This is incredibly useful - it means
+that if you switch from R-Cloud, to the lab computers, to your laptop,
+all you have to do is to move the folder and everything will just work.
+Learn more here.</p>
+<p>You will have a project for each Lab and I may share projects with
+example code.</p>
 <p><br></p>
 </div>
-<div id="on-your-desktop" class="section level5" number="2.1.1.0.2">
-<h5><span class="header-section-number">2.1.1.0.2</span> <strong>On your
-desktop</strong></h5>
-<p><img src="Figures/pg_Tut2_startup_fig1.png" width="60%" style="display: block; margin: auto;" /></p>
+<div id="using-projects-on-r-studio-cloud"
+class="section level2 unnumbered">
+<h2 class="unnumbered">Using Projects on R-Studio Cloud</h2>
+<p>These are literally built in when you create a new project from the
+workspace.</p>
+<p>For each new lab, go back to the workspace and create a new one (see
+above in the cloud section)</p>
+</div>
+<div id="using-projects-on-r-desktop" class="section level2 unnumbered">
+<h2 class="unnumbered">Using Projects on R-Desktop</h2>
+<p>Easy once you get the hang of it.</p>
+<div id="instructions" class="section level3 unnumbered">
+<h3 class="unnumbered">Instructions</h3>
 <ol style="list-style-type: decimal">
-<li>If it’s not already open, open <strong>R-Studio</strong></li>
-<li>Go to the file menu at the very top and click
-<code>New Project</code></li>
-<li>Select <code>New Directory</code>, then
-<code>New Project</code></li>
-<li>Name your project <em>GEOG364-Lab1-PROJECT</em></li>
-<li>Under “create project as a subdirectory of”, hit the browse button
-and go inside your GEOG-364 main folder (you just need to be in the
-folder, you don’t need to have selected anything). Press open</li>
-<li>Finally, press <code>Create Project</code></li>
+<li><p>IMPORTANT! If you haven’t already, on an easy to access place on
+your computer, make a folder called GEOG-364. This is where ALL your
+labs are going to live.</p></li>
+<li><p>Now everything is installed, open R-studio <strong>(NOT
+R!)</strong>.</p></li>
 </ol>
-<p><img src="Figures/pg_Tut2_startup_fig4.png" width="660" /></p>
-<p><br></p>
+<p><img src="Figures/Tut_Fig6_startup_icons.png" width="80%" style="display: block; margin: auto;" />
+<br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Go to the file menu at the very top and click
+<code>New Project</code></p></li>
+<li><p>Select <code>New Directory</code>, then
+<code>New Project</code></p></li>
+<li><p>Name your project <em>GEOG364-Lab1-PROJECT</em> (or whatever
+lab)</p></li>
+<li><p><strong>Under “create project as a subdirectory of”, hit the
+browse button and go inside your GEOG-364 main folder (you just need to
+be in the folder, you don’t need to have selected anything).</strong>
+Press open</p></li>
+<li><p>Finally, press <code>Create Project</code></p></li>
+</ol>
+<p><img src="Figures/Tut_Fig8_project.png" width="660" /></p>
 </div>
 </div>
-<div id="Tut2Bc_signsRproj" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> How do I know it
-has worked?</h3>
+<div id="how-to-check-you-are-in-a-project"
+class="section level2 unnumbered">
+<h2 class="unnumbered">How to check you are in a project</h2>
 <p>R will change slightly. If you look at the top of the screen in the
-title bar, it should say <em>GEOG364-Lab1-Project R Studio</em>.</p>
+title bar, it should say something like <em>GEOG364-Lab1-Project R
+Studio</em>.</p>
 <p>The Files tab should have gone to your project folder. Essentially,
 R-Studio is now “looking” inside your Lab 1 folder, making it easier to
 find your data and output your results.</p>
 <div class="figure">
-<img src="Figures/pg_Tut2_startup_fig5.png" alt="Note, in this book you might see a few GEOG-364s instead of GEOG-364s" width="845" />
+<img src="Figures/Tut_Fig9_projectcheck.png" alt="How to check you are in a project" width="845" />
 <p class="caption">
-Note, in this book you might see a few GEOG-364s instead of GEOG-364s
+How to check you are in a project
 </p>
 </div>
 <p><br></p>
@@ -725,34 +868,44 @@ instructor.</p>
 <pre class="r"><code>getwd()</code></pre>
 <p><br></p>
 </div>
-<div id="returning-to-your-lab-project" class="section level3"
-number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Returning to your
-lab project</h3>
+<div id="returning-to-your-lab-project" class="section level2"
+number="4.2">
+<h2><span class="header-section-number">4.2</span> Returning to your lab
+project</h2>
+<div id="cloud" class="section level3 unnumbered">
+<h3 class="unnumbered">CLOUD</h3>
+<p>On the cloud this is very easy, just go back to <a
+href="https://rstudio.cloud/content/yours"
+class="uri">https://rstudio.cloud/content/yours</a></p>
+</div>
+<div id="desktop" class="section level3 unnumbered">
+<h3 class="unnumbered">DESKTOP</h3>
 <p>OK, let’s imagine that you get halfway through your lab and your
 computer dies. How do you get back to your Lab work? Try this now. Close
 down R-Studio.</p>
 <p>To reopen a lab:</p>
 <ol style="list-style-type: decimal">
-<li><strong>DO NOT RE-OPEN R-STUDIO!</strong></li>
-<li>Instead navigate on your computer to your
-<em>GEOG-364/GEOG364-Lab1-Project</em> folder.<br />
-</li>
-<li>Double click on the GEOG364-Lab1-Project.RProj file.</li>
+<li><p><strong>DO NOT RE-OPEN R-STUDIO!</strong></p></li>
+<li><p>Instead navigate on your computer to your
+<em>GEOG-364/GEOG364-Lab1-Project</em> folder.</p></li>
+<li><p>Double click on the GEOG364-Lab1-Project.RProj file.</p></li>
 </ol>
 <p>This will reopen R for that specific lab, so you can continue where
 you left off.</p>
 <p>It means you can also open several versions of R studio for multiple
 projects, which can be very useful in keeping labs separate and staying
 sane.</p>
-<p><img src="Figures/pg_Tut2_startup_fig6.png" width="961" /></p>
+<p><img src="Figures/Tut_Fig10_projectopen.png" width="961" /></p>
 <p><br> <br></p>
+<p>=========================================</p>
+<p>BELOW THIS POINT I HAVE NOT HAD THE TIME TO MAKE THE TUTORIALS
+PRETTY</p>
 </div>
 </div>
-<div id="Tut2_Packages" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> R-Packages</h2>
-<div id="Tut2Ba_whatarethey" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> What are
+<div id="Tut2_Packages" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> R-Packages</h2>
+<div id="Tut2Ba_whatarethey" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> What are
 packages?</h3>
 <p>As described earlier, we program in R by typing a series of commands.
 R is open source meaning anyone can create a new one, so over the last
@@ -785,8 +938,8 @@ to open.
 </p>
 <p><br> <br></p>
 </div>
-<div id="Tut2Bc_fulllist" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> LAB 1: Bulk
+<div id="Tut2Bc_fulllist" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> LAB 1: Bulk
 download main packages</h3>
 <p>Now we are going to download most of the packages you need for these
 labs so that you do not need to do this each week. We’re doing it in
@@ -827,8 +980,8 @@ remotes::install_github(&quot;isciences/exactextractr&quot;)</code></pre>
 <p><br> <br></p>
 </div>
 </div>
-<div id="adding-a-new-package" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Adding a new
+<div id="adding-a-new-package" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Adding a new
 package</h2>
 <p>This is a TWO STEP PROCESS</p>
 <ol style="list-style-type: decimal">
@@ -839,8 +992,8 @@ package (like clicking on the icon to start the app)</li>
 </ol>
 <p>More details here:</p>
 <p><br></p>
-<div id="Tut2Bb_howtodownload" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> How to
+<div id="Tut2Bb_howtodownload" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> How to
 Download/Install a new package</h3>
 <p>Look at the Packages tab next to the plot one, you can see which
 packages/libraries are already pre-installed onto your computer.</p>
@@ -872,8 +1025,8 @@ there.</em></p>
 computer</strong></p>
 <p><br></p>
 <div id="how-to-loaduse-a-package" class="section level4"
-number="2.3.1.1">
-<h4><span class="header-section-number">2.3.1.1</span> How to LOAD/USE a
+number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> How to LOAD/USE a
 package</h4>
 <p>Installing a package don’t make the commands immediately available.
 For that you need to load it (like clicking on an app). This can be done
@@ -904,8 +1057,8 @@ is no error then nothing should happen.</strong></p>
 </div>
 </div>
 <div id="how-to-force-the-computer-to-use-a-specific-package"
-class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> How to force the
+class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> How to force the
 computer to use a specific package</h3>
 <p>Sometimes multiple packages name a command the same thing and you
 want to specify which package you want to use. You can do this using the
@@ -917,8 +1070,11 @@ want to specify which package you want to use. You can do this using the
 </div>
 </div>
 </div>
-<div id="basic-commands" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Basic commands</h1>
+<div id="console-vs-scripts-vs-markdown"
+class="section level1 tabset tabset-fade" number="5">
+<h1 class="tabset tabset-fade"><span
+class="header-section-number">5</span> Console vs scripts vs
+Markdown</h1>
 <p class="comment">
 You should now have R-Studio open and be inside an R project. If you’re
 having issues at this point or haven’t managed to get to this step,
@@ -933,11 +1089,11 @@ through the video more slowly here:</p>
 </div>
 </div>
 <p><br> <br></p>
-<div id="first-steps" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> First steps</h2>
+<div id="how-to-use-the-console" class="section level2 unnumbered">
+<h2 class="unnumbered">How to use the console</h2>
 <p>Remember that the aim of programming is to provide a language so you
 can ask your computer to do complex tasks. The console window (see
-Figure @ref(fig:tut2afig2)) is like a phone call with your computer,
+Figure @ref(fig:Tut_Fig1)) is like a phone call with your computer,
 where you “speak” in R.</p>
 <ul>
 <li>The computer has a little <code>&gt;</code> symbol to say it is
@@ -946,21 +1102,49 @@ listening/waiting for your command</li>
 <li>The computer tries to carry it out and will print the answer
 directly onto the screen</li>
 </ul>
-<p>Let’s start by the simplest command possible. Try typing each of the
-following commands into your R console and pressing Enter</p>
+<p>Let’s start by the simplest command possible.</p>
+<div id="example-1" class="section level4" number="5.0.0.1">
+<h4><span class="header-section-number">5.0.0.1</span> EXAMPLE 1</h4>
+<p>Type this command into your R console and press enter to run.</p>
 <pre class="r"><code>1+1</code></pre>
 <p>When you press enter, it should give you the answer…. 2</p>
 <pre class="r"><code>1+1</code></pre>
 <pre><code>## [1] 2</code></pre>
-<p>Note that spacing does not matter: <code>1+1</code> will generate the
-same answer as <code>1      +       1</code>. When we get to text,
-capital letters DO matter.</p>
+<p><br></p>
+</div>
+<div id="example-2" class="section level4" number="5.0.0.2">
+<h4><span class="header-section-number">5.0.0.2</span> EXAMPLE 2</h4>
+<p>Type this command into your R console and press enter to run.</p>
+<pre class="r"><code># Take the sine function of the number 2, like sin(2) on your calculator
+sin(2)</code></pre>
+<p>Here we have a <strong>command</strong> <code>sin()</code> applied to
+the number 2. We also have a <strong>comment</strong> in green, which
+the computer ignores.</p>
+<p><br></p>
+</div>
+<div id="notes" class="section level4" number="5.0.0.3">
+<h4><span class="header-section-number">5.0.0.3</span> NOTES</h4>
+<ul>
+<li><p>Spacing <em>mostly</em> does not matter: <code>1+1</code> will
+generate the same answer as <code>1      +       1</code>.</p>
+<ul>
+<li>Exception: you cannot have a space between a command name and its (
+) e.g <code>sin (2)</code> will fail`</li>
+</ul></li>
+<li><p>Capital letters DO matter. R is case sensitive.</p></li>
+<li><p>To see previous commands, you can click the history tab
+(Environment quadrant) or press the up/down arrows on your keyboard, but
+when you close R, all record of these commands will be lost.</p></li>
+</ul>
 <p><br> <br></p>
 </div>
-<div id="saving-commands-in-scripts" class="section level2"
-number="3.2">
-<h2><span class="header-section-number">3.2</span> Saving commands in
-scripts</h2>
+</div>
+<div id="saving-commands-in-scripts" class="section level2 unnumbered">
+<h2 class="unnumbered">Saving commands in “scripts”</h2>
+<p class="comment">
+WE WILL NOT USE THIS OPTION, but it’s useful for a lot of programming
+and zero writing
+</p>
 <p>You might wonder at this point about how to save your work.</p>
 <p>Typing into console is like having a phone call with your computer;
 you’re talking but you’re not keeping records of what you say. To see
@@ -968,18 +1152,34 @@ previous commands, you can click the history tab (Environment quadrant)
 or press the up/down arrows on your keyboard, but when you close R, all
 record of these commands will be lost.</p>
 <p>We need instead is a way to save the commands for future use - we can
-do this using scripts. There are several types of document, or script
-that you can create and save in R-Studio.</p>
+do this using <strong>scripts</strong>.</p>
+<p>There are several types of document, or script that you can create
+and save in R-Studio. There are about 20 options in the file menu!</p>
+<div id="types-of-script" class="section level3 tabset tabset-fade"
+number="5.0.1">
+<h3 class="tabset tabset-fade"><span
+class="header-section-number">5.0.1</span> Types of script</h3>
+<div id="a-basic-r-script-.r-ignore" class="section level4"
+number="5.0.1.1">
+<h4><span class="header-section-number">5.0.1.1</span> A Basic R script
+(.r) [IGNORE]</h4>
+<p class="comment">
+WE WILL NORMALLY IGNORE THIS OPTION, but it’s useful for a lot of
+programming and zero writing
+</p>
+<p>A basic script (the filetype is .r).</p>
 <ul>
-<li><p>A basic script (the filetype is .r). This is simply just a blank
-notepad where you can save code commands. When you “run” the commands in
-the script, R simply copy/pastes the commands over to the
-console.</p></li>
-<li><p>An R-Notebook or R-Markdown document (the filetype is .Rmd).
-These are much more interesting - and are how I wrote this lab book. We
-will be getting to these later in the lab</p></li>
+<li>This is simply just a blank notepad where you can save code
+commands. (How I learned to code)</li>
+<li>You do NOT save any output</li>
 </ul>
+<p>When you “run” the commands in the script, R simply copy/pastes the
+commands over to the console. You run the commands by highlighting
+(triple click to highlight a whole line), then press control-enter (or
+command-enter on a mac). You can also copy/paste them accoss.</p>
+<p>To open this you literally go to file, then new script.</p>
 <p><br></p>
+</div>
 <div id="creating-a-basic-r-script" class="section level4 unnumbered">
 <h4 class="unnumbered">Creating a basic R script</h4>
 <p>For now, let’s just create a basic R script. Go to the File menu at
@@ -997,11 +1197,15 @@ Running commands in a basic script
 <p>You now have a space where you can save the work below if you wish.
 YOU DO NOT NEED TO SUBMIT THIS. You are also welcome to simply enter the
 commands in the console.</p>
+</div>
+<div id="section" class="section level4" number="5.0.1.2">
+<h4><span class="header-section-number">5.0.1.2</span> </h4>
 <p><br> <br></p>
 </div>
 </div>
-<div id="Tut3B_Calc" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> R as a
+</div>
+<div id="Tut3B_Calc" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> R as a
 calculator</h2>
 <p>When using R as a calculator, the order of operations is the same as
 you would have learned back in school, so use brackets to force a
@@ -1031,8 +1235,8 @@ other</p>
 <p><br> <br></p>
 </div>
 <div id="asking-questionscomparisons" class="section level2"
-number="3.4">
-<h2><span class="header-section-number">3.4</span> Asking
+number="5.2">
+<h2><span class="header-section-number">5.2</span> Asking
 questions/comparisons</h2>
 <p>We can also do comparisons in R - using the special symbols TRUE or
 FALSE (no quote marks, they are special).</p>
@@ -1052,8 +1256,8 @@ FALSE (no quote marks, they are special).</p>
 number 10.</p>
 <p><br> <br></p>
 </div>
-<div id="Tut3C_plus" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> The + symbol in the
+<div id="Tut3C_plus" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> The + symbol in the
 console</h2>
 <p>If you type in an incomplete command, R will understand and wait for
 you to complete it. For example, if you type <code>1 +</code> and press
@@ -1070,8 +1274,8 @@ taking much longer than you expect), or to get rid of the code you’re
 currently writing.</p>
 <p><br> <br></p>
 </div>
-<div id="Tut3D_functions" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span>
+<div id="Tut3D_functions" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span>
 Functions/Commands</h2>
 <p>Watch this short video to learn three important facts about
 functions:</p>
@@ -1127,15 +1331,15 @@ the numbers 12 to 20, along with some axis labels. When you run this,
 the plot will show up in the plots tab.</p>
 <pre class="r"><code># plot the numbers 1 to 10 against the numbers 11 to 20
 plot(1:10,11:20,col=&quot;dark blue&quot;, xlab=&quot;x values&quot;,ylab=&quot;GEOG-364 is the best&quot;) </code></pre>
-<p><img src="GEOG364_T1_R_Basics_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="index_GEOG364-22_Tutorial_R_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>If you are feeling lost, <a
 href="https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/"
 class="uri">https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/</a>
 is a good website which goes over a lot of this in more detail.</p>
 <p><br> <br></p>
 </div>
-<div id="Tut3E_text" class="section level2" number="3.7">
-<h2><span class="header-section-number">3.7</span> Dealing with
+<div id="Tut3E_text" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Dealing with
 text</h2>
 <p>In R, the computer interprets most words as commands. But sometimes
 we need to actually input text, for example for a plot title.
@@ -1157,8 +1361,8 @@ commands, then getting confused by the space between Hello and
 World..</p>
 <p><br> <br></p>
 </div>
-<div id="Tut3F_vars" class="section level2" number="3.8">
-<h2><span class="header-section-number">3.8</span> Variables</h2>
+<div id="Tut3F_vars" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> Variables</h2>
 <p>So now we can use R as a calculator and even add a few more complex
 commands. What we need to be able to do now is to save the results, or
 load in data so we can run more complex commands. We do this through
@@ -1233,8 +1437,8 @@ e.g.</p>
 <pre class="r"><code>rm(x)</code></pre>
 <p>and to clear everything, type</p>
 <pre class="r"><code>rm(list=ls())</code></pre>
-<div id="combining-variables" class="section level3" number="3.8.1">
-<h3><span class="header-section-number">3.8.1</span> Combining
+<div id="combining-variables" class="section level3" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Combining
 variables</h3>
 <p>As I showed above, you can now use multiple variables together in
 more complex commands. For example, try these commands:</p>
@@ -1261,8 +1465,1005 @@ more in future labs.</p>
 </div>
 </div>
 </div>
-<div id="Tut4a_WhatIsIt" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> R-Markdown</h1>
+<div id="r-basics-variables-text-and-commands" class="section level1"
+number="6">
+<h1><span class="header-section-number">6</span> R basics: Variables,
+text and commands</h1>
+<p><br></p>
+</div>
+<div id="getting-help" class="section level1 tabset tabset-fade"
+number="7">
+<h1 class="tabset tabset-fade"><span
+class="header-section-number">7</span> Getting help</h1>
+<p class="comment">
+When programming in R, someone often tells you about a “cool new
+command”. I want you to feel comfortable working out how to use them.
+The R help files are also wonderful.
+</p>
+<p>First, take a look here for all about help. <a
+href="https://www.r-project.org/help.html"
+class="uri">https://www.r-project.org/help.html</a></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Inside every R help file you will see this structure: <a
+href="https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html"
+class="uri">https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html</a></li>
+</ol>
+<p><br> <br></p>
+<div id="how-to-use-the-r-help-files" class="section level2 unnumbered">
+<h2 class="unnumbered">How to use the R help files</h2>
+<p>Here’s how I approach it, but you might find a better approach.</p>
+<ol style="list-style-type: decimal">
+<li>If you don’t already know, find the formal name and package name of
+the command</li>
+</ol>
+<ul>
+<li>The only info we NEED to know about a new command is its name and
+the library/package/app it is stored in. <br><br />
+</li>
+<li>If you don’t know, you can often google the command and look on the
+top left for the package and formal name. You often also find easy
+online tutorials.. <br></li>
+<li>Or go to <a href="https://www.rdocumentation.org/"
+class="uri">https://www.rdocumentation.org/</a> <br></li>
+</ul>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>If you need to install the package, go to the Packages menu in the
+quadrant and click install.</li>
+</ol>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Add the <code>library(PACKAGENAME)</code> command to your library
+code chunk and run to load the package.</li>
+</ol>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Immediately go to the help file for the command you want to run. You
+can do this in the help menu next to the packages menu, or using a ? in
+the CONSOLE e.g. <code>?skim</code>. This will not work if you have not
+loaded the library.</li>
+</ol>
+<p><br></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Inside every help file you will see this structure (SKIM THIS
+EXTERNAL: TUTORIAL)[<a
+href="https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html"
+class="uri">https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html</a>].</li>
+</ol>
+<p><br></p>
+<ol start="6" style="list-style-type: decimal">
+<li>FINALLY, <strong>Scroll to the bottom of the helpfile</strong> for
+some worked examples that you can literally copy and paste into your
+console or your code to understand how it works.</li>
+</ol>
+</div>
+<div id="example-understanding-skim" class="section level2 unnumbered">
+<h2 class="unnumbered">EXAMPLE! Understanding <code>skim</code></h2>
+<p><strong>I was told last year about a new summary command, skim.
+Here’s how it ended up in your lab instructions</strong></p>
+<ol style="list-style-type: decimal">
+<li>I googled ‘skim r command’. This took me quickly to the R
+documentation page</li>
+</ol>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig13a_HelpFile_skimrgoogle.png" alt="Look for Rdocumentation, search-R-Project, or Rdrr" width="943" />
+<p class="caption">
+Look for Rdocumentation, search-R-Project, or Rdrr
+</p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>I ended up at this website: <a
+href="https://search.r-project.org/CRAN/refmans/skimr/html/skim.html"
+class="uri">https://search.r-project.org/CRAN/refmans/skimr/html/skim.html</a>.
+From this I saw that the <code>skim()</code> command is in the
+<code>skimr</code> package*</li>
+</ol>
+<div class="figure" style="text-align: center">
+<img src="Figures/Tut_Fig13_HelpFile_skimr.png" alt="*The skim command is in the skimr package (red circle)*" width="984" />
+<p class="caption">
+<em>The skim command is in the skimr package (red circle)</em>
+</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>I added the <code>skimr</code> package to my library code chunk and
+re-ran</li>
+</ol>
+<pre class="r"><code># LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(ggplot2)
+library(plotly)
+
+library(skimr) </code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>In the console, I FIRST typed <code>&gt; ?skimr</code> to read about
+the package itself (e.g. ?PACKAGENAME). This doesn’t work if you didn’t
+run the library code chunk first.</li>
+</ol>
+<p><br></p>
+<ol start="5" style="list-style-type: decimal">
+<li>In the console, I THEN typed <code>&gt; ?skim</code> to bring up the
+help file and scrolled to the bottom. This doesn’t work if you didn’t
+run the library code chunk first. Inside every R help file you will see
+this structure: <a
+href="https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html"
+class="uri">https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html</a>
+but for now, I scrolled to the bottom.</li>
+</ol>
+<pre><code>&lt;br&gt;</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>I then ran the help file worked examples in the console to
+understand the command. It looks like skim is a nice summary command I
+can apply to a table (in their case the iris table). And that’s how it
+ended up here..</li>
+</ol>
+<pre class="r"><code> skim(iris)</code></pre>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+iris
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:left;">
+ordered
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
+<th style="text-align:left;">
+top_counts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Species
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+set: 50, ver: 50, vir: 50
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5.84
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+5.80
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:left;">
+▆▇▇▅▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.06
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:left;">
+▁▆▇▂▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.76
+</td>
+<td style="text-align:right;">
+1.77
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+4.35
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+<td style="text-align:left;">
+▇▁▆▇▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+1.30
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+▇▁▇▅▃
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code> # Use tidyselect
+ skim(iris, Species)</code></pre>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+iris
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factor
+</td>
+<td style="text-align:left;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:left;">
+ordered
+</th>
+<th style="text-align:right;">
+n_unique
+</th>
+<th style="text-align:left;">
+top_counts
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Species
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+set: 50, ver: 50, vir: 50
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code> skim(iris, starts_with(&quot;Sepal&quot;))</code></pre>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+iris
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5.84
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:left;">
+▆▇▇▅▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.06
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:left;">
+▁▆▇▂▁
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code> skim(iris, where(is.numeric))</code></pre>
+<table style="width: auto;" class="table table-condensed">
+<caption>
+Data summary
+</caption>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Name
+</td>
+<td style="text-align:left;">
+iris
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of rows
+</td>
+<td style="text-align:left;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Number of columns
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+_______________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Column type frequency:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+________________________
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Group variables
+</td>
+<td style="text-align:left;">
+None
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+skim_variable
+</th>
+<th style="text-align:right;">
+n_missing
+</th>
+<th style="text-align:right;">
+complete_rate
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+p0
+</th>
+<th style="text-align:right;">
+p25
+</th>
+<th style="text-align:right;">
+p50
+</th>
+<th style="text-align:right;">
+p75
+</th>
+<th style="text-align:right;">
+p100
+</th>
+<th style="text-align:left;">
+hist
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5.84
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+5.80
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:left;">
+▆▇▇▅▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.06
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:left;">
+▁▆▇▂▁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Length
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.76
+</td>
+<td style="text-align:right;">
+1.77
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+4.35
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+<td style="text-align:left;">
+▇▁▆▇▂
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Petal.Width
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+1.30
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+▇▁▇▅▃
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Finally, I googled tutorials to see if there was a friendlier way of
+looking: <a href="https://docs.ropensci.org/skimr/reference/skim.html"
+class="uri">https://docs.ropensci.org/skimr/reference/skim.html</a></li>
+</ol>
+<p><br> <br></p>
+</div>
+</div>
+<div id="Tut4a_WhatIsIt" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> R-Markdown</h1>
 <p>Typing console is a phone call to the computer, you’re talking but
 you’re not keeping records of what you say (you can always press the up
 key to see previous commands but that’s about it). When you close R,
@@ -1289,8 +2490,8 @@ video</p>
 </div>
 </div>
 <p><br> <br></p>
-<div id="Tut4B_MarkCreate" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Creating a markdown
+<div id="Tut4B_MarkCreate" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Creating a markdown
 document</h2>
 <p>Save your R-script to your Lab 1 folder and close it.</p>
 <p>Time to make your own. Go to the File menu on the top left, then
@@ -1315,15 +2516,15 @@ space at the top of the file where we can add information about
 themes/styles etc.</p>
 <p><br></p>
 </div>
-<div id="Tut4C_Basics" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Markdown Basics</h2>
+<div id="Tut4C_Basics" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Markdown Basics</h2>
 <p>Your file contains some friendly text to explain what is going on,
 which I have annotated here. Read the file and see what it says.</p>
 <p><img src="Figures/pg_Tut4_markdown_fig3.png" width="739" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
-<div id="Tut4Da_knit" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Knitting</h2>
+<div id="Tut4Da_knit" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Knitting</h2>
 <p>The file on your screen isn’t the finished article. To see how it
 will look as a final version, we need to “knit” it. Go to the top of the
 .Rmd file, find the <code>knit</code> button. Press it (you might have
@@ -1336,8 +2537,8 @@ markdown and knitted output.</p>
 <p><img src="Figures/pg_Tut4_markdown_fig4.png" width="1652" style="display: block; margin: auto;" /></p>
 <p><br> <br></p>
 </div>
-<div id="Tut4E_YAML" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> YAML Code</h2>
+<div id="Tut4E_YAML" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> YAML Code</h2>
 <p>Your YAML code is the code at the top of your file in between the —
 lines in the figure above. Let’s zoom in</p>
 <p><img src="Figures/pg_Tut4_markdown_fig5.png" width="80%" style="display: block; margin: auto;" /></p>
@@ -1379,8 +2580,8 @@ headings)</li>
 <li>The document is now in the lumen theme.</li>
 </ul>
 <p><br></p>
-<div id="troubleshooting" class="section level3" number="4.4.1">
-<h3><span class="header-section-number">4.4.1</span>
+<div id="troubleshooting" class="section level3" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span>
 Troubleshooting</h3>
 <ul>
 <li><p>Note, if you copy/paste this and it doesn’t work, sometimes the
@@ -1400,8 +2601,8 @@ two TAB KEYS before toc, toc_float, number_sections and theme.</li>
 press knit. If it doesn’t work, ask for help before moving on</em></p>
 <p><br></p>
 </div>
-<div id="changing-the-theme" class="section level3" number="4.4.2">
-<h3><span class="header-section-number">4.4.2</span> Changing the
+<div id="changing-the-theme" class="section level3" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Changing the
 theme</h3>
 <p>You don’t need to choose the lumen theme. There are many other ways
 you can edit your markdown documents here: <a
@@ -1416,8 +2617,8 @@ welcome to try if you have one you fell in love with!</p>
 <p><nr></p>
 </div>
 <div id="adding-other-yaml-options" class="section level3"
-number="4.4.3">
-<h3><span class="header-section-number">4.4.3</span> Adding other YAML
+number="8.4.3">
+<h3><span class="header-section-number">8.4.3</span> Adding other YAML
 options</h3>
 <p>There are many more details about different options on these
 websites:</p>
@@ -1435,10 +2636,10 @@ class="uri">https://education.rstudio.com/blog/2019/10/tools-for-teaching-yaml-w
 <p><br></p>
 </div>
 </div>
-<div id="Tut4F_chunk" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Code chunks</h2>
-<div id="Tut4Fa_basics" class="section level3" number="4.5.1">
-<h3><span class="header-section-number">4.5.1</span> Code chunk
+<div id="Tut4F_chunk" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Code chunks</h2>
+<div id="Tut4Fa_basics" class="section level3" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Code chunk
 basics</h3>
 <p>The grey areas on your screen are called “code chunks” (see
 @ref(fig:tut2afig2)). Think of them as mini consoles. You put code
@@ -1459,8 +2660,8 @@ times (around line 33) and press the green insert button (top right near
 the Run button). Insert a new R code chunk. Inside, type
 <code>1+2</code> and run it.</p>
 </div>
-<div id="Tut4Eb_options" class="section level3" number="4.5.2">
-<h3><span class="header-section-number">4.5.2</span> Editing code chunk
+<div id="Tut4Eb_options" class="section level3" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Editing code chunk
 options</h3>
 <p>At the top of every code chunk, you should see the line “```{r}”.</p>
 <p>Inside the curly brackets, you can add options to the code chunk for
@@ -1475,8 +2676,8 @@ all in the final option (e.g. it runs it in the background).</p>
 <br></p>
 <div
 id="remove-all-the-welcome-text-below-the-code-chunk-that-loads-the-libraries-when-you-press-knit."
-class="section level4" number="4.5.2.1">
-<h4><span class="header-section-number">4.5.2.1</span> Remove all the
+class="section level4" number="8.5.2.1">
+<h4><span class="header-section-number">8.5.2.1</span> Remove all the
 “welcome” text below the code chunk that loads the libraries when you
 press knit.</h4>
 <p>One useful option is to remove all the “friendly text” when you load
@@ -1498,8 +2699,8 @@ before moving on</em></p>
 <p><br></p>
 </div>
 <div id="other-code-chunk-options" class="section level4"
-number="4.5.2.2">
-<h4><span class="header-section-number">4.5.2.2</span> Other code chunk
+number="8.5.2.2">
+<h4><span class="header-section-number">8.5.2.2</span> Other code chunk
 options</h4>
 <p>There are loads here along with a nice tutorial: <a
 href="https://rmarkdown.rstudio.com/lesson-3.html"
@@ -1508,10 +2709,10 @@ class="uri">https://rmarkdown.rstudio.com/lesson-3.html</a></p>
 </div>
 </div>
 </div>
-<div id="Tut4G_format" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Formatting text</h2>
-<div id="markdown-visual-editor" class="section level3" number="4.6.1">
-<h3><span class="header-section-number">4.6.1</span> Markdown visual
+<div id="Tut4G_format" class="section level2" number="8.6">
+<h2><span class="header-section-number">8.6</span> Formatting text</h2>
+<div id="markdown-visual-editor" class="section level3" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Markdown visual
 editor</h3>
 <p><img src="Figures/pg_Tut4_markdown_fig8b_Visual.png" width="989" /></p>
 <p>If you are not familiar with Markdown yet, or do not prefer writing
@@ -1522,8 +2723,8 @@ href="https://rstudio.github.io/visual-markdown-editing/"
 class="uri">https://rstudio.github.io/visual-markdown-editing/</a></p>
 <p><br></p>
 <div id="writing-text-and-paragraphs---read-this" class="section level4"
-number="4.6.1.1">
-<h4><span class="header-section-number">4.6.1.1</span> Writing text and
+number="8.6.1.1">
+<h4><span class="header-section-number">8.6.1.1</span> Writing text and
 Paragraphs - READ THIS</h4>
 <p>The text part of your document is anywhere outside your YAML code or
 a code chunk.</p>
@@ -1540,8 +2741,8 @@ chances are there isn’t a blank line before or after it.</p>
 <p><br></p>
 </div>
 </div>
-<div id="getting-formatting-help" class="section level3" number="4.6.2">
-<h3><span class="header-section-number">4.6.2</span> Getting formatting
+<div id="getting-formatting-help" class="section level3" number="8.6.2">
+<h3><span class="header-section-number">8.6.2</span> Getting formatting
 help:</h3>
 <p>There are many ways you can format the text in your markdown
 document, from adding headings, to bold/italic to complex html text
@@ -1559,8 +2760,8 @@ a quick reference guide on your screen.</li>
 <p><img src="Figures/pg_Tut4_markdown_fig9.png" width="90%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
-<div id="basic-text-formats" class="section level3" number="4.6.3">
-<h3><span class="header-section-number">4.6.3</span> Basic text
+<div id="basic-text-formats" class="section level3" number="8.6.3">
+<h3><span class="header-section-number">8.6.3</span> Basic text
 formats</h3>
 <p>There are many ways you can format the text in your markdown
 document, from adding headings, to bold/italic to complex html text
@@ -1572,8 +2773,8 @@ italic.</p>
 <p>The text formatting won’t show in the text itself, you will only see
 the formats when you press knit.</p>
 <p>br&gt;</p>
-<div id="bold-and-italic" class="section level4" number="4.6.3.1">
-<h4><span class="header-section-number">4.6.3.1</span>
+<div id="bold-and-italic" class="section level4" number="8.6.3.1">
+<h4><span class="header-section-number">8.6.3.1</span>
 <strong>Bold</strong> and <em>italic:</em></h4>
 <p>Putting stars or _ around your text will make it bold or italic (or
 both). To understand how, take a look at the cheatsheets. Interestingly
@@ -1582,8 +2783,8 @@ both). To understand how, take a look at the cheatsheets. Interestingly
 </div>
 </div>
 <div id="headings-sub-headings-tut_headings" class="section level3"
-number="4.6.4">
-<h3><span class="header-section-number">4.6.4</span> Headings &amp;
+number="8.6.4">
+<h3><span class="header-section-number">8.6.4</span> Headings &amp;
 Sub-headings {Tut_Headings}</h3>
 <p>You can use the # symbol to make a heading</p>
 <p><em>Outside</em> a code chunk, the # symbol makes a heading, AS LONG
@@ -1610,8 +2811,8 @@ SPACE AFTER THE # IS IMPORTANT.</li>
 <p><br></p>
 </div>
 </div>
-<div id="Tut4H_photo" class="section level2" number="4.7">
-<h2><span class="header-section-number">4.7</span> Adding photos</h2>
+<div id="Tut4H_photo" class="section level2" number="8.7">
+<h2><span class="header-section-number">8.7</span> Adding photos</h2>
 <p>There are many ways to do this, with a FANTASTIC tutorial here if you
 get stuck:</p>
 <p><a
@@ -1721,7 +2922,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

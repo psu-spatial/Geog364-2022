@@ -1,0 +1,522 @@
+---
+title: "Lab 2: Exploratory Data Analysis"
+subtitle: <h5 style="font-style:normal">GEOG-364 - Geospatial Analysis</h4>
+author: <h5 style="font-style:normal">Dr Helen Greatrex</h4>
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+    number_sections: yes
+---
+
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 0px;
+border-radius: 5px;
+font-style: normal;
+}
+
+h1.title {
+  font-weight: bold;
+  font-family: Arial;  
+}
+
+h2.title {
+  font-family: Arial;  
+}
+
+</style>
+
+
+<style type="text/css">
+#TOC {
+  font-size: 12px;
+  font-family: Arial;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+library(kableExtra)
+library(tidyverse)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(ggpubr)
+```
+
+<br>
+<br>
+
+# Overview {- .tabset .tabset-fade} 
+
+## Learning Objectives {-}
+
+SOME SECTIONS AND TUTORIALS TO BE UPDATED!
+
+Same as before: some code showcase, some analysis and an optional "above and beyond". By the end of this week’s lab, you will hopefully be able to:
+
+1. Understand YAML code and set up a lab template
+
+2. Get more comfortable de-bugging errors
+
+3. Conduct some exploratory data analysis
+
+4. Make better plots and a more professional report
+
+SEE CANVAS FOR SUBMISSION DATES.
+
+<br><br><br>
+
+## CLICK TO SEE COMMON ERRORS.. {-}
+
+### Check here! {- .tabset .tabset-fade} 
+
+#### Random error {-}
+
+R studio tries really hard to help, look for a little red cross to see exactly where the problem is.  I bet you missed a parenthesis or spelled something wrong.  R IS CASE SENSITIVE
+
+<br><br><br>
+
+#### Can't find files/folders {-}
+
+Every time you re-open R studio check you are using your project file (does it say Lab 2 at the top?).  If not, use TUTORIALXXX to create a project.
+
+<br><br><br>
+
+
+#### Can't find a command {-}
+
+Sometimes R can't find a command.  This is likely one of two reasons:
+
+A. You haven't downloaded a package from the internet (use the Package/Install menu)
+
+B.  Even if you have, IN YOUR LAB-WRITEUP AT THE TOP, needs to be a code chunk where you load the libraries. This has to be run EVERY TIME you open R studio.  It's linked to the next error
+
+<br><br><br>
+
+
+#### Things are suddenly not working {-}
+
+EVERY TIME YOU RE-OPEN R-STUDIO YOU NEED TO RE-RUN ALL YOUR CODE CHUNKS. The easiest way to do this is to press the “Run All” button (see the Run menu at the top of your script)
+
+<br><br><br>
+
+
+#### Anything else? {-}
+
+Try google!  Genuinely, this will be how we debug it with you...  If still no luck, ask for help.
+
+
+
+## GET SUPPORT ON TEAMS/CANVAS {-}
+
+[CLICK THIS LINK FOR LAB HELP ON TEAMS](https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGFVYc0fpUTM1%40thread.tacv2/conversations?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+
+Teams is the fastest way to get help.
+
+Canvas: Lab 2 assignment.
+
+<br>
+
+
+# Instructions  
+<br>
+
+
+## 1: Create your Lab 2 Project {- .tabset .tabset-fade} 
+
+### Overview {-}
+
+You need a new project file FOR EVERY LAB. 
+
+This explains how to get started and how it should look on the cloud and on desktop.
+
+<br><br><br>
+
+### Using R-CLOUD? {-}
+
+SEE TUTORIALXXX
+
+### Using YOUR LAPTOP? {-}
+
+SEE TUTORIALXXX
+
+
+<br>
+<br>
+<br>
+
+## 2. Create a Markdown Template {- .tabset .tabset-fade} 
+
+### Overview {-}
+
+Life is faster when we don't have to set up Markdown files all the time. 
+So we will create a template in 3 easy steps (see the tabs)
+
+  1. Make a markdown file
+  2. Edit into a professional/creative template format
+  3. Add the libraries we will need for the lab
+  
+<br>
+<br>
+<br>
+<br>
+
+### Make a new markdown file {-}
+
+Same as last week, go  to New File/**New R-Markdown** to make a new R-Markdown file. 
+
+Call it Lab 2 and add your PSU-e-mail e.g. Lab 2-hlg5155. Immediately press knit - as that will auto-save the file (call it the same thing) and create the html.
+
+As you can see, the friendly text is back for your new lab-script. This is a pain and we want to make life easy in terms of formatting. So our next job is to make a template so future reports are faster
+
+<br>
+<br>
+<br>
+<br>
+
+### Edit your file into a nice template {-}
+
+Work through XXXXTUTORIAL to create and save a template to your folder. You will only have to do this once!
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+## 3. Add Libraries {-} 
+
+In the library section of your lab report, add a new code chunk and use this code to load the following libraries.
+
+```{r}
+# LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+```
+
+If you get errors about the package not existing, then go to the Packages Menu in Help Quadrant, click **install** and download them.  
+
+
+<br>
+<br>
+<br>
+<br>
+
+## 4. Code Showcase {- .tabset .tabset-fade} 
+
+### Overview {- .tabset .tabset-fade} 
+
+IF YOU HAVEN'T DONE THE SET-UP SECTION, GO AND DO IT OR CODE SHOWCASE WILL BE HARDER THAN IT SHOULD BE!
+
+In the Code Showcase section of your report, create five sub-sections called
+
+ - **My Photos**
+
+ - **My Theme**
+
+ - **The YAML code**}
+
+ - **Using helpfiles**
+
+ - **Tutorial Feedback**
+
+See the tabs for what to do..
+
+
+
+#### Adding photos {-}
+
+Add a photo/video/gif of your choice WITH text below or as a caption explaining why this is important to you <br>
+
+This is explained in TUTORIAL:XXX
+
+<br>
+<br>
+<br>
+<br>
+
+
+#### Themes {-}
+
+Now you have set up your template, your lab write-up should have a cool theme.  
+
+What theme did you choose, any other formatting options you want?
+
+This is explained in TUTORIAL:XXX
+
+<br>
+<br>
+<br>
+<br>
+
+
+#### YAML code {-}
+
+Now you have set up your template, your lab write-up should have a cool theme.  
+
+What theme did you choose, any other formatting options you want?
+
+This is explained in TUTORIAL:XXX
+
+  
+<br>
+<br>
+<br>
+<br>
+
+
+#### Using helpfiles {-}
+
+
+When programming in R, someone often tells you about a "cool new command". I want you to feel comfortable working out how to use them.
+
+The help files are MASSIVELY VALUABLE in helping run it without support, because at the end they have worked examples you can copy and paste in. Here's some practice in getting up and running.
+
+
+1. Work through this tutorial on help-files (seriously, it will help) : TUTORIAL:## How to use the R help files {-}
+
+2. Use helpfiles to make me a "Quick Thematic Map (qtm)" of a city of your choice (hint, start by googling *""Quick Thematic Map" QTM documentation R*) then work through my tutorial above.   Bonus for making it beautiful
+
+3. Make me a mini tutorial on ANY new function and include a worked example!  Just google "cool R functions".  If you are really stuck here, I will put some suggestions on teams if people ask.
+
+   + Really good ones get a participation point and go into the tutorials...
+   
+     
+<br>
+<br>
+<br>
+<br>
+
+#### Tutorial Feedback {-}
+
+As you have probably noticed, the tutorials have changed A LOT this week!  I need all of your help to debug them.  
+
+1. Quickly look through the tutorials tab (including last week's)
+
+In your lab script write:
+
+ - General comments.  Do you like the new "tab" format?  Too much text? Not enough?  
+ 
+ - Any mistakes/errors/confusing things?   Broken links?
+ 
+ - Tell me (at least) one thing to either change/add/expand. 
+
+  
+<br>
+<br>
+<br>
+<br>
+
+## 5. Data Analysis  {-}
+
+I want you to choose one and to show me your best summary analysis of what the data contains. Feel free to use these, or any other data-set you like.
+
+R contains MANY built in datasets.  You can load them using the `data()` command 
+
+ - Starwars characters: `data(“starwars”, package = “dplyr”)`
+ - Pirates data `data(“pirates”, package = “yarrr”)`
+ - OpenIntro datasets (you might need to install this package) https://cran.r-project.org/web/packages/openintro/vignettes/datasets.html
+ - http://www.sthda.com/english/wiki/r-built-in-data-sets 
+ 
+ 
+ CHOOSE A DIFFERENT ONE TO YOUR FRIENDS!
+
+ To get full marks you need to include the sub-sections.
+
+<br>
+<br>
+
+### Study Design {-} 
+<br>
+
+#### Study Background/Professional report [4 marks] {-} 
+
+Pretend this is real! Write me a short paragraph about why starwars/pirates/chickens/your data is important.  Include pictures or web-links...
+
+Tell me a potential user of this data, what are they interested in. 
+
+These 4 marks are also for how professional your data analysis looks.
+
+<br>
+
+#### Study Design [8 marks] {-} 
+
+Based on your data for me a reasonable:
+
+ - High level study vision. What are you hoping to explore
+ - Object of analysis of the dataset
+ - Population the data comes from
+ - Bullet point list of variables
+ 
+Then put a summary of your specific study e.g. I am hoping to explore/model...... 
+
+<br>
+<br>
+<br>
+
+### Exploratory data analysis {-}
+<br>
+<br>
+
+#### Data summary [5 marks]  {-}
+
+ Tell me a few bullets about your dataset and its package. How was it collected if known, where is it from?
+<br>
+
+#### Meta Data/Quality control [8 marks] {-} 
+
+Now, I want you to use commands like `summary()` and `skim()` to understand the data. You can also look at it using View().  Include your code and write up your results in full sentences.
+
+ - What's the source of your data?  
+ - How many objects/rows are there? 
+ - Any missing data? What type of data are your variables?  
+ - Any concerns? (e.g. if your study was antique cars, a car dataset of 2000s models might be rubbish..)
+
+<br>
+
+#### Response variable [5 marks] {-} 
+
+Finally, tell me everything you can about the summary statistics of a chosen response variable.  
+
+Go wild - try summary statistics, look at R graph gallery for plots..
+
+Understand these aspects of the data  
+ - centrality
+ - spread
+ - pattern
+ - outliers? unusual values?
+ 
+
+<br>
+<br>
+<br>
+<br>
+
+
+## 6. Above & beyond  {-}
+
+Remember that an A is 94%, so you can ignore this section and still easily get an A.
+
+But here is your time to shine. Also, if you are struggling in another part of the lab, you can use this to gain back points.
+
+**To get the final 4 marks in the lab, you need to show me something new, e.g. you need to go above and beyond the lab questions in some way.** 
+
+ - You get 2/4 for doing something new in any way
+ - You get 4/4 for something really impressive or multiple small things.
+ 
+**Tell us at the end of your R script what you did or you do not get the marks!**
+
+Or here are some ideas...
+ - https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+ - https://r-graph-gallery.com/
+
+
+
+<br>
+<br>
+<br>
+
+
+## Submitting your Lab  {- .tabset .tabset-fade} 
+
+Remember to save your work throughout and to spell check your writing (next to the save button). Now, press the knit button again. If you have not made any mistakes in the code then R should create a html file in your Lab folder which includes your answers. 
+
+### ON YOUR LAPTOPS {-}
+
+ - Go to your 364 folder and look for your lab folder. 
+ <br>
+ 
+ - You should see a .html file (edge/chrome) complete with a very recent time-stamp.html file along with a .rmd file with a recent time-stamp
+ <br>
+ 
+ - In that folder, double click on the html file.  This will open it in your browser. CHECK THAT THIS IS WHAT YOU WANT TO SUBMIT.
+ <br>
+ 
+ - Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+```{r, echo=FALSE}
+knitr::include_graphics("./Figures/Lab_ToSubmit.png")
+```
+
+
+<br>
+<br>
+<br>
+
+### ON A R-STUDIO CLOUD: {-}
+
+ - If you are on R studio cloud, see  XXXXX for how to download your files
+
+<br>
+
+ - Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+
+<br>
+<br>
+<br>
+
+## CHECK THIS BEFORE YOU SUBMIT!  {- .tabset .tabset-fade} 
+
+People who use this section get better grades...
+
+### PREDICT YOUR GRADE {-}
+
+Here is LITERALLY how we are grading you.  Predict your grade!
+
+
+**HTML FILE SUBMISSION - 8 marks**
+
+**RMD CODE SUBMISSION - 8 marks**
+
+**MARKDOWN/CODE STYLE - 10 MARKS**
+
+Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE IN YOUR WEB-BROWSER BEFORE YOU SUBMIT.  There is also a spell check next to the save button.  You have written your answers below the relevant code chunk in full sentences in a way that is easy to find and grade. For example, you have written in full sentences, it is clear what your answers are referring to. 
+    
+**CODE SHOWCASE - 50 MARKS**
+
+10 for each section
+
+**DATA ANALYSIS - 30 MARKS**
+
+To be added
+    
+**Above and beyond: 4 MARKS**
+
+You get 2/4 for doing something new in any way and 4/4 for something really impressive or multiple small things.
+
+
+[100 marks total]
+
+
+<br>
+<br>
+<br>
+
+### What your grade means/why is 100% hard? {-}
+
+Overall, here is what your lab should correspond to:
+
+```{r, echo=FALSE}
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
+knitr::kable(rubric) %>%   
+  kable_classic_2() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+
+```
+

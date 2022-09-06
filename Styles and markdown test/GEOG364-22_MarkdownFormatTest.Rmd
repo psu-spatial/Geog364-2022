@@ -1,0 +1,176 @@
+---
+title: "Markdown Format Test"
+output: 
+  html_document:
+    toc: true 
+    toc_depth: 3
+    toc_float:
+      collapsed: yes
+    number_sections: yes
+---
+
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+</style>
+
+
+# Tabs
+
+## Question 1 {.tabset .tabset-fade .tabset-pills}
+
+### Question
+
+What does the uniform distribution look like?
+
+### Answer
+
+```{r, echo = FALSE, eval = TRUE }
+hist(1:10)
+
+```
+
+
+
+# Accordian buttons
+
+All suggestions from 
+https://stackoverflow.com/questions/52576626/rmarkdown-collapsible-panel
+
+
+## Method 1
+
+This method uses button.
+
+```{css,echo=FALSE}
+button.btn.collapsed:before
+{
+    content:'+' ;
+    display:block;
+    width:15px;
+}
+button.btn:before
+{
+    content:'-' ;
+    display:block;
+    width:15px;
+}
+```
+
+```{r,echo=FALSE,results='hide'}
+knitr::knit_hooks$set(drop1=function(before, options, envir) {
+    if (before) {
+        paste(
+            '<p>',
+'<button class="btn btn-primary collapsed" data-toggle="collapse" data-target="#ce1">',
+'</button>',
+'</p>',
+'<div class="collapse" id="ce1">',
+'<div class="card card-body">',  sep = "\n")
+    } else {
+        paste("</div>", "</div>", sep = "\n")
+    }
+})
+```
+
+
+
+```{r,drop1=TRUE,results="markup"}
+str(iris)
+```
+
+## Method 2
+
+This method uses a link which behaves like a button.
+
+```{css,echo=FALSE}
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+  display: none;
+}
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+  display: none;
+}
+```
+
+```{r,echo=FALSE,results='hide'}
+knitr::knit_hooks$set(drop2=function(before, options, envir) {
+    if (before) {
+        paste(
+            '<p>',
+'<a class="btn btn-primary collapsed" data-toggle="collapse" href="#ce2">',
+'<span class="if-collapsed">+</span>',
+'<span class="if-not-collapsed">-</span>',
+'</a>',
+'</p>',
+'<div class="collapse" id="ce2">',
+'<div class="card card-body">',  sep = "\n")
+    } else {
+        paste("</div>", "</div>", sep = "\n")
+    }
+})
+```
+
+```{r,drop2=TRUE,results="markup"}
+str(iris)
+```
+
+
+
+
+# Method 3 html
+
+
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+    Click For Answer
+  </a>
+</p>
+<div class="collapse" id="collapseExample1">
+  <div class="card card-body">
+
+  ```{r}
+  hist(1:10)
+  ```
+
+  </div>
+</div>
+
+
+This works! I can also control if the code and/or results must be shown by controlling the chunk options.
+
+But, this is not optimal because the code is messy and ugly with all the raw html. Copy-pasting this multiple times is not ideal. The ID used collapseExample1 needs to be unique every time this code block is used.
+
+Is there some way to package this block into a reusable unit like a function or something? I am thinking something like an R function, where I can pass in code to be evaluated (or code that don't need to be evaluated), chunk options (eval, echo, results, etc..) and state of the panel (open/closed).
+
+collapsible_panel(code=NULL,echo=TRUE,results="show",state="closed")
+
+
+
+# Method 4 simple html
+for code output
+
+```{r, eval=FALSE}
+hist(1:10)
+```
+
+<details>
+  <summary>Click for Answer</summary>
+    ```{r, echo=FALSE, eval=TRUE}
+    hist(1:10)
+    ```
+</details> 
+
+If you see html: 
+
+The knitr chunk option results='asis' has done its job correctly. The problem is Pandoc's Markdown treats indented lines (by four spaces) as literal code blocks (<pre></pre>).
+
+The solution is either remove the leading spaces, or protect them. It seems you do not want to do the former. You can pass your HTML code to htmltools::HTML() so that the output is protected during Pandoc's conversion
+
+

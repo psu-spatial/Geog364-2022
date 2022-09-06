@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lab 2: Exploratory Data Analysis</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">GEOG-364</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="GEOG364-22_T1_R_Basics.html">Original R tutorials</a>
+</li>
+<li>
+  <a href="index_GEOG364-22_Tutorial_R.html">NEW! R-TUTORIAL</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index_GEOG364-22_L1Basics.html">Lab 1: R-Basics</a>
+    </li>
+    <li>
+      <a href="index_GEOG364-22_L2EDA.html">Lab 2: Exploratory Analysis</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Lab 2: Exploratory Data Analysis</h1>
+<h3 class="subtitle"><h5 style="font-style:normal">
+GEOG-364 - Geospatial Analysis
+</h4></h3>
+<h4 class="author"><h5 style="font-style:normal">
+Dr Helen Greatrex
+</h4></h4>
+
+</div>
+
+
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 0px;
+border-radius: 5px;
+font-style: normal;
+}
+
+h1.title {
+  font-weight: bold;
+  font-family: Arial;  
+}
+
+h2.title {
+  font-family: Arial;  
+}
+
+</style>
+<style type="text/css">
+#TOC {
+  font-size: 12px;
+  font-family: Arial;
+}
+</style>
+<p><br> <br></p>
+<div id="overview" class="section level1 unnumbered tabset tabset-fade">
+<h1 class="unnumbered tabset tabset-fade">Overview</h1>
+<div id="learning-objectives" class="section level2 unnumbered">
+<h2 class="unnumbered">Learning Objectives</h2>
+<p>SOME SECTIONS AND TUTORIALS TO BE UPDATED!</p>
+<p>Same as before: some code showcase, some analysis and an optional
+“above and beyond”. By the end of this week’s lab, you will hopefully be
+able to:</p>
+<ol style="list-style-type: decimal">
+<li><p>Understand YAML code and set up a lab template</p></li>
+<li><p>Get more comfortable de-bugging errors</p></li>
+<li><p>Conduct some exploratory data analysis</p></li>
+<li><p>Make better plots and a more professional report</p></li>
+</ol>
+<p>SEE CANVAS FOR SUBMISSION DATES.</p>
+<p><br><br><br></p>
+</div>
+<div id="click-to-see-common-errors.."
+class="section level2 unnumbered">
+<h2 class="unnumbered">CLICK TO SEE COMMON ERRORS..</h2>
+<div id="check-here"
+class="section level3 unnumbered tabset tabset-fade">
+<h3 class="unnumbered tabset tabset-fade">Check here!</h3>
+<div id="random-error" class="section level4 unnumbered">
+<h4 class="unnumbered">Random error</h4>
+<p>R studio tries really hard to help, look for a little red cross to
+see exactly where the problem is. I bet you missed a parenthesis or
+spelled something wrong. R IS CASE SENSITIVE</p>
+<p><br><br><br></p>
+</div>
+<div id="cant-find-filesfolders" class="section level4 unnumbered">
+<h4 class="unnumbered">Can’t find files/folders</h4>
+<p>Every time you re-open R studio check you are using your project file
+(does it say Lab 2 at the top?). If not, use TUTORIALXXX to create a
+project.</p>
+<p><br><br><br></p>
+</div>
+<div id="cant-find-a-command" class="section level4 unnumbered">
+<h4 class="unnumbered">Can’t find a command</h4>
+<p>Sometimes R can’t find a command. This is likely one of two
+reasons:</p>
+<p>A. You haven’t downloaded a package from the internet (use the
+Package/Install menu)</p>
+<ol start="2" style="list-style-type: upper-alpha">
+<li>Even if you have, IN YOUR LAB-WRITEUP AT THE TOP, needs to be a code
+chunk where you load the libraries. This has to be run EVERY TIME you
+open R studio. It’s linked to the next error</li>
+</ol>
+<p><br><br><br></p>
+</div>
+<div id="things-are-suddenly-not-working"
+class="section level4 unnumbered">
+<h4 class="unnumbered">Things are suddenly not working</h4>
+<p>EVERY TIME YOU RE-OPEN R-STUDIO YOU NEED TO RE-RUN ALL YOUR CODE
+CHUNKS. The easiest way to do this is to press the “Run All” button (see
+the Run menu at the top of your script)</p>
+<p><br><br><br></p>
+</div>
+<div id="anything-else" class="section level4 unnumbered">
+<h4 class="unnumbered">Anything else?</h4>
+<p>Try google! Genuinely, this will be how we debug it with you… If
+still no luck, ask for help.</p>
+</div>
+</div>
+</div>
+<div id="get-support-on-teamscanvas" class="section level2 unnumbered">
+<h2 class="unnumbered">GET SUPPORT ON TEAMS/CANVAS</h2>
+<p><a
+href="https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGFVYc0fpUTM1%40thread.tacv2/conversations?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&amp;tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e">CLICK
+THIS LINK FOR LAB HELP ON TEAMS</a></p>
+<p>Teams is the fastest way to get help.</p>
+<p>Canvas: Lab 2 assignment.</p>
+<p><br></p>
+</div>
+</div>
+<div id="instructions" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Instructions</h1>
+<p><br></p>
+<div id="create-your-lab-2-project"
+class="section level2 unnumbered tabset tabset-fade">
+<h2 class="unnumbered tabset tabset-fade">1: Create your Lab 2
+Project</h2>
+<div id="overview-1" class="section level3 unnumbered">
+<h3 class="unnumbered">Overview</h3>
+<p>You need a new project file FOR EVERY LAB.</p>
+<p>This explains how to get started and how it should look on the cloud
+and on desktop.</p>
+<p><br><br><br></p>
+</div>
+<div id="using-r-cloud" class="section level3 unnumbered">
+<h3 class="unnumbered">Using R-CLOUD?</h3>
+<p>SEE TUTORIALXXX</p>
+</div>
+<div id="using-your-laptop" class="section level3 unnumbered">
+<h3 class="unnumbered">Using YOUR LAPTOP?</h3>
+<p>SEE TUTORIALXXX</p>
+<p><br> <br> <br></p>
+</div>
+</div>
+<div id="create-a-markdown-template"
+class="section level2 unnumbered tabset tabset-fade">
+<h2 class="unnumbered tabset tabset-fade">2. Create a Markdown
+Template</h2>
+<div id="overview-2" class="section level3 unnumbered">
+<h3 class="unnumbered">Overview</h3>
+<p>Life is faster when we don’t have to set up Markdown files all the
+time. So we will create a template in 3 easy steps (see the tabs)</p>
+<ol style="list-style-type: decimal">
+<li>Make a markdown file</li>
+<li>Edit into a professional/creative template format</li>
+<li>Add the libraries we will need for the lab</li>
+</ol>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="make-a-new-markdown-file" class="section level3 unnumbered">
+<h3 class="unnumbered">Make a new markdown file</h3>
+<p>Same as last week, go to New File/<strong>New R-Markdown</strong> to
+make a new R-Markdown file.</p>
+<p>Call it Lab 2 and add your PSU-e-mail e.g. Lab 2-hlg5155. Immediately
+press knit - as that will auto-save the file (call it the same thing)
+and create the html.</p>
+<p>As you can see, the friendly text is back for your new lab-script.
+This is a pain and we want to make life easy in terms of formatting. So
+our next job is to make a template so future reports are faster</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="edit-your-file-into-a-nice-template"
+class="section level3 unnumbered">
+<h3 class="unnumbered">Edit your file into a nice template</h3>
+<p>Work through XXXXTUTORIAL to create and save a template to your
+folder. You will only have to do this once!</p>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+<div id="add-libraries" class="section level2 unnumbered">
+<h2 class="unnumbered">3. Add Libraries</h2>
+<p>In the library section of your lab report, add a new code chunk and
+use this code to load the following libraries.</p>
+<pre class="r"><code># LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)</code></pre>
+<p>If you get errors about the package not existing, then go to the
+Packages Menu in Help Quadrant, click <strong>install</strong> and
+download them.</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="code-showcase"
+class="section level2 unnumbered tabset tabset-fade">
+<h2 class="unnumbered tabset tabset-fade">4. Code Showcase</h2>
+<div id="overview-3"
+class="section level3 unnumbered tabset tabset-fade">
+<h3 class="unnumbered tabset tabset-fade">Overview</h3>
+<p>IF YOU HAVEN’T DONE THE SET-UP SECTION, GO AND DO IT OR CODE SHOWCASE
+WILL BE HARDER THAN IT SHOULD BE!</p>
+<p>In the Code Showcase section of your report, create five sub-sections
+called</p>
+<ul>
+<li><p><strong>My Photos</strong></p></li>
+<li><p><strong>My Theme</strong></p></li>
+<li><p><strong>The YAML code</strong>}</p></li>
+<li><p><strong>Using helpfiles</strong></p></li>
+<li><p><strong>Tutorial Feedback</strong></p></li>
+</ul>
+<p>See the tabs for what to do..</p>
+<div id="adding-photos" class="section level4 unnumbered">
+<h4 class="unnumbered">Adding photos</h4>
+<p>Add a photo/video/gif of your choice WITH text below or as a caption
+explaining why this is important to you <br></p>
+<p>This is explained in TUTORIAL:XXX</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="themes" class="section level4 unnumbered">
+<h4 class="unnumbered">Themes</h4>
+<p>Now you have set up your template, your lab write-up should have a
+cool theme.</p>
+<p>What theme did you choose, any other formatting options you want?</p>
+<p>This is explained in TUTORIAL:XXX</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="yaml-code" class="section level4 unnumbered">
+<h4 class="unnumbered">YAML code</h4>
+<p>Now you have set up your template, your lab write-up should have a
+cool theme.</p>
+<p>What theme did you choose, any other formatting options you want?</p>
+<p>This is explained in TUTORIAL:XXX</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="using-helpfiles" class="section level4 unnumbered">
+<h4 class="unnumbered">Using helpfiles</h4>
+<p>When programming in R, someone often tells you about a “cool new
+command”. I want you to feel comfortable working out how to use
+them.</p>
+<p>The help files are MASSIVELY VALUABLE in helping run it without
+support, because at the end they have worked examples you can copy and
+paste in. Here’s some practice in getting up and running.</p>
+<ol style="list-style-type: decimal">
+<li><p>Work through this tutorial on help-files (seriously, it will
+help) : TUTORIAL:## How to use the R help files {-}</p></li>
+<li><p>Use helpfiles to make me a “Quick Thematic Map (qtm)” of a city
+of your choice (hint, start by googling <em>““Quick Thematic Map” QTM
+documentation R</em>) then work through my tutorial above. Bonus for
+making it beautiful</p></li>
+<li><p>Make me a mini tutorial on ANY new function and include a worked
+example! Just google “cool R functions”. If you are really stuck here, I
+will put some suggestions on teams if people ask.</p>
+<ul>
+<li>Really good ones get a participation point and go into the
+tutorials…</li>
+</ul></li>
+</ol>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="tutorial-feedback" class="section level4 unnumbered">
+<h4 class="unnumbered">Tutorial Feedback</h4>
+<p>As you have probably noticed, the tutorials have changed A LOT this
+week! I need all of your help to debug them.</p>
+<ol style="list-style-type: decimal">
+<li>Quickly look through the tutorials tab (including last week’s)</li>
+</ol>
+<p>In your lab script write:</p>
+<ul>
+<li><p>General comments. Do you like the new “tab” format? Too much
+text? Not enough?</p></li>
+<li><p>Any mistakes/errors/confusing things? Broken links?</p></li>
+<li><p>Tell me (at least) one thing to either
+change/add/expand.</p></li>
+</ul>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+</div>
+<div id="data-analysis" class="section level2 unnumbered">
+<h2 class="unnumbered">5. Data Analysis</h2>
+<p>I want you to choose one and to show me your best summary analysis of
+what the data contains. Feel free to use these, or any other data-set
+you like.</p>
+<p>R contains MANY built in datasets. You can load them using the
+<code>data()</code> command</p>
+<ul>
+<li>Starwars characters:
+<code>data(“starwars”, package = “dplyr”)</code></li>
+<li>Pirates data <code>data(“pirates”, package = “yarrr”)</code></li>
+<li>OpenIntro datasets (you might need to install this package) <a
+href="https://cran.r-project.org/web/packages/openintro/vignettes/datasets.html"
+class="uri">https://cran.r-project.org/web/packages/openintro/vignettes/datasets.html</a></li>
+<li><a href="http://www.sthda.com/english/wiki/r-built-in-data-sets"
+class="uri">http://www.sthda.com/english/wiki/r-built-in-data-sets</a></li>
+</ul>
+<p>CHOOSE A DIFFERENT ONE TO YOUR FRIENDS!</p>
+<p>To get full marks you need to include the sub-sections.</p>
+<p><br> <br></p>
+<div id="study-design" class="section level3 unnumbered">
+<h3 class="unnumbered">Study Design</h3>
+<p><br></p>
+<div id="study-backgroundprofessional-report-4-marks"
+class="section level4 unnumbered">
+<h4 class="unnumbered">Study Background/Professional report [4
+marks]</h4>
+<p>Pretend this is real! Write me a short paragraph about why
+starwars/pirates/chickens/your data is important. Include pictures or
+web-links…</p>
+<p>Tell me a potential user of this data, what are they interested
+in.</p>
+<p>These 4 marks are also for how professional your data analysis
+looks.</p>
+<p><br></p>
+</div>
+<div id="study-design-8-marks" class="section level4 unnumbered">
+<h4 class="unnumbered">Study Design [8 marks]</h4>
+<p>Based on your data for me a reasonable:</p>
+<ul>
+<li>High level study vision. What are you hoping to explore</li>
+<li>Object of analysis of the dataset</li>
+<li>Population the data comes from</li>
+<li>Bullet point list of variables</li>
+</ul>
+<p>Then put a summary of your specific study e.g. I am hoping to
+explore/model……</p>
+<p><br> <br> <br></p>
+</div>
+</div>
+<div id="exploratory-data-analysis" class="section level3 unnumbered">
+<h3 class="unnumbered">Exploratory data analysis</h3>
+<p><br> <br></p>
+<div id="data-summary-5-marks" class="section level4 unnumbered">
+<h4 class="unnumbered">Data summary [5 marks]</h4>
+<p>Tell me a few bullets about your dataset and its package. How was it
+collected if known, where is it from? <br></p>
+</div>
+<div id="meta-dataquality-control-8-marks"
+class="section level4 unnumbered">
+<h4 class="unnumbered">Meta Data/Quality control [8 marks]</h4>
+<p>Now, I want you to use commands like <code>summary()</code> and
+<code>skim()</code> to understand the data. You can also look at it
+using View(). Include your code and write up your results in full
+sentences.</p>
+<ul>
+<li>What’s the source of your data?<br />
+</li>
+<li>How many objects/rows are there?</li>
+<li>Any missing data? What type of data are your variables?<br />
+</li>
+<li>Any concerns? (e.g. if your study was antique cars, a car dataset of
+2000s models might be rubbish..)</li>
+</ul>
+<p><br></p>
+</div>
+<div id="response-variable-5-marks" class="section level4 unnumbered">
+<h4 class="unnumbered">Response variable [5 marks]</h4>
+<p>Finally, tell me everything you can about the summary statistics of a
+chosen response variable.</p>
+<p>Go wild - try summary statistics, look at R graph gallery for
+plots..</p>
+<p>Understand these aspects of the data<br />
+- centrality - spread - pattern - outliers? unusual values?</p>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+</div>
+<div id="above-beyond" class="section level2 unnumbered">
+<h2 class="unnumbered">6. Above &amp; beyond</h2>
+<p>Remember that an A is 94%, so you can ignore this section and still
+easily get an A.</p>
+<p>But here is your time to shine. Also, if you are struggling in
+another part of the lab, you can use this to gain back points.</p>
+<p><strong>To get the final 4 marks in the lab, you need to show me
+something new, e.g. you need to go above and beyond the lab questions in
+some way.</strong></p>
+<ul>
+<li>You get 2/4 for doing something new in any way</li>
+<li>You get 4/4 for something really impressive or multiple small
+things.</li>
+</ul>
+<p><strong>Tell us at the end of your R script what you did or you do
+not get the marks!</strong></p>
+<p>Or here are some ideas… - <a
+href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html"
+class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a>
+- <a href="https://r-graph-gallery.com/"
+class="uri">https://r-graph-gallery.com/</a></p>
+<p><br> <br> <br></p>
+</div>
+<div id="submitting-your-lab"
+class="section level2 unnumbered tabset tabset-fade">
+<h2 class="unnumbered tabset tabset-fade">Submitting your Lab</h2>
+<p>Remember to save your work throughout and to spell check your writing
+(next to the save button). Now, press the knit button again. If you have
+not made any mistakes in the code then R should create a html file in
+your Lab folder which includes your answers.</p>
+<div id="on-your-laptops" class="section level3 unnumbered">
+<h3 class="unnumbered">ON YOUR LAPTOPS</h3>
+<ul>
+<li><p>Go to your 364 folder and look for your lab folder. <br></p></li>
+<li><p>You should see a .html file (edge/chrome) complete with a very
+recent time-stamp.html file along with a .rmd file with a recent
+time-stamp <br></p></li>
+<li><p>In that folder, double click on the html file. This will open it
+in your browser. CHECK THAT THIS IS WHAT YOU WANT TO SUBMIT.
+<br></p></li>
+<li><p>Now go to Canvas and submit BOTH your html and your .Rmd
+file.</p></li>
+</ul>
+<p><img src="Figures/Lab_ToSubmit.png" width="1673" /></p>
+<p><br> <br> <br></p>
+</div>
+<div id="on-a-r-studio-cloud" class="section level3 unnumbered">
+<h3 class="unnumbered">ON A R-STUDIO CLOUD:</h3>
+<ul>
+<li>If you are on R studio cloud, see XXXXX for how to download your
+files</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Now go to Canvas and submit BOTH your html and your .Rmd file.</li>
+</ul>
+<p><br> <br> <br></p>
+</div>
+</div>
+<div id="check-this-before-you-submit"
+class="section level2 unnumbered tabset tabset-fade">
+<h2 class="unnumbered tabset tabset-fade">CHECK THIS BEFORE YOU
+SUBMIT!</h2>
+<p>People who use this section get better grades…</p>
+<div id="predict-your-grade" class="section level3 unnumbered">
+<h3 class="unnumbered">PREDICT YOUR GRADE</h3>
+<p>Here is LITERALLY how we are grading you. Predict your grade!</p>
+<p><strong>HTML FILE SUBMISSION - 8 marks</strong></p>
+<p><strong>RMD CODE SUBMISSION - 8 marks</strong></p>
+<p><strong>MARKDOWN/CODE STYLE - 10 MARKS</strong></p>
+<p>Your code and document is neat and easy to read. LOOK AT YOUR HTML
+FILE IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check
+next to the save button. You have written your answers below the
+relevant code chunk in full sentences in a way that is easy to find and
+grade. For example, you have written in full sentences, it is clear what
+your answers are referring to.</p>
+<p><strong>CODE SHOWCASE - 50 MARKS</strong></p>
+<p>10 for each section</p>
+<p><strong>DATA ANALYSIS - 30 MARKS</strong></p>
+<p>To be added</p>
+<p><strong>Above and beyond: 4 MARKS</strong></p>
+<p>You get 2/4 for doing something new in any way and 4/4 for something
+really impressive or multiple small things.</p>
+<p>[100 marks total]</p>
+<p><br> <br> <br></p>
+</div>
+<div id="what-your-grade-meanswhy-is-100-hard"
+class="section level3 unnumbered">
+<h3 class="unnumbered">What your grade means/why is 100% hard?</h3>
+<p>Overall, here is what your lab should correspond to:</p>
+<table class=" lightable-classic-2 table table-striped table-hover table-responsive" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Grade
+</th>
+<th style="text-align:left;">
+% Mark
+</th>
+<th style="text-align:left;">
+Rubric
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A*
+</td>
+<td style="text-align:left;">
+98-100
+</td>
+<td style="text-align:left;">
+Exceptional.  Not only was it near perfect, but the graders learned
+something.  THIS IS HARD TO GET.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+96+
+</td>
+<td style="text-align:left;">
+You went above and beyond
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+94+:
+</td>
+<td style="text-align:left;">
+Everything asked for with high quality.   Class example
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A-
+</td>
+<td style="text-align:left;">
+90+
+</td>
+<td style="text-align:left;">
+The odd minor mistake, All code done but not written up in full
+sentences etc. A little less care
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B+
+</td>
+<td style="text-align:left;">
+87+
+</td>
+<td style="text-align:left;">
+More minor mistakes.  Things like missing units, getting the odd
+question wrong, no workings shown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+84+
+</td>
+<td style="text-align:left;">
+Solid work but the odd larger mistake or missing answer.  Completely
+misinterpreted something, that type of thing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B-
+</td>
+<td style="text-align:left;">
+80+
+</td>
+<td style="text-align:left;">
+Starting to miss entire/questions sections, or multiple larger mistakes.
+Still a solid attempt. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C+
+</td>
+<td style="text-align:left;">
+77+
+</td>
+<td style="text-align:left;">
+You made a good effort and did some things well, but there were a lot of
+problems. (e.g. you wrote up the text well, but messed up the code)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+It’s clear you tried and learned something.  Just attending labs will
+get you this much as we can help you get to this stage
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+60+
+</td>
+<td style="text-align:left;">
+You attempt the lab and submit something. Not clear you put in much
+effort or you had real issues
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+0+
+</td>
+<td style="text-align:left;">
+Didn’t submit, or incredibly limited attempt. 
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

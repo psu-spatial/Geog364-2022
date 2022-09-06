@@ -308,7 +308,7 @@ If you are on R studio cloud, see Tutorial 1 for how to download your files
 Now go to Canvas and submit BOTH your html and your .Rmd file in Lab 1.
 
 ```{r, echo=FALSE}
-knitr::include_graphics("./Figures/Lab1_Basics_2022_fig1.png")
+knitr::include_graphics("./Figures/Lab_ToSubmit.png")
 ```
 
 <br>
@@ -350,7 +350,7 @@ You get 2/4 for doing something new in any way and 4/4 for something really impr
 Overall, here is what your lab should correspond to:
 
 ```{r, echo=FALSE}
-rubric <- readxl::read_excel("GEOG364_22_LRubric.xlsx")
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
 knitr::kable(rubric) %>%   
   kable_classic_2() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
