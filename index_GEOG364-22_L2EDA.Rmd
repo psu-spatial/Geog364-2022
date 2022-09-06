@@ -231,8 +231,6 @@ In the Code Showcase section of your report, create five sub-sections called
 
  - **My Theme**
 
- - **The YAML code**}
-
  - **Using helpfiles**
 
  - **Tutorial Feedback**
@@ -260,20 +258,6 @@ Now you have set up your template, your lab write-up should have a cool theme.
 What theme did you choose, any other formatting options you want?
 
 This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code
-<br>
-<br>
-<br>
-<br>
-
-
-#### YAML code {-}
-
-Now you have set up your template, your lab write-up should have a cool theme.  
-
-What theme did you choose, any other formatting options you want?
-
-This is explained in TUTORIAL:https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code
-  
 <br>
 <br>
 <br>
