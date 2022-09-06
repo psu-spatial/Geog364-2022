@@ -186,7 +186,7 @@ As you can see, the friendly text is back for your new lab-script. This is a pai
 
 Work through  to create and save a template to your folder. You will only have to do this once!
 
-TUTORIAL REPORT TEMPLATE: 
+TUTORIAL REPORT TEMPLATE: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#10_Report_template
 
 <br>
 <br>
