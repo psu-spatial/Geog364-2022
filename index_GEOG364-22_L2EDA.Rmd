@@ -166,14 +166,12 @@ So we will create a template in 3 easy steps (see the tabs)
   2. Edit into a professional/creative template format
   3. Add the libraries we will need for the lab
   
-<br>
-<br>
-<br>
-<br>
 
 ### Make a new markdown file {-}
 
 Same as last week, go  to New File/**New R-Markdown** to make a new R-Markdown file. 
+
+https://psu-spatial.github.io/Geog364-2022/GEOG364-22_T1_R_Basics.html#4_R-Markdown
 
 Call it Lab 2 and add your PSU-e-mail e.g. Lab 2-hlg5155. Immediately press knit - as that will auto-save the file (call it the same thing) and create the html.
 
@@ -186,8 +184,9 @@ As you can see, the friendly text is back for your new lab-script. This is a pai
 
 ### Edit your file into a nice template {-}
 
-Work through XXXXTUTORIAL to create and save a template to your folder. You will only have to do this once!
+Work through  to create and save a template to your folder. You will only have to do this once!
 
+TUTORIAL REPORT TEMPLATE: 
 
 <br>
 <br>
@@ -212,7 +211,7 @@ library(plotly)
 If you get errors about the package not existing, then go to the Packages Menu in Help Quadrant, click **install** and download them.  
 
 IF YOU ARE ON CLOUD MORE CHANCE YOU WILL HAVE TO REINSTALL BUT JUST DO THESE 6.
-
+TUTORIAL https://psu-spatial.github.io/Geog364-2022/GEOG364-22_T1_R_Basics.html#23_Adding_a_new_package
 
 <br>
 <br>
@@ -245,7 +244,7 @@ See the tabs for what to do..
 
 Add a photo/video/gif of your choice WITH text below or as a caption explaining why this is important to you <br>
 
-This is explained in TUTORIAL:XXX
+This is explained in TUTORIAL:https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#87_Adding_photos
 
 <br>
 <br>
@@ -259,8 +258,7 @@ Now you have set up your template, your lab write-up should have a cool theme.
 
 What theme did you choose, any other formatting options you want?
 
-This is explained in TUTORIAL:XXX
-
+This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code
 <br>
 <br>
 <br>
@@ -273,8 +271,7 @@ Now you have set up your template, your lab write-up should have a cool theme.
 
 What theme did you choose, any other formatting options you want?
 
-This is explained in TUTORIAL:XXX
-
+This is explained in TUTORIAL:https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code
   
 <br>
 <br>
@@ -285,12 +282,13 @@ This is explained in TUTORIAL:XXX
 #### Using helpfiles {-}
 
 
+
 When programming in R, someone often tells you about a "cool new command". I want you to feel comfortable working out how to use them.
 
 The help files are MASSIVELY VALUABLE in helping run it without support, because at the end they have worked examples you can copy and paste in. Here's some practice in getting up and running.
 
 
-1. Work through this tutorial on help-files (seriously, it will help) : TUTORIAL:## How to use the R help files {-}
+1. Work through this tutorial on help-files (seriously, it will help) : TUTORIAL:## How to use the R help files https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#7_Getting_help 
 
 2. Use helpfiles to make me a "Quick Thematic Map (qtm)" of a city of your choice (hint, start by googling *""Quick Thematic Map" QTM documentation R*) then work through my tutorial above.   Bonus for making it beautiful
 
@@ -308,12 +306,12 @@ The help files are MASSIVELY VALUABLE in helping run it without support, because
 
 As you have probably noticed, the tutorials have changed A LOT this week!  I need all of your help to debug them.  
 
-1. Quickly look through the tutorials tab (including last week's)
+1. Quickly look through the NEW tutorials tab (including last week's)
+https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html
 
-In your lab script write:
+In your lab script write a few sentences:
 
  - General comments.  Do you like the new "tab" format?  Too much text? Not enough?  
- 
  - Any mistakes/errors/confusing things?   Broken links?
  
  - Tell me (at least) one thing to either change/add/expand. 
@@ -352,7 +350,7 @@ Pretend this is real! Write me a short paragraph about why starwars/pirates/chic
 
 Tell me a potential user of this data, what are they interested in. 
 
-These 4 marks are also for how professional your data analysis looks.
+These 4 marks are also for how professional your data analysis looks. e.g. headings textformats..
 
 <br>
 
@@ -365,7 +363,7 @@ Based on your data for me a reasonable:
  - Population the data comes from
  - Bullet point list of variables
  
-Then put a summary of your specific study e.g. I am hoping to explore/model...... 
+Then put a summary of your specific study e.g. "I am hoping to explore/model...... "
 
 <br>
 <br>
@@ -395,14 +393,22 @@ Now, I want you to use commands like `summary()` and `skim()` to understand the 
 
 Finally, tell me everything you can about the summary statistics of a chosen response variable.  
 
-Go wild - try summary statistics, look at R graph gallery for plots..
+Go wild - try googling summary statistics in R, look at R graph gallery for plots..
 
 Understand these aspects of the data  
- - centrality
- - spread
- - pattern
- - outliers? unusual values?
+
+ - centrality  (mean, median..)
+ - spread (IQR, range)
+ - pattern (histogram? boxplox?)
+ - outliers? unusual values? (look at the data describe in text..)
+ - other
  
+ 
+ THIS IS FROM MY STATS COURSE OPEN IN NEW TAB!
+ 
+https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#6_Summarising_data
+
+https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#7_Making_plots
 
 <br>
 <br>

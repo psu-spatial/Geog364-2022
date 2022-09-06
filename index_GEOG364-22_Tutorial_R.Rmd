@@ -1533,3 +1533,67 @@ knitr::include_graphics("chipmunk.webp")
 **For more options see the tutorial: http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/ **
 
 
+
+
+
+
+# R-Markdown TEMPLATE 
+
+
+
+# Report template
+
+It is often useful to have a "template" markdown file so you don't have to re-do all your custom formatting each time.  Here we will set up a specific one for your STAT462 Labs.  For this section, I advise doing everything in the standard view (E.g. don't press the little A symbol for the pretty view)
+
+
+**PART 1.** When you make a new markdown file, it makes a load of friendly text explaining how to use R.  We don't need this in your report.  
+
+In your .Rmd, delete all the text/code below line 11.  Your lab report should look like this.
+
+```{r, tut3fig5, echo=FALSE,fig.align='center'}
+knitr::include_graphics('./Figures/pg_Tut3_basics_fig5.png')
+```
+
+<br>
+
+**PART 2.** Now we want to update the YAML code at the top (between the ---).  
+
+Follow Tutorial YAML to understand what YAML code is and to update yours [CLICK HERE FOR TUTORIAL YAML](https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code){target="_blank"}
+
+Press knit.  EVERYTHING SHOULD STILL WORK.  Your html output should now look like this.
+
+```{r, tut3fig6, echo=FALSE,fig.align='center'}
+knitr::include_graphics('./Figures/pg_Tut3_basics_fig6.png')
+```
+<br>
+
+**PART 3.** Customise.  Now customise! You can change the theme to something you like or add in other options.  Press knit to check it still works before you move on. Lots of themes in [Tutorial YAML](https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code){target="_blank"}
+ 
+<br> 
+
+**PART 4.** Now we want to update some *code chunk options*.  For each little grey code chunk there are a load of things we can do. For example we can make it hide the code and show the output (or vica-versa), change colour, or add captions. See [Tutorial 4.5 CODE CHUNKS]( https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#85_Code_chunks){target="_blank"} 
+
+This first code chunk shows the options we want as default for ALL code chunks. We want to add in a few additional things. Specifically we want to make it remove all the library loading messages in your final reports <br><br>  Change the top code chunk so that it says this:
+
+```{r, eval=FALSE, fig.cap="*Hint, remember R is case sensitive.  It should be FALSE, not false*"}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE)
+```
+
+<br>
+
+When you press knit, nothing will happen but later on in your labs when you knit, R will still show error messages, but hide friendly warnings. <br> See [Tutorial 4.5 CODE CHUNKS]( https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#85_Code_chunks){target="_blank"} 
+
+
+
+```{r, tut3fig7, echo=FALSE,fig.align='center'}
+knitr::include_graphics('./Figures/pg_Tut3_basics_fig7.png')
+```
+
+<br>
+
+*PART 6**  Save a new copy of your .Rmd file directly into your GEOG364 folder.  Now for future labs we can simply copy/paste this across.
+
+
+<br>
+<br>
+<br>
