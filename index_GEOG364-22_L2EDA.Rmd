@@ -131,13 +131,15 @@ Canvas: Lab 2 assignment.
 <br>
 
 
-## 1: Create your Lab 2 Project {- .tabset .tabset-fade} 
+## 1: Create your Lab 2 Project SEPARATE TO LAB 1 {- .tabset .tabset-fade} 
 
 ### Overview {-}
 
-You need a new project file FOR EVERY LAB. 
+You need a new project file FOR EVERY LAB.  
 
 This explains how to get started and how it should look on the cloud and on desktop.
+
+TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
 
 <br><br><br>
 
