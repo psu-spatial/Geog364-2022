@@ -31,6 +31,7 @@ knitr::opts_chunk$set(echo = TRUE,
 # PACKAGES-----------------------------------------------
 # Tutorial packages
 library(vembedr)
+library(skimr)
 library(yarrr)
 library(RColorBrewer)
 library(GGally) 
@@ -1537,11 +1538,7 @@ knitr::include_graphics("chipmunk.webp")
 
 
 
-# R-Markdown TEMPLATE 
-
-
-
-# Report template
+# R-Markdown REPORT TEMPLATE 
 
 It is often useful to have a "template" markdown file so you don't have to re-do all your custom formatting each time.  Here we will set up a specific one for your STAT462 Labs.  For this section, I advise doing everything in the standard view (E.g. don't press the little A symbol for the pretty view)
 
