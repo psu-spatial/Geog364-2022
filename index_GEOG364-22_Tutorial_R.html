@@ -473,27 +473,28 @@ class="uri">https://www.rstudio.com/products/rstudio/</a></p>
 </div>
 </div>
 <p><br></p>
-<hr />
-<p><br></p>
-<hr />
 </div>
 </div>
 </div>
-<div id="accessing-the-labs" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Accessing the labs</h1>
+<div id="accessing-r-studio" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Accessing R-Studio</h1>
 <div id="deciding-on-options" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Deciding on
 options</h2>
-<p>These days there are MANY ways of accessing R-Studio.</p>
+<p>Like there are many ways of accessing MSWord, there are many ways of
+accessing R-Studio.</p>
 <p>To make it easy to switch between them, we are going to be using
-“Projects”. These are self contained folders that contain all of your
-code, data and output. This makes it really easy to run R-studio and to
-move things around on your computer. (e.g. if you move the whole folder,
-it all still runs).</p>
-<p>For this course, I suggest one of two main options. Each of the
-sections below is dedicated to getting up and started.</p>
+<strong>“Projects”</strong>.</p>
+<p>These are self contained folders that contain all of your code, data
+and output. This makes it easy to run R-studio and to move things around
+on your computer. (e.g. if you move the whole folder, it all still
+runs).</p>
+<p>For this course, I suggest one of two main options for accessing
+R_studio. Each of the sections below is dedicated to getting up and
+started and you can switch between them.</p>
 <p><br></p>
 <hr />
+<p><br></p>
 </div>
 <div id="r-studio-cloud-website"
 class="section level2 tabset tabset-fade" number="2.2">
@@ -501,8 +502,8 @@ class="section level2 tabset tabset-fade" number="2.2">
 class="header-section-number">2.2</span> R-Studio CLOUD (website)</h2>
 <div id="about" class="section level3 unnumbered">
 <h3 class="unnumbered">About</h3>
-<p>There are many ways to access R-Studio. The easiest is to simply to
-use R Online at the R-Studio Cloud website</p>
+<p>The easiest way to get R-studio is to simply to use the R-Studio
+Cloud website</p>
 <p>Here you can log into an online version of R. and I believe is free
 for the first 25hrs each month. Like Jupiter Notebook, you can also
 programme in other langauges.</p>
@@ -522,18 +523,20 @@ data points</li>
 <li>You have to be online; bad internet connections make it harder</li>
 </ul></li>
 </ul>
+<p><br></p>
 <div id="signing-uplogging-in" class="section level4 unnumbered">
 <h4 class="unnumbered">Signing up/Logging in</h4>
 <p>To sign up, make an account at <a
 href="https://rstudio.cloud/plans/free"
 class="uri">https://rstudio.cloud/plans/free</a>, then click the tabs
 here to look around. Sadly there is no student pricing right now.</p>
+<p><br></p>
 <hr />
+<p><br></p>
 </div>
 </div>
-<div id="creating-projectsthe-workspace"
-class="section level3 unnumbered">
-<h3 class="unnumbered">Creating projects/the Workspace</h3>
+<div id="projects-in-r-studio-cloud" class="section level3 unnumbered">
+<h3 class="unnumbered">Projects in R-Studio-CLOUD</h3>
 <p><a
 href="https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570"
 title="Why use R Projects"><img
@@ -545,8 +548,12 @@ all you have to do is to move the folder and everything will just work.
 Learn more here.</p>
 <p>You will have a project for each Lab and I may share projects with
 example code.</p>
-<div id="how-to-create-a-project" class="section level4 unnumbered">
-<h4 class="unnumbered">How to create a project</h4>
+<p><br></p>
+<hr />
+<p><br></p>
+<div id="how-to-create-a-project-in-r-studio-cloud"
+class="section level4 unnumbered">
+<h4 class="unnumbered">How to create a project in R-Studio-CLOUD</h4>
 <p>Once you have logged in, you will get to a dashboard like this,
 called the R-studio workspace. You make a new project by clicking the
 button on the top right. You can open different projects in different
@@ -569,12 +576,18 @@ computer.</p>
 “.html”. More later on those, but here is how to download them so you
 can submit them</p>
 <ol style="list-style-type: decimal">
-<li>On your computer, go to your GEOG364 folder (or make one!)</li>
-<li>Make a subfolder named for that lab e.g. <em>Lab 1</em></li>
-<li>On the R-Studio Cloud website; inside your project, go to the files
-tab (next to Projects/Help in one quadrant) 4.Click the checkbox by the
-.RmD , click the cog-wheel and then export. Repeat for the html. (you
-can click, both it will download as a zip file).</li>
+<li><p>On the R-Studio Cloud website; inside your project, go to the
+files tab (next to Projects/Help in one quadrant. You will see a list of
+files, one with the file type .Rmd (your code) and one with .html(the
+website you made when you pressed knit). Look at the red circle in the
+pic below</p></li>
+<li><p>Click the checkbox to the left the .RmD</p></li>
+<li><p>Look just above at the Files quadrant settings menu. Click the
+blue “more” cogwheel icon. (see diagram)</p></li>
+<li><p>Now click export. This will download the file and export it to
+Canvas s</p></li>
+<li><p>REPEAT FOR THE HTML (you can do them together but it exports as a
+zip)</p></li>
 </ol>
 <div class="figure" style="text-align: center">
 <img src="Figures/Tut_Fig5_export.png" alt="*Downloading the files*" width="1363" />
@@ -1141,10 +1154,6 @@ when you close R, all record of these commands will be lost.</p></li>
 </div>
 <div id="saving-commands-in-scripts" class="section level2 unnumbered">
 <h2 class="unnumbered">Saving commands in “scripts”</h2>
-<p class="comment">
-WE WILL NOT USE THIS OPTION, but it’s useful for a lot of programming
-and zero writing
-</p>
 <p>You might wonder at this point about how to save your work.</p>
 <p>Typing into console is like having a phone call with your computer;
 you’re talking but you’re not keeping records of what you say. To see
@@ -1154,15 +1163,14 @@ record of these commands will be lost.</p>
 <p>We need instead is a way to save the commands for future use - we can
 do this using <strong>scripts</strong>.</p>
 <p>There are several types of document, or script that you can create
-and save in R-Studio. There are about 20 options in the file menu!</p>
+and save in R-Studio. There are about 20 options in the file menu. Here
+are a few important ones</p>
 <div id="types-of-script" class="section level3 tabset tabset-fade"
 number="5.0.1">
 <h3 class="tabset tabset-fade"><span
 class="header-section-number">5.0.1</span> Types of script</h3>
-<div id="a-basic-r-script-.r-ignore" class="section level4"
-number="5.0.1.1">
-<h4><span class="header-section-number">5.0.1.1</span> A Basic R script
-(.r) [IGNORE]</h4>
+<div id="a-basic-r-script-.r-ignore" class="section level4 unnumbered">
+<h4 class="unnumbered">A Basic R script (.r) [IGNORE]</h4>
 <p class="comment">
 WE WILL NORMALLY IGNORE THIS OPTION, but it’s useful for a lot of
 programming and zero writing
@@ -1178,6 +1186,16 @@ commands over to the console. You run the commands by highlighting
 (triple click to highlight a whole line), then press control-enter (or
 command-enter on a mac). You can also copy/paste them accoss.</p>
 <p>To open this you literally go to file, then new script.</p>
+<p>This will add a new window - which is simply a notepad file you can
+save. If you type your commands in there, you can save them. You run
+them in the console by highlighting the text on each line and pressing
+Ctrl-Enter (or command enter on a mac).</p>
+<div class="figure" style="text-align: center">
+<img src="Figures/pg_Tut3_basics_fig4b.png" alt="Running commands in a basic script" width="1250" />
+<p class="caption">
+Running commands in a basic script
+</p>
+</div>
 <p><br></p>
 </div>
 <div id="creating-a-basic-r-script" class="section level4 unnumbered">
@@ -1198,8 +1216,8 @@ Running commands in a basic script
 YOU DO NOT NEED TO SUBMIT THIS. You are also welcome to simply enter the
 commands in the console.</p>
 </div>
-<div id="section" class="section level4" number="5.0.1.2">
-<h4><span class="header-section-number">5.0.1.2</span> </h4>
+<div id="section" class="section level4" number="5.0.1.1">
+<h4><span class="header-section-number">5.0.1.1</span> </h4>
 <p><br> <br></p>
 </div>
 </div>
@@ -1599,857 +1617,450 @@ can apply to a table (in their case the iris table). And that’s how it
 ended up here..</li>
 </ol>
 <pre class="r"><code> skim(iris)</code></pre>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-Data summary
-</caption>
+<table>
+<caption>Data summary</caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-iris
-</td>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-150
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-5
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-factor
-</td>
-<td style="text-align:left;">
-1
-</td>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-4
-</td>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: factor</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="17%" />
+<col width="9%" />
+<col width="11%" />
+<col width="32%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:left;">
-ordered
-</th>
-<th style="text-align:right;">
-n_unique
-</th>
-<th style="text-align:left;">
-top_counts
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Species
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-set: 50, ver: 50, vir: 50
-</td>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="18%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="7%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-mean
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-p0
-</th>
-<th style="text-align:right;">
-p25
-</th>
-<th style="text-align:right;">
-p50
-</th>
-<th style="text-align:right;">
-p75
-</th>
-<th style="text-align:right;">
-p100
-</th>
-<th style="text-align:left;">
-hist
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Sepal.Length
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-5.84
-</td>
-<td style="text-align:right;">
-0.83
-</td>
-<td style="text-align:right;">
-4.3
-</td>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-5.80
-</td>
-<td style="text-align:right;">
-6.4
-</td>
-<td style="text-align:right;">
-7.9
-</td>
-<td style="text-align:left;">
-▆▇▇▅▂
-</td>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Sepal.Width
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.06
-</td>
-<td style="text-align:right;">
-0.44
-</td>
-<td style="text-align:right;">
-2.0
-</td>
-<td style="text-align:right;">
-2.8
-</td>
-<td style="text-align:right;">
-3.00
-</td>
-<td style="text-align:right;">
-3.3
-</td>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:left;">
-▁▆▇▂▁
-</td>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Petal.Length
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.76
-</td>
-<td style="text-align:right;">
-1.77
-</td>
-<td style="text-align:right;">
-1.0
-</td>
-<td style="text-align:right;">
-1.6
-</td>
-<td style="text-align:right;">
-4.35
-</td>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-6.9
-</td>
-<td style="text-align:left;">
-▇▁▆▇▂
-</td>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Petal.Width
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1.20
-</td>
-<td style="text-align:right;">
-0.76
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:right;">
-1.30
-</td>
-<td style="text-align:right;">
-1.8
-</td>
-<td style="text-align:right;">
-2.5
-</td>
-<td style="text-align:left;">
-▇▁▇▅▃
-</td>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code> # Use tidyselect
  skim(iris, Species)</code></pre>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-Data summary
-</caption>
+<table>
+<caption>Data summary</caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-iris
-</td>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-150
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-5
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-factor
-</td>
-<td style="text-align:left;">
-1
-</td>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: factor</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="17%" />
+<col width="9%" />
+<col width="11%" />
+<col width="32%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:left;">
-ordered
-</th>
-<th style="text-align:right;">
-n_unique
-</th>
-<th style="text-align:left;">
-top_counts
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Species
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-set: 50, ver: 50, vir: 50
-</td>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">set: 50, ver: 50, vir: 50</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code> skim(iris, starts_with(&quot;Sepal&quot;))</code></pre>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-Data summary
-</caption>
+<table>
+<caption>Data summary</caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-iris
-</td>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-150
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-5
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-2
-</td>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
 <table>
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="18%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="8%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-mean
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-p0
-</th>
-<th style="text-align:right;">
-p25
-</th>
-<th style="text-align:right;">
-p50
-</th>
-<th style="text-align:right;">
-p75
-</th>
-<th style="text-align:right;">
-p100
-</th>
-<th style="text-align:left;">
-hist
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Sepal.Length
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-5.84
-</td>
-<td style="text-align:right;">
-0.83
-</td>
-<td style="text-align:right;">
-4.3
-</td>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-5.8
-</td>
-<td style="text-align:right;">
-6.4
-</td>
-<td style="text-align:right;">
-7.9
-</td>
-<td style="text-align:left;">
-▆▇▇▅▂
-</td>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.8</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Sepal.Width
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.06
-</td>
-<td style="text-align:right;">
-0.44
-</td>
-<td style="text-align:right;">
-2.0
-</td>
-<td style="text-align:right;">
-2.8
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-3.3
-</td>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:left;">
-▁▆▇▂▁
-</td>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.0</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code> skim(iris, where(is.numeric))</code></pre>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-Data summary
-</caption>
+<table>
+<caption>Data summary</caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-iris
-</td>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">iris</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-150
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">150</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-5
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">5</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-4
-</td>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="18%" />
+<col width="13%" />
+<col width="18%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+<col width="7%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-mean
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-p0
-</th>
-<th style="text-align:right;">
-p25
-</th>
-<th style="text-align:right;">
-p50
-</th>
-<th style="text-align:right;">
-p75
-</th>
-<th style="text-align:right;">
-p100
-</th>
-<th style="text-align:left;">
-hist
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Sepal.Length
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-5.84
-</td>
-<td style="text-align:right;">
-0.83
-</td>
-<td style="text-align:right;">
-4.3
-</td>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-5.80
-</td>
-<td style="text-align:right;">
-6.4
-</td>
-<td style="text-align:right;">
-7.9
-</td>
-<td style="text-align:left;">
-▆▇▇▅▂
-</td>
+<tr class="odd">
+<td align="left">Sepal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">5.84</td>
+<td align="right">0.83</td>
+<td align="right">4.3</td>
+<td align="right">5.1</td>
+<td align="right">5.80</td>
+<td align="right">6.4</td>
+<td align="right">7.9</td>
+<td align="left">▆▇▇▅▂</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Sepal.Width
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.06
-</td>
-<td style="text-align:right;">
-0.44
-</td>
-<td style="text-align:right;">
-2.0
-</td>
-<td style="text-align:right;">
-2.8
-</td>
-<td style="text-align:right;">
-3.00
-</td>
-<td style="text-align:right;">
-3.3
-</td>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:left;">
-▁▆▇▂▁
-</td>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.06</td>
+<td align="right">0.44</td>
+<td align="right">2.0</td>
+<td align="right">2.8</td>
+<td align="right">3.00</td>
+<td align="right">3.3</td>
+<td align="right">4.4</td>
+<td align="left">▁▆▇▂▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Petal.Length
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3.76
-</td>
-<td style="text-align:right;">
-1.77
-</td>
-<td style="text-align:right;">
-1.0
-</td>
-<td style="text-align:right;">
-1.6
-</td>
-<td style="text-align:right;">
-4.35
-</td>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-6.9
-</td>
-<td style="text-align:left;">
-▇▁▆▇▂
-</td>
+<tr class="odd">
+<td align="left">Petal.Length</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.76</td>
+<td align="right">1.77</td>
+<td align="right">1.0</td>
+<td align="right">1.6</td>
+<td align="right">4.35</td>
+<td align="right">5.1</td>
+<td align="right">6.9</td>
+<td align="left">▇▁▆▇▂</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Petal.Width
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1.20
-</td>
-<td style="text-align:right;">
-0.76
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:right;">
-1.30
-</td>
-<td style="text-align:right;">
-1.8
-</td>
-<td style="text-align:right;">
-2.5
-</td>
-<td style="text-align:left;">
-▇▁▇▅▃
-</td>
+<tr class="even">
+<td align="left">Petal.Width</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.20</td>
+<td align="right">0.76</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
+<td align="right">1.30</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="left">▇▁▇▅▃</td>
 </tr>
 </tbody>
 </table>

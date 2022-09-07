@@ -163,7 +163,7 @@ Leave another blank line and add a new Level 1 heading called *"Code Showcase"*.
 
   - 103^3^  (e.g `103*103*103`, or `103^3`) <br>
   
-  _ The co-sine of your age (google is your friend, google R function for cosine) <br>
+  - The co-sine of your age (google is your friend, google R function for cosine) <br>
   
   - Use R code to work out how many characters are in [the longest town name in Wales](https://www.bbcamerica.com/anglophenia/2015/09/how-to-pronounce-the-longest-place-name-in-the-u-k) *Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch*. <br>
      + Hint 1, remember you can copy paste this into your code. <br>
