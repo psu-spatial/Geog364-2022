@@ -135,31 +135,21 @@ Canvas: Lab 2 assignment.
 
 ## 1: Create your Lab 2 Project SEPARATE TO LAB 1 {- .tabset .tabset-fade} 
 
-### Overview {-}
+You need a new project file FOR EVERY LAB.   This explains how to get started and how it should look on the cloud and on desktop.
 
-You need a new project file FOR EVERY LAB.  
 
-This explains how to get started and how it should look on the cloud and on desktop.
 
-TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
+ -  Using R-CLOUD? : click here: 
+    + https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD
 
-<br><br><br>
-
-### Using R-CLOUD? {-}
-
-https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
-
-### Using YOUR LAPTOP? {-}
-
-https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#4_R-Projects_(one_for_each_lab)
+ - Using YOUR LAPTOP? : Click here:  
+    + https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop
 
 <br>
 <br>
 <br>
 
 ## 2. Create a Markdown Template {- .tabset .tabset-fade} 
-
-### Overview {-}
 
 Life is faster when we don't have to set up Markdown files all the time. 
 So we will create a template in 3 easy steps (see the tabs)
@@ -168,8 +158,9 @@ So we will create a template in 3 easy steps (see the tabs)
   2. Edit into a professional/creative template format
   3. Add the libraries we will need for the lab
   
+<br>
 
-### Make a new markdown file {-}
+### 1. Make a new markdown file {-}
 
 Same as last week, go  to New File/**New R-Markdown** to make a new R-Markdown file. 
 
@@ -182,15 +173,14 @@ As you can see, the friendly text is back for your new lab-script. This is a pai
 <br>
 <br>
 <br>
-<br>
 
-### Edit your file into a nice template {-}
+
+### 2. Edit your file into a nice template {-}
 
 Work through  to create and save a template to your folder. You will only have to do this once!
 
 TUTORIAL REPORT TEMPLATE: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#10_Report_template
 
-<br>
 <br>
 <br>
 <br>
@@ -213,10 +203,8 @@ library(knitr)
 
 If you get errors about the package not existing, then go to the Packages Menu in Help Quadrant, click **install** and download them.  
 
-IF YOU ARE ON CLOUD MORE CHANCE YOU WILL HAVE TO REINSTALL BUT JUST DO THESE 6.
-TUTORIAL https://psu-spatial.github.io/Geog364-2022/GEOG364-22_T1_R_Basics.html#23_Adding_a_new_package
+IF YOU ARE ON CLOUD MORE CHANCE YOU WILL HAVE TO REINSTALL BUT JUST FOLLOW THIS OR CLICK THE LITTLE YELLOW BAR  https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#5_R-Packages 
 
-<br>
 <br>
 <br>
 <br>
@@ -227,7 +215,7 @@ TUTORIAL https://psu-spatial.github.io/Geog364-2022/GEOG364-22_T1_R_Basics.html#
 
 IF YOU HAVEN'T DONE THE SET-UP SECTION, GO AND DO IT OR CODE SHOWCASE WILL BE HARDER THAN IT SHOULD BE!
 
-In the Code Showcase section of your report, create five sub-sections called
+In the Code Showcase section of your report, create four sub-sections in the text part of the document called
 
  - **My Photos**
 
@@ -240,12 +228,11 @@ In the Code Showcase section of your report, create five sub-sections called
 See the tabs for what to do..
 
 
-
 #### Adding photos {-}
 
 Add a photo/video/gif of your choice WITH text below or as a caption explaining why this is important to you <br>
 
-This is explained in TUTORIAL:https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#87_Adding_photos
+This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#96_Adding_photos
 
 <br>
 <br>
@@ -259,7 +246,7 @@ Now you have set up your template, your lab write-up should have a cool theme.
 
 What theme did you choose, any other formatting options you want?
 
-This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#84_YAML_Code
+This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#93_YAML_Code
 <br>
 <br>
 <br>
@@ -268,23 +255,22 @@ This is explained in TUTORIAL: https://psu-spatial.github.io/Geog364-2022/index_
 
 #### Using helpfiles {-}
 
+When programming in R, someone often tells you about a "cool new command". I want you to feel comfortable working out how to use them.  The help files are MASSIVELY VALUABLE in helping run it without support, because at the end they have worked examples you can copy and paste in. Here's some practice in getting up and running.
 
 
-When programming in R, someone often tells you about a "cool new command". I want you to feel comfortable working out how to use them.
+1. Work through this tutorial on help-files (seriously, it will help) : 
+  + https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#7_Getting_help
 
-The help files are MASSIVELY VALUABLE in helping run it without support, because at the end they have worked examples you can copy and paste in. Here's some practice in getting up and running.
+2. Use the instructions in that tutorial to make me a "Quick Thematic Map " of a city of your choice
+  + Hint 1, the command is qtm...
+  + Hint 2, go to the VERY END of the helpfile.
 
-
-1. Work through this tutorial on help-files (seriously, it will help) : TUTORIAL:## How to use the R help files https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#7_Getting_help 
-
-2. Use helpfiles to make me a "Quick Thematic Map (qtm)" of a city of your choice (hint, start by googling *""Quick Thematic Map" QTM documentation R*) then work through my tutorial above.   Hint, the command is called qtm.. 
 
 3. Make me a mini tutorial on ANY new function and include a worked example!  Just google "cool R functions".  If you are really stuck here, I will put some suggestions on teams if people ask.
 
    + Really good ones get a participation point and go into the tutorials...
    
      
-<br>
 <br>
 <br>
 <br>
@@ -323,10 +309,11 @@ R contains MANY built in datasets.  You can load them using the `data()` command
  
  CHOOSE A DIFFERENT ONE TO YOUR FRIENDS!
 
- To get full marks you need to include the sub-sections.
+<br>
 
+To get full marks you need to include the sub-sections.
 
-### Study Background/Professional report [4 marks] {-} 
+#### Study Background/Professional report [4 marks] {-} 
 
 Pretend this is real! Write me a short paragraph about why starwars/pirates/chickens/your data is important.  Include pictures or web-links...
 
@@ -336,7 +323,7 @@ These 4 marks are also for how professional your data analysis looks. e.g. headi
 
 <br>
 
-### Study Design [8 marks] {-} 
+#### Study Design [8 marks] {-} 
 
 Based on your data for me a reasonable:
 
@@ -475,7 +462,7 @@ Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE IN YOUR 
 
 **DATA ANALYSIS - 30 MARKS**
 
-To be added
+See the marks in the question itself
     
 **Above and beyond: 4 MARKS**
 

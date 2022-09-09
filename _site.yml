@@ -5,8 +5,6 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Original R tutorials"
-      href: GEOG364-22_T1_R_Basics.html
     - text: "NEW! R-TUTORIAL"
       href: index_GEOG364-22_Tutorial_R.html  
     - text: "Labs"
