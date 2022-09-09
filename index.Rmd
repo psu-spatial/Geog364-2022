@@ -7,7 +7,6 @@ output:
   html_document:
     theme: flatly  
     toc: false # adds a table of contents
-    css: styles2.css
     toc_depth: 3
     toc_float:
       collapsed: no

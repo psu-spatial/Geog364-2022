@@ -7,6 +7,7 @@ output:
     toc_float:
       collapsed: yes
     number_sections: yes
+    css: styles2.css
 ---
 
 ```{=html}
@@ -126,7 +127,6 @@ GetRLatest()
 <br><br>
 
 ## All about R-Studio {.tabset .tabset-fade}
-
 ### R-STUDIO is a PIECE OF SOFTWARE {.unnumbered}
 
 **R-studio** is piece of software designed to make it easier to
@@ -162,33 +162,24 @@ embed_url("https://www.youtube.com/watch?v=SdMPh5uphO0")
 
 <br>
 
-# Accessing R-Studio
 
-## Deciding on options
 
-Like there are many ways of accessing MSWord, there are many ways of
-accessing R-Studio.
 
-To make it easy to switch between them, we are going to be using
-**"Projects"**.
 
-These are self contained folders that contain all of your code, data and
-output. This makes it easy to run R-studio and to move things around on
-your computer. (e.g. if you move the whole folder, it all still runs).
-
-For this course, I suggest one of two main options for accessing
-R_studio. Each of the sections below is dedicated to getting up and
-started and you can switch between them.
+# R-Studio CLOUD {.tabset .tabset-fade}
 
 <br>
 
-------------------------------------------------------------------------
+**These tabs tell you all you need to know about running R-Studio on the Cloud website:** 
+
+   - **What is the cloud**
+   - **Creating a project**
+   - **Downloading and uploading files from the cloud website**
+      + (Important so you can submit your labs!)
 
 <br>
 
-## R-Studio CLOUD (website) {.tabset .tabset-fade}
-
-### About {.unnumbered}
+## About R-Studio Cloud {-}
 
 The easiest way to get R-studio is to simply to use the R-Studio Cloud
 website
@@ -208,21 +199,16 @@ programme in other langauges.
         data points
     -   You have to be online; bad internet connections make it harder
 
-<br>
-
-#### Signing up/Logging in {.unnumbered}
 
 To sign up, make an account at <https://rstudio.cloud/plans/free>, then
 click the tabs here to look around. Sadly there is no student pricing
 right now.
 
 <br>
-
-------------------------------------------------------------------------
-
 <br>
 
-### Projects in R-Studio-CLOUD {.unnumbered}
+
+## Projects using the cloud {-}
 
 [![Rproject](./Figures/Tut_Fig7_ProjectVideo.png)](https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570)
 
@@ -230,18 +216,9 @@ An R-project is a folder that will store everything to do with each lab
 in one place on your computer. This is incredibly useful - it means that
 if you switch from R-Cloud, to the lab computers, to your laptop, all
 you have to do is to move the folder and everything will just work.
-Learn more here.
+Learn more here.  You will have a project for each Lab and I may share projects with example code.
 
-You will have a project for each Lab and I may share projects with
-example code.
-
-<br>
-
-------------------------------------------------------------------------
-
-<br>
-
-#### How to create a project in R-Studio-CLOUD {.unnumbered}
+### Creating a lab project {-}
 
 Once you have logged in, you will get to a dashboard like this, called
 the R-studio workspace. You make a new project by clicking the button on
@@ -255,7 +232,18 @@ computer.
 knitr::include_graphics('./Figures/Tut_Fig4_clouddash.png')
 ```
 
-### Downloading your work {.unnumbered}
+
+### Returning to your lab project {-}
+
+On the cloud this is very easy, just go back to
+<https://rstudio.cloud/content/yours>
+
+<br>
+<br>
+
+## DOWNLOADING/UPLOADING FILES {.unnumbered}
+
+### Downloading files {-}
 
 Ignore this until later on and you need to submit your lab.
 
@@ -284,7 +272,8 @@ them
 knitr::include_graphics('./Figures/Tut_Fig5_export.png')
 ```
 
-### Uploading to the cloud {.unnumbered}
+
+### Uploading files {-}
 
 Simply click the upload button inside your project in the files tab and
 upload your files. You do not need subfolders.
@@ -297,14 +286,23 @@ knitr::include_graphics('./Figures/Tut_Fig5_export.png')
 
 ------------------------------------------------------------------------
 
-## R-Studio Desktop {.tabset .tabset-fade}
+# R-Studio Desktop {.tabset .tabset-fade}
 
-### About {.unnumbered}
+
+**These tabs tell you all you need to know about installing and running R-Studio on your own computer** 
+
+   - **What is the is the RDesktop**
+   - **Installing/updating R itself**
+   - **Installing/updating R-Studio**
+   - **Creating a project**
+
+
+## About {-}
 
 If you have your own computer, you can run R-Studio for free on there.
 
 -   Advantages:
-    -   Its really powerful and we will learn how to use and update it
+    -   Its powerful and we will learn how to use and update it
     -   No need for the internet
     -   You can play with millions of data points <br>
 -   Disadvantages:
@@ -313,31 +311,20 @@ If you have your own computer, you can run R-Studio for free on there.
     -   You are tied to your laptop/computer (although you can uplaod
         your files to the cloud)
 
-<p class="comment">
-
-\*\*If you already have R and/or R-Studio, it is very important you
-update BOTH of them to the most recent version. To do so, pretend you
-are installing them from scratch. If you are worried this will affect
-another class, chat with Dr Greatrex before starting out.
-
-</p>
+<p class="comment"> If you already have R and/or R-Studio, it is very important you update BOTH of them to the most recent version. To do so, pretend you are installing them from scratch. If you are worried this will affect another class, chat with Dr Greatrex before starting out.</p>
 
 <br>
 
-### Downloading R/R-Studio on a PC: {.unnumbered}
+## Downloading R AND R-Studio {-}
 
-<p class="comment">
+### On a PC: {-}
 
-\*\*To make R-Studio run on your computer, you need to download TWO
-things: [1] A programme that teaches your computer the ability to
-"speak" in R and [2] The R studio software itself
-
-</p>
+<p class="comment"> To make R-Studio run on your computer, you need to download TWO things: [1] A programme that teaches your computer the ability to "speak" in R and [2] The R studio software itself </p>
 
 1.  **[STEP 1 of 2] Download & install the R-language itself:**
 
     -   Go to: <https://cloud.r-project.org/bin/windows/base/> ,
-    -   download this version of R (the main download R for windows
+    -   Download this version of R (the main download R for windows
         button)
 
     ```{r, echo=FALSE}
@@ -356,15 +343,9 @@ things: [1] A programme that teaches your computer the ability to
 
 <br>
 
-### Downloading R/R-Studio on a Mac: {.unnumbered}
+### On a Mac: {.unnumbered}
 
-<p class="comment">
-
-\*\*To make R-Studio run on your computer, you need to download TWO
-things: [1] A programme that teaches your computer the ability to
-"speak" in R and [2] The R studio software itself
-
-</p>
+<p class="comment">To make R-Studio run on your computer, you need to download TWO things: [1] A programme that teaches your computer the ability to "speak" in R and [2] The R studio software itself</p>
 
 1.  **[STEP 1 of 2] Download & install the R-language itself for mac:**
 
@@ -387,11 +368,122 @@ things: [1] A programme that teaches your computer the ability to
 
 ------------------------------------------------------------------------
 
+## Using Projects on R-Desktop {-}
+
+### What are Projects?
+
+[![Rproject](./Figures/Tut_Fig7_ProjectVideo.png)](https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570)
+
+An R-project is a folder that will store everything to do with each lab
+in one place on your computer. This is incredibly useful - it means that
+if you switch from R-Cloud, to the lab computers, to your laptop, all
+you have to do is to move the folder and everything will just work.
+Learn more here.
+
+You will have a project for each Lab and I may share projects with
+example code.
+
+<br>
+
+### Creating a project on desktop {-}
+
+1.  IMPORTANT! If you haven't already, on an easy to access place on
+    your computer, make a folder called GEOG-364. This is where ALL your
+    labs are going to live.
+
+2.  Now everything is installed, open R-studio **(NOT R!)**.
+
+```{r, Tut_Fig6, echo=FALSE, out.width="80%",fig.align='center'}
+knitr::include_graphics('./Figures/Tut_Fig6_startup_icons.png')
+```
+
+<br>
+
+2.  Go to the file menu at the very top and click `New Project`
+
+3.  Select `New Directory`, then `New Project`
+
+4.  Name your project *GEOG364-Lab1-PROJECT* (or whatever lab)
+
+5.  **Under "create project as a subdirectory of", hit the browse button
+    and go inside your GEOG-364 main folder (you just need to be in the
+    folder, you don't need to have selected anything).** Press open
+
+6.  Finally, press `Create Project`
+
+```{r, Tut_Fig8, echo=FALSE}
+knitr::include_graphics('./Figures/Tut_Fig8_project.png')
+```
+
+### How to check you are in a project {-}
+
+R will change slightly. If you look at the top of the screen in the
+title bar, it should say something like *GEOG364-Lab1-Project R Studio*.
+
+The Files tab should have gone to your project folder. Essentially,
+R-Studio is now "looking" inside your Lab 1 folder, making it easier to
+find your data and output your results.
+
+```{r, Tut_Fig9, echo=FALSE, fig.cap="How to check you are in a project"}
+knitr::include_graphics('./Figures/Tut_Fig9_projectcheck.png')
+```
+
+<br>
+
+Essentially, R-Studio is now "looking" inside your Lab 1 folder, making
+it easier to find your data and output your results.
+
+If you want one, final check, try typing this into the console
+(INCLUDING THE EMPTY PARANTHESES/BRACKETS), press enter and see if it
+prints out the location of Lab 1 on your computer. If not, talk to an
+instructor.
+
+```{r, eval=FALSE}
+getwd()
+```
+
+<br>
+
+### Returning to your lab project {-}
+
+OK, let's imagine that you get halfway through your lab and your
+computer dies. How do you get back to your Lab work? Try this now. Close
+down R-Studio.
+
+To reopen a lab:
+
+1.  **DO NOT RE-OPEN R-STUDIO!**
+
+2.  Instead navigate on your computer to your
+    *GEOG-364/GEOG364-Lab1-Project* folder.
+
+3.  Double click on the GEOG364-Lab1-Project.RProj file.
+
+This will reopen R for that specific lab, so you can continue where you
+left off.
+
+It means you can also open several versions of R studio for multiple
+projects, which can be very useful in keeping labs separate and staying
+sane.
+
+```{r, Tut_Fig10, echo=FALSE}
+knitr::include_graphics('./Figures/Tut_Fig10_projectopen.png')
+```
+
 <br> <br>
 
-# Initial set-up {.tabset .tabset-fade}
 
-## Looking around
+
+
+# Global settings {.tabset .tabset-fade}
+
+<br>
+
+Want to understand more about what the screens do, or change the appearance. Here is the chapter for you.
+
+<br>
+
+## The screen {-}
 
 You will be greeted by three panels:
 
@@ -411,18 +503,11 @@ If you wish to learn more about what these windows do, have a look at
 this resource, from the Pirates Guide to R:
 <https://bookdown.org/ndphillips/YaRrr/the-four-rstudio-windows.html>.
 
-<p class="comment">
-
-If you have used R before, you might see that there are variables and
-plots etc already loaded\*\*. It is always good to clear these before
-you start a new analysis. To do this, click the little broom symbol in
-your environment tab
-
-</p>
+<p class="comment"> If you have used R before, you might see that there are variables and plots etc already loaded. It is always good to clear these before you start a new analysis. To do this, click the little broom symbol in your environment tab</p>
 
 <br>
 
-## Moving the 4 quadrants around
+## Moving the 4 quadrants around {-}
 
 You might find you like the different quadrants in a different order. To
 change this, look at the menu at VERY TOP OF THE SCREEN.
@@ -441,7 +526,7 @@ knitr::include_graphics('./Figures/Tut_Fig12_panes.png')
 
 <br>
 
-## Changing settings (LAB 1 IMPORTANT)
+## Changing settings {-}
 
 R-studio wants to be helpful and will try to re-load exactly where you
 were in a project when you log back in. This can get confusing, so we
@@ -477,136 +562,20 @@ Now:
 
 <br>
 
-# R-Projects (one for each lab) {.tabset .tabset-fade}
 
-## What are Projects?
-
-[![Rproject](./Figures/Tut_Fig7_ProjectVideo.png)](https://www.linkedin.com/learning/learning-the-r-tidyverse/why-should-you-use-projects-in-rstudio?u=76811570)
-
-An R-project is a folder that will store everything to do with each lab
-in one place on your computer. This is incredibly useful - it means that
-if you switch from R-Cloud, to the lab computers, to your laptop, all
-you have to do is to move the folder and everything will just work.
-Learn more here.
-
-You will have a project for each Lab and I may share projects with
-example code.
+# R-Packages {.tabset .tabset-fade}
 
 <br>
+ 
+There are three tabs here:
 
-## Using Projects on R-Studio Cloud {.unnumbered}
+ 1. A description of packages
+ 2. How to install one from the internet
+ 3. How to load and use it with the library() command
+ 
+ <br>
 
-These are literally built in when you create a new project from the
-workspace.
-
-For each new lab, go back to the workspace and create a new one (see
-above in the cloud section)
-
-## Using Projects on R-Desktop {.unnumbered}
-
-Easy once you get the hang of it.
-
-### Instructions {.unnumbered}
-
-1.  IMPORTANT! If you haven't already, on an easy to access place on
-    your computer, make a folder called GEOG-364. This is where ALL your
-    labs are going to live.
-
-2.  Now everything is installed, open R-studio **(NOT R!)**.
-
-```{r, Tut_Fig6, echo=FALSE, out.width="80%",fig.align='center'}
-knitr::include_graphics('./Figures/Tut_Fig6_startup_icons.png')
-```
-
-<br>
-
-2.  Go to the file menu at the very top and click `New Project`
-
-3.  Select `New Directory`, then `New Project`
-
-4.  Name your project *GEOG364-Lab1-PROJECT* (or whatever lab)
-
-5.  **Under "create project as a subdirectory of", hit the browse button
-    and go inside your GEOG-364 main folder (you just need to be in the
-    folder, you don't need to have selected anything).** Press open
-
-6.  Finally, press `Create Project`
-
-```{r, Tut_Fig8, echo=FALSE}
-knitr::include_graphics('./Figures/Tut_Fig8_project.png')
-```
-
-## How to check you are in a project {.unnumbered}
-
-R will change slightly. If you look at the top of the screen in the
-title bar, it should say something like *GEOG364-Lab1-Project R Studio*.
-
-The Files tab should have gone to your project folder. Essentially,
-R-Studio is now "looking" inside your Lab 1 folder, making it easier to
-find your data and output your results.
-
-```{r, Tut_Fig9, echo=FALSE, fig.cap="How to check you are in a project"}
-knitr::include_graphics('./Figures/Tut_Fig9_projectcheck.png')
-```
-
-<br>
-
-Essentially, R-Studio is now "looking" inside your Lab 1 folder, making
-it easier to find your data and output your results.
-
-If you want one, final check, try typing this into the console
-(INCLUDING THE EMPTY PARANTHESES/BRACKETS), press enter and see if it
-prints out the location of Lab 1 on your computer. If not, talk to an
-instructor.
-
-```{r, eval=FALSE}
-getwd()
-```
-
-<br>
-
-## Returning to your lab project
-
-### CLOUD {.unnumbered}
-
-On the cloud this is very easy, just go back to
-<https://rstudio.cloud/content/yours>
-
-### DESKTOP {.unnumbered}
-
-OK, let's imagine that you get halfway through your lab and your
-computer dies. How do you get back to your Lab work? Try this now. Close
-down R-Studio.
-
-To reopen a lab:
-
-1.  **DO NOT RE-OPEN R-STUDIO!**
-
-2.  Instead navigate on your computer to your
-    *GEOG-364/GEOG364-Lab1-Project* folder.
-
-3.  Double click on the GEOG364-Lab1-Project.RProj file.
-
-This will reopen R for that specific lab, so you can continue where you
-left off.
-
-It means you can also open several versions of R studio for multiple
-projects, which can be very useful in keeping labs separate and staying
-sane.
-
-```{r, Tut_Fig10, echo=FALSE}
-knitr::include_graphics('./Figures/Tut_Fig10_projectopen.png')
-```
-
-<br> <br>
-
-=========================================
-
-BELOW THIS POINT I HAVE NOT HAD THE TIME TO MAKE THE TUTORIALS PRETTY
-
-## R-Packages {#Tut2_Packages}
-
-### What are packages? {#Tut2Ba_whatarethey}
+## What are packages? {-}
 
 As described earlier, we program in R by typing a series of commands. R
 is open source meaning anyone can create a new one, so over the last 20
@@ -629,110 +598,20 @@ So to access the commands in a package we need these two steps:
 1.  ONCE ONLY: Download the package from the internet
 2.  EVERY TIME: Load the packages you want
 
-<p class="comment">
+<p class="comment"> **A close analogy is your phone:** There are millions of apps available  from banking, to 50 different calendar apps. You don't have every app in the world installed on your phone - and you don't have every app you *do* download running at the same time. <br><br> Instead you download the apps that you think you will need (occasionally downloading a new one on the fly) - and when you need to use an app, you click on it to open.</p>
 
-**A close analogy is your phone:** There are millions of apps available
-from banking, to 50 different calendar apps. You don't have every app in
-the world installed on your phone - and you don't have every app you
-*do* download running at the same time. Instead you download the apps
-that you think you will need (occasionally downloading a new one on the
-fly) - and when you need to use an app, you click on it to open.
-
-</p>
 
 <br> <br>
 
-### LAB 1: Bulk download main packages {#Tut2Bc_fulllist}
 
-Now we are going to download most of the packages you need for these
-labs so that you do not need to do this each week. We're doing it in
-groups of 5 to make it easier to check for errors.
+## Downloading a new package {-}
 
-**Copy each of these commands into the R-CONSOLE and press enter to
-run.**
+This is like going to the app store to get a new app. Just like you only go to the app store once, this is a one-off for each package.
 
-A load of text should stream down your console. Just let it run until
-the console is back to the \> symbol and you can type. It might take
-several minutes. Sometimes this will give you an error and not run,
-
-**WHAT DOES SUCCESS LOOK LIKE?**
-
-If it works, you should see some text like "the downloaded binary
-packages are in....". If not, there will be errors.
-
-```{r, warnings=FALSE, message=FALSE, eval=FALSE}
-
-install.packages(c("tidyverse","abind","car","corrplot","dismo"))
-install.packages(c("elevatr","ggpubr","ggstatsplot","hrbrthemesv")) 
-install.packages(c("IMTest","ISLR", "kableExtra","lattice","matlab"))
-install.packages(c("maps","mapdata","maptools","mapview","ncdf4","skimr"))
-install.packages(c("olsrr", "plotly","RColorBrewer"))
-install.packages(c("rmdformats", "stargazer","units","viridis","yarrr","vembedr","GGally"))
-install.packages(c("beeswarm","corrplot","equatiomatic"))
-install.packages(c("ggExtra","ggridges","ggthemes","ztable"))
-install.packages(c("Stat2Data","USAboundaries","hrbrthemes"))
-install.packages(c("knitr" , "readxl", "remotes"))
-
-```
-
-```{r, warnings=FALSE, message=FALSE, eval=FALSE}
-# The ones below are where there are often errors so we will go more slowly
-install.packages(c("rgdal","rgeos","rmapshaper"))
-install.packages(c("sf","sp","raster","terra"))
-install.packages(c("tidycensus","tigris","tmap"))
-
-```
-
-Sometimes you need to install a package from a different place, like
-github. To do this we use a more complex command from the remotes
-library. Sometimes when doing so, R will ask questions IN THE CONSOLE.
-It will wait for your answer until you type it and press enter! Choose
-to install all sub-packages.
-
-```{r, warnings=FALSE, message=FALSE, eval=FALSE}
-# Sometimes you need to install a package from a different place, like github. 
-# To do this we use a more complex command from the remotes library
-install.packages(c("knitr" , "readxl", "remotes"))
-remotes::install_github("ropensci/USAboundariesData")
-remotes::install_github("ropenscilabs/rnaturalearthhires")
-remotes::install_github("isciences/exactextractr")
-
-```
-
-<br> <br>
-
-## Adding a new package
-
-This is a TWO STEP PROCESS
-
-1.  You need to download it from the internet (like buying a phone app)
-2.  You need to tell the computer you want to use the commands in that
-    package (like clicking on the icon to start the app)
-
-More details here:
-
-<br>
-
-### How to Download/Install a new package {#Tut2Bb_howtodownload}
-
-Look at the Packages tab next to the plot one, you can see which
-packages/libraries are already pre-installed onto your computer.
-
-If the package you want isn't listed then you need to download it from
-the internet (as a one-off), like buying it from the app store
-
--   Click the INSTALL button in the Packages tab, then start typing the
-    package name and it will show up (check the include dependencies
-    box).
-
-OR
-
--   IN THE CONSOLE! Run the `install.packages()` command on the package
-    you want to download **with quotes around the package name** e.g.
-
-    ```{r,eval=FALSE}
-    install.packages("bardr")
-    ```
+  - Look for the quadrant with the packages tab in it. 
+     + You will see a list of packages/apps that have already been installed.
+     + Click the INSTALL button in the Packages tab menu (on the left) 
+     + Start typing the package name and it will show up (check the include dependencies box).  Install the package.
 
 OR
 
@@ -749,10 +628,11 @@ there.*
 
 <br>
 
-#### How to LOAD/USE a package
+## Using the commands inside a package {-}
 
-Installing a package don't make the commands immediately available. For
-that you need to load it (like clicking on an app). This can be done
+Just like you can't use a phone app until you press the icon, just getting a package from the app-store doesn't make the commands immediately available. 
+
+For that you need to load it (like clicking on an app). This can be done
 with the `library()` command.
 
 In the console type this to install the full works of Shakespeare in the
@@ -763,7 +643,9 @@ bardr package
 library(bardr)
 ```
 
-If you have managed to install a package successfully, often nothing
+I suggest keeping all your library() commands in a code chunk near the top of the file and 
+
+If you have managed to load a package successfully, often nothing
 happens - this is great! It means it loaded the package without errors.
 Otherwise, I suggest running this command TWICE! This is because loading
 packages will print "friendly messages" or "welcome text" the first time
@@ -783,7 +665,7 @@ then nothing should happen.**
 
 <br>
 
-### How to force the computer to use a specific package
+## Use a single command from a package
 
 Sometimes multiple packages name a command the same thing and you want
 to specify which package you want to use. You can do this using the ::
@@ -798,32 +680,22 @@ dplyr::filter(mydata)
 
 <br>
 
-# Console vs scripts vs Markdown {.tabset .tabset-fade}
-
-<p class="comment">
-
-You should now have R-Studio open and be inside an R project. If you're
-having issues at this point or haven't managed to get to this step,
-STOP! Ask an instructor for help.
-
-</p>
-
-<br>
+# R-Basics: 
 
 First watch this 5 min video above for some pointers. We will also go
-through the video more slowly here:
+through the video more slowly below:
 
 ```{r,echo=FALSE,fig.align='center'}
 embed_url("https://youtu.be/SWxoJqTqo08?t=41")
 ```
 
-<br> <br>
 
-## How to use the console {.unnumbered}
+<br>
 
-Remember that the aim of programming is to provide a language so you can
-ask your computer to do complex tasks. The console window (see Figure
-\@ref(fig:Tut_Fig1)) is like a phone call with your computer, where you
+## The Console
+
+The console window (see Figure
+\@ref(fig:Tut_Fig1)) is essentially a phone call with your computer, where you
 "speak" in R.
 
 -   The computer has a little `>` symbol to say it is listening/waiting
@@ -832,11 +704,7 @@ ask your computer to do complex tasks. The console window (see Figure
 -   The computer tries to carry it out and will print the answer
     directly onto the screen
 
-Let's start by the simplest command possible.
-
-#### EXAMPLE 1
-
-Type this command into your R console and press enter to run.
+Let's start by the simplest command possible. Type this command into your R console and press enter to run.
 
 ```{r, eval=FALSE}
 1+1
@@ -850,8 +718,6 @@ When you press enter, it should give you the answer.... 2
 
 <br>
 
-#### EXAMPLE 2
-
 Type this command into your R console and press enter to run.
 
 ```{r, eval=FALSE}
@@ -864,7 +730,7 @@ a **comment** in green, which the computer ignores.
 
 <br>
 
-#### NOTES
+## Spacing and Capital Letters
 
 -   Spacing *mostly* does not matter: `1+1` will generate the same
     answer as `1      +       1`.
@@ -878,82 +744,10 @@ a **comment** in green, which the computer ignores.
     quadrant) or press the up/down arrows on your keyboard, but when you
     close R, all record of these commands will be lost.
 
-<br> <br>
+<br> 
 
-## Saving commands in "scripts" {.unnumbered}
-
-You might wonder at this point about how to save your work.
-
-Typing into console is like having a phone call with your computer;
-you're talking but you're not keeping records of what you say. To see
-previous commands, you can click the history tab (Environment quadrant)
-or press the up/down arrows on your keyboard, but when you close R, all
-record of these commands will be lost.
-
-We need instead is a way to save the commands for future use - we can do
-this using **scripts**.
-
-There are several types of document, or script that you can create and
-save in R-Studio. There are about 20 options in the file menu. Here are
-a few important ones
-
-### Types of script {.tabset .tabset-fade}
-
-#### A Basic R script (.r) [IGNORE] {.unnumbered}
-
-<p class="comment">
-
-WE WILL NORMALLY IGNORE THIS OPTION, but it's useful for a lot of
-programming and zero writing
-
-</p>
-
-A basic script (the filetype is .r).
-
--   This is simply just a blank notepad where you can save code
-    commands. (How I learned to code)
--   You do NOT save any output
-
-When you "run" the commands in the script, R simply copy/pastes the
-commands over to the console. You run the commands by highlighting
-(triple click to highlight a whole line), then press control-enter (or
-command-enter on a mac). You can also copy/paste them accoss.
-
-To open this you literally go to file, then new script.
-
-This will add a new window - which is simply a notepad file you can
-save. If you type your commands in there, you can save them. You run
-them in the console by highlighting the text on each line and pressing
-Ctrl-Enter (or command enter on a mac).
-
-```{r, tut3fig4b, echo=FALSE, fig.cap = "Running commands in a basic script",fig.align='center'}
-knitr::include_graphics('./Figures/pg_Tut3_basics_fig4b.png')
-```
 
 <br>
-
-#### Creating a basic R script {.unnumbered}
-
-For now, let's just create a basic R script. Go to the File menu at the
-very top of the screen, then new file / new script.
-
-This will add a new window - which is simply a notepad file you can
-save. If you type your commands in there, you can save them. You run
-them in the console by highlighting the text on each line and pressing
-Ctrl-Enter (or command enter on a mac).
-
-```{r, tut3fig4, echo=FALSE, fig.cap = "Running commands in a basic script",fig.align='center'}
-knitr::include_graphics('./Figures/pg_Tut3_basics_fig4b.png')
-```
-
-You now have a space where you can save the work below if you wish. YOU
-DO NOT NEED TO SUBMIT THIS. You are also welcome to simply enter the
-commands in the console.
-
-#### 
-
-<br> <br>
-
 ## R as a calculator {#Tut3B_Calc}
 
 When using R as a calculator, the order of operations is the same as you
@@ -1061,7 +855,7 @@ Try typing these EXACTLY into the console.
 
 -   `nchar("hello")`
     -   This will count the number of letters in the word "hello" (e.g.
-        5)
+        5)  
 -   `file.choose()`
     -   This will open up an interactive window (sometimes behind the
         studio screen), choose any file and it will print the location
@@ -1283,42 +1077,47 @@ more in future labs.
 
 <br> <br>
 
-# R basics: Variables, text and commands
+
+
+
+<br>
+## Variables and Commands (functions)
+
 
 <br>
 
+
 # Getting help {.tabset .tabset-fade}
 
-<p class="comment">
+First, take a look here to learn about help
+ -  <https://www.r-project.org/help.html>
 
-When programming in R, someone often tells you about a "cool new
-command". I want you to feel comfortable working out how to use them.
-The R help files are also wonderful.
+When programming in R, someone often tells you about a "cool new command". I want you to feel comfortable working out how to use them.  Equally, sometimes R crashes because it can't find a command. So this helps you find what you need to install.
 
-</p>
 
-First, take a look here for all about help.
-<https://www.r-project.org/help.html>
+## How to use the R help files {-}
 
-5.  Inside every R help file you will see this structure:
-    <https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html>
+Here's how I approach it
 
-<br> <br>
-
-## How to use the R help files {.unnumbered}
-
-Here's how I approach it, but you might find a better approach.
-
-1.  If you don't already know, find the formal name and package name of
-    the command
-
--   The only info we NEED to know about a new command is its name and
+1.  The only info we NEED to know about a new command is its name and
     the library/package/app it is stored in. <br>\
--   If you don't know, you can often google the command and look on the
-    top left for the package and formal name. You often also find easy
-    online tutorials.. <br>
--   Or go to <https://www.rdocumentation.org/> <br>
-
+    
+  - If you don't know, you can often google the command, and go to one of the websites with an online helpfile
+    
+  - Different websites have different ways of writing the things. For example, here are four common files you might see when looking at the mutate command which is a part of the dplyr package.
+  
+```{r, Tut13A, echo=FALSE, fig.cap = "COMMAND=mutate, PACKAGE=dplyr",fig.align='center',out.width="100%"}
+knitr::include_graphics('./Figures/Tut_Fig13_mutateA.png')
+```
+```{r, Tut13B, echo=FALSE, fig.cap = "COMMAND=mutate, PACKAGE=dplyr",fig.align='center',out.width="100%"}
+knitr::include_graphics('./Figures/Tut_Fig13_mutateB.png')
+```
+```{r, Tut13C, echo=FALSE, fig.cap = "COMMAND=mutate, PACKAGE=dplyr",fig.align='center',out.width="100%"}
+knitr::include_graphics('./Figures/Tut_Fig13_mutateD.png')
+```
+         
+<p class="comment">HINT FOR LAB 2, THE COMMAND ITSELF IS CALLED qtm...</p>
+    
 <br>
 
 2.  If you need to install the package, go to the Packages menu in the
@@ -1347,6 +1146,10 @@ Here's how I approach it, but you might find a better approach.
 6.  FINALLY, **Scroll to the bottom of the helpfile** for some worked
     examples that you can literally copy and paste into your console or
     your code to understand how it works.
+    
+
+<p class="comment">HINT FOR LAB 2, SCROLL ALL THE WAY TO THE VERY BOTTOM OF THE HELP FILE</p>
+
 
 ## EXAMPLE! Understanding `skim` {.unnumbered}
 
@@ -1395,9 +1198,8 @@ library(skimr)
     <https://bcgov.github.io/ds-cop-intro-to-r/seeking-help-in-r.html>
     but for now, I scrolled to the bottom.
 
-```{=html}
 <!-- -->
-```
+
     <br>
 
 6.  I then ran the help file worked examples in the console to
@@ -1421,7 +1223,37 @@ library(skimr)
 
 <br> <br>
 
-# R-Markdown {#Tut4a_WhatIsIt}
+
+# Scripts and Markdown
+
+You might wonder at this point about how to save your work.
+
+Typing into console is like having a phone call with your computer;
+you're talking but you're not keeping records of what you say. To see
+previous commands, you can click the history tab (Environment quadrant)
+or press the up/down arrows on your keyboard, but when you close R, all
+record of these commands will be lost.
+
+We need instead is a way to save the commands for future use - we can do
+this using **scripts**.
+
+There are several types of document, or script that you can create and
+save in R-Studio. There are about 20 options in the file menu. Here are
+a few important ones
+
+## Types of script {.tabset .tabset-fade}
+
+### A Basic R script (.r) [IGNORE] {-}
+
+<p class="comment">WE WILL NORMALLY IGNORE THIS OPTION, but it's useful for a lot of programming and zero writing</p>
+
+-   This is simply just a blank notepad where you can save code
+    commands. (How I learned to code)
+-   You do NOT save any output
+
+<br>
+
+### R-Markdown {#Tut4a_WhatIsIt}
 
 Typing console is a phone call to the computer, you're talking but
 you're not keeping records of what you say (you can always press the up
@@ -1453,7 +1285,17 @@ embed_url("https://vimeo.com/178485416?embedded=true&source=video_title&owner=22
 
 <br> <br>
 
-## Creating a markdown document {#Tut4B_MarkCreate}
+# Markdown Basics {#Tut4C_Basics}
+
+Your file contains some friendly text to explain what is going on, which
+I have annotated here. Read the file and see what it says.
+
+```{r, tut4fig3, echo=FALSE,fig.align='center'}
+knitr::include_graphics('./Figures/pg_Tut4_markdown_fig3.png')
+```
+
+
+## Creating a markdown document 
 
 Save your R-script to your Lab 1 folder and close it.
 
@@ -1463,16 +1305,15 @@ to download some packages to be able to do this. Say yes.
 
 Eventually a window will open up:
 
-```{r, tut4fig1, echo=FALSE,fig.align='center',out.width="80%"}
+```{r, tut4fig1b, echo=FALSE,fig.align='center',out.width="80%"}
 knitr::include_graphics('./Figures/pg_Tut4_markdown_fig1.png')
 ```
 
 It will ask you to name and save your file. Give it a relevant name. A
 new file should appear on your screen. At the top of that window (by the
-knit button, there is a save button. Save it as something relevant
-INSIDE YOUR PROJECT FOLDER!
+knit button, there is a "knit button". Click that and it should make a website and autosave it for you.  Make sure your email ID is somewhere in there.
 
-```{r, tut4fig2, echo=FALSE,fig.align='center',fig.cap="Yours will say GEOG-364 not GEOG-364.."}
+```{r, tut4fig2c, echo=FALSE,fig.align='center',fig.cap="Yours will say GEOG-364 not GEOG-364.."}
 knitr::include_graphics('./Figures/pg_Tut4_markdown_fig2.png')
 ```
 
@@ -1482,14 +1323,6 @@ of the file where we can add information about themes/styles etc.
 
 <br>
 
-## Markdown Basics {#Tut4C_Basics}
-
-Your file contains some friendly text to explain what is going on, which
-I have annotated here. Read the file and see what it says.
-
-```{r, tut4fig3, echo=FALSE,fig.align='center'}
-knitr::include_graphics('./Figures/pg_Tut4_markdown_fig3.png')
-```
 
 <br>
 
@@ -1707,20 +1540,6 @@ There are loads here along with a nice tutorial:
 
 ## Formatting text {#Tut4G_format}
 
-### Markdown visual editor
-
-```{r, Lab2fig8b, echo=FALSE}
-knitr::include_graphics('./Figures/pg_Tut4_markdown_fig8b_Visual.png')
-```
-
-If you are not familiar with Markdown yet, or do not prefer writing
-Markdown code, RStudio has included a new visual editor for Markdown
-documents, which feels similar to traditional programs like Word. You
-can find the full documentation at
-<https://rstudio.github.io/visual-markdown-editing/>
-
-<br>
-
 #### Writing text and Paragraphs - READ THIS
 
 The text part of your document is anywhere outside your YAML code or a
@@ -1742,7 +1561,23 @@ chances are there isn't a blank line before or after it.
 
 <br>
 
+
+### Markdown visual editor
+
+If you are not familiar with Markdown yet, or do not prefer writing
+Markdown code, RStudio has included a new visual editor for Markdown
+documents, which feels similar to traditional programs like Word.
+
+You can find the full documentation at
+<https://rstudio.github.io/visual-markdown-editing/>
+
+ALL YOU HAVE TO DO IS CLICK THE VISUAL BUTTON BELOW SAVE/KNIT IN THE MARKDOWN QUADRANT.
+
+<br>
+
 ### Getting formatting help:
+
+Now you can use  visual editor, you probably won't need this...
 
 There are many ways you can format the text in your markdown document,
 from adding headings, to bold/italic to complex html text formats.
@@ -1761,7 +1596,9 @@ knitr::include_graphics('./Figures/pg_Tut4_markdown_fig9.png')
 
 <br>
 
-### Basic text formats
+### Basic text formats 
+
+YOU CAN IGNORE THIS SECTION IF YOU ARE USING VISUAL EDITOR
 
 There are many ways you can format the text in your markdown document,
 from adding headings, to bold/italic to complex html text formats.
@@ -1894,16 +1731,14 @@ knitr::include_graphics("chipmunk.webp")
 
 It is often useful to have a "template" markdown file so you don't have
 to re-do all your custom formatting each time. Here we will set up a
-specific one for your STAT462 Labs. For this section, I advise doing
-everything in the standard view (E.g. don't press the little A symbol
-for the pretty view)
+specific one for your GEOG-364 Labs. 
 
 **PART 1.** When you make a new markdown file, it makes a load of
 friendly text explaining how to use R. We don't need this in your
 report.
 
 In your .Rmd, delete all the text/code below line 11. Your lab report
-should look like this.
+should look like this but for GEOG 364
 
 ```{r, tut3fig5, echo=FALSE,fig.align='center'}
 knitr::include_graphics('./Figures/pg_Tut3_basics_fig5.png')
@@ -1959,6 +1794,10 @@ CHUNKS](https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.h
 ```{r, tut3fig7, echo=FALSE,fig.align='center'}
 knitr::include_graphics('./Figures/pg_Tut3_basics_fig7.png')
 ```
+
+Finally, make a level 1 heading called Libraries and put a code chunk below it.  That is where you will put the library() command for any libraries that you need to load.
+
+Below that, make a level 1 heading called code showcase.
 
 <br>
 

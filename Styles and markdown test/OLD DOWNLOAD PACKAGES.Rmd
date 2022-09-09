@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+### LAB 1: Bulk download main packages {- .hidden .unlisted}
+
+Now we are going to download most of the packages you need for these
+labs so that you do not need to do this each week. We're doing it in
+groups of 5 to make it easier to check for errors.
+
+**Copy each of these commands into the R-CONSOLE and press enter to
+run.**
+
+A load of text should stream down your console. Just let it run until
+the console is back to the \> symbol and you can type. It might take
+several minutes. Sometimes this will give you an error and not run,
+
+**WHAT DOES SUCCESS LOOK LIKE?**
+
+If it works, you should see some text like "the downloaded binary
+packages are in....". If not, there will be errors.
+
+```{r, warnings=FALSE, message=FALSE, eval=FALSE}
+
+install.packages(c("tidyverse","abind","car","corrplot","dismo"))
+install.packages(c("elevatr","ggpubr","ggstatsplot","hrbrthemesv")) 
+install.packages(c("IMTest","ISLR", "kableExtra","lattice","matlab"))
+install.packages(c("maps","mapdata","maptools","mapview","ncdf4","skimr"))
+install.packages(c("olsrr", "plotly","RColorBrewer"))
+install.packages(c("rmdformats", "stargazer","units","viridis","yarrr","vembedr","GGally"))
+install.packages(c("beeswarm","corrplot","equatiomatic"))
+install.packages(c("ggExtra","ggridges","ggthemes","ztable"))
+install.packages(c("Stat2Data","USAboundaries","hrbrthemes"))
+install.packages(c("knitr" , "readxl", "remotes"))
+
+```
+
+```{r, warnings=FALSE, message=FALSE, eval=FALSE}
+# The ones below are where there are often errors so we will go more slowly
+install.packages(c("rgdal","rgeos","rmapshaper"))
+install.packages(c("sf","sp","raster","terra"))
+install.packages(c("tidycensus","tigris","tmap"))
+
+```
+
+Sometimes you need to install a package from a different place, like
+github. To do this we use a more complex command from the remotes
+library. Sometimes when doing so, R will ask questions IN THE CONSOLE.
+It will wait for your answer until you type it and press enter! Choose
+to install all sub-packages.
+
+```{r, warnings=FALSE, message=FALSE, eval=FALSE}
+# Sometimes you need to install a package from a different place, like github. 
+# To do this we use a more complex command from the remotes library
+install.packages(c("knitr" , "readxl", "remotes"))
+remotes::install_github("ropensci/USAboundariesData")
+remotes::install_github("ropenscilabs/rnaturalearthhires")
+remotes::install_github("isciences/exactextractr")
+
+```

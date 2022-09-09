@@ -9,6 +9,8 @@ output:
     toc_float:
       collapsed: no
     number_sections: yes
+    css: styles2.css
+
 ---
 
 
@@ -275,7 +277,7 @@ The help files are MASSIVELY VALUABLE in helping run it without support, because
 
 1. Work through this tutorial on help-files (seriously, it will help) : TUTORIAL:## How to use the R help files https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#7_Getting_help 
 
-2. Use helpfiles to make me a "Quick Thematic Map (qtm)" of a city of your choice (hint, start by googling *""Quick Thematic Map" QTM documentation R*) then work through my tutorial above.   Bonus for making it beautiful
+2. Use helpfiles to make me a "Quick Thematic Map (qtm)" of a city of your choice (hint, start by googling *""Quick Thematic Map" QTM documentation R*) then work through my tutorial above.   Hint, the command is called qtm.. 
 
 3. Make me a mini tutorial on ANY new function and include a worked example!  Just google "cool R functions".  If you are really stuck here, I will put some suggestions on teams if people ask.
 
@@ -323,13 +325,8 @@ R contains MANY built in datasets.  You can load them using the `data()` command
 
  To get full marks you need to include the sub-sections.
 
-<br>
-<br>
 
-### Study Design {-} 
-<br>
-
-#### Study Background/Professional report [4 marks] {-} 
+### Study Background/Professional report [4 marks] {-} 
 
 Pretend this is real! Write me a short paragraph about why starwars/pirates/chickens/your data is important.  Include pictures or web-links...
 
@@ -339,7 +336,7 @@ These 4 marks are also for how professional your data analysis looks. e.g. headi
 
 <br>
 
-#### Study Design [8 marks] {-} 
+### Study Design [8 marks] {-} 
 
 Based on your data for me a reasonable:
 
@@ -351,11 +348,8 @@ Based on your data for me a reasonable:
 Then put a summary of your specific study e.g. "I am hoping to explore/model...... "
 
 <br>
-<br>
-<br>
 
 ### Exploratory data analysis {-}
-<br>
 <br>
 
 #### Data summary [5 marks]  {-}
@@ -397,9 +391,6 @@ https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#7_Making_plots
 
 <br>
 <br>
-<br>
-<br>
-
 
 ## 6. Above & beyond  {-}
 
@@ -419,9 +410,6 @@ Or here are some ideas...
  - https://r-graph-gallery.com/
 
 
-
-<br>
-<br>
 <br>
 
 
