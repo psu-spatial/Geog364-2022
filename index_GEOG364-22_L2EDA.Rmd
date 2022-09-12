@@ -297,19 +297,33 @@ In your lab script write a few sentences:
 
 ## 5. Data Analysis  {-}
 
-I want you to choose one and to show me your best summary analysis of what the data contains. Feel free to use these, or any other data-set you like.
-
-R contains MANY built in datasets.  You can load them using the `data()` command 
-
- - Starwars characters: `data(“starwars”, package = “dplyr”)`
- - Pirates data `data(“pirates”, package = “yarrr”)`
- - OpenIntro datasets (you might need to install this package) https://cran.r-project.org/web/packages/openintro/vignettes/datasets.html
- - http://www.sthda.com/english/wiki/r-built-in-data-sets 
- 
- 
- CHOOSE A DIFFERENT ONE TO YOUR FRIENDS!
+**Choose any dataset that is built into R and conduct your best summary analysis of what the data contains, using the subsections below as a guide**
 
 <br>
+
+### 5.1 What datasets are available? {-}
+
+R contains MANY built in datasets - you can choose any dataset you like.   CHOOSE A DIFFERENT ONE TO YOUR FRIENDS!
+
+You can load datasets using the `data()` command as shown below (REWRITE ALL THE QUOTE MARKS IF YOU COPY PASTE THE COMMAND)
+
+<br>
+
+Here are some examples of R datasets. You are allowed to choose one of these, or any others:
+
+
+ - `starwars` characters in the `dplyr` package
+      + Command to load: `data(“starwars”, package = “dplyr”)`
+ - Data about `pirates  in the `yarrr` package
+       + Command to load: `data(“pirates”, package = “yarrr”)`
+ - OpenIntro datasets (you might need to install this package) 
+       + https://cran.r-project.org/web/packages/openintro/vignettes/datasets.html
+ - More datasets: 
+       + http://www.sthda.com/english/wiki/r-built-in-data-sets 
+
+<br>
+ 
+### 5.2 How to write the analysis {-}
 
 To get full marks you need to include the sub-sections.
 
@@ -336,7 +350,8 @@ Then put a summary of your specific study e.g. "I am hoping to explore/model....
 
 <br>
 
-### Exploratory data analysis {-}
+#### 5.3 Exploratory data analysis {-}
+
 <br>
 
 #### Data summary [5 marks]  {-}
@@ -355,26 +370,24 @@ Now, I want you to use commands like `summary()` and `skim()` to understand the 
 
 <br>
 
-#### Response variable [5 marks] {-} 
+#### Response variable Exploratory Analysis [5 marks] {-} 
 
-Finally, tell me everything you can about the summary statistics of a chosen response variable.  
+Finally, tell me everything you can about the summary statistics of a SINGLE chosen response variable.   Go wild - try googling summary statistics in R, look at R graph gallery for plots.. (https://r-graph-gallery.com/)
 
-Go wild - try googling summary statistics in R, look at R graph gallery for plots..
-
-Understand these aspects of the data  
+Use your statistics and plots to explain these aspects of the data  
 
  - centrality  (mean, median..)
  - spread (IQR, range)
  - pattern (histogram? boxplox?)
  - outliers? unusual values? (look at the data describe in text..)
- - other
+ - other?
  
- 
- THIS IS FROM MY STATS COURSE OPEN IN NEW TAB!
- 
-https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#6_Summarising_data
+I suggest using a numeric variable but you are welcome to choose any as long as your analysis is appropriate.
 
-https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#7_Making_plots
+TUTORIALS : [THIS IS FROM MY STATS COURSE, SO OPEN IN NEW TAB!]
+ 
+ - https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#6_Summarising_data
+ - https://psu-spatial.github.io/stat462-2022/T1_R_Basics.html#7_Making_plots
 
 <br>
 <br>
