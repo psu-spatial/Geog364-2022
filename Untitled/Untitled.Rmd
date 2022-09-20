@@ -1,0 +1,63 @@
+---
+title: "adsads"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+    css: stylesreaddown.css
+---
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+
+<style>
+p {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0px 0px 12px 0px;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    color: #9F2042;
+}
+
+#sidebar {
+  background: #1d3557;
+}
+
+#postamble {
+  background:#1d3557;
+  border-top:solid 10px #1d3557;
+}
+
+.title {
+  text-align: center;
+  color: #1d3557;
+}
+
+.subtitle {
+  color: #1d3557;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+  color: #1d3557;
+}
+
+#content h2 {
+    background-color: #1d3557;
+}
+</style>
+
+
+# hello
+
+## hi
+
+adsnjklsad
+asd
+asf

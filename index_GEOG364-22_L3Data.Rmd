@@ -1,0 +1,450 @@
+---
+title:  "<br> Lab 3: Data Wrangling"
+author: "Dr Greatrex"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+library(kableExtra)
+library(tidyverse)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(ggpubr)
+library(knitr)
+library(sp)
+library(sf)
+library(tmap)
+```
+
+<br>
+
+# OVERVIEW
+
+------------------------------------------------------------------------
+
+Like the new format?
+
+## Learning Objectives
+
+The aim of this week's lab is to get comfortable reading in and managing
+spatial and non-spatial datasets. In the R-community, they often use the
+jargon "Data Wranging".
+
+SEE CANVAS FOR SUBMISSION DATES.
+
+## Get help
+
+If a link to a tutorial is broken, you should be able to go to the
+tutorial number and find it in the menu.
+
+Teams is the fastest way to get help. [CLICK THIS LINK FOR THE TEAMS
+WEBSITE FOR LAB
+HELP](https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGFVYc0fpUTM1%40thread.tacv2/conversations?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+
+<br>
+
+# LAB SET-UP
+
+------------------------------------------------------------------------
+
+## Create your Lab 3 Project
+
+You need a separate Lab 3 Project.
+
+-   Using R-CLOUD? : click here. This also has instructions on
+    uploading/downloading code from your computers.
+    -   <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD>
+        <br><br>
+-   Using YOUR LAPTOP? : Click here:
+    -   <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop>
+
+<br>
+
+## Use a template
+
+You now have a few choices on making a professional lab script
+
+#### Option 1: Use the template you made {.unnumbered}
+
+Go back to Lab 2 or wherever you stored your template, copy the .Rmd
+into your lab 3 project folder (uploading it into lab 3 project if
+you're on the cloud website). Then open your Lab 3 project, open the
+.Rmd file, rename & edit the YAML - and you're set!
+
+If you want to go down this route but didn't make one, simply follow
+tutorial 10
+(<https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#10_R-Markdown_REPORT_TEMPLATE>)
+<br><br>
+
+#### Option 2: Use a professional template NEW {.unnumbered}
+
+In your show-me-something new, several of you found cool new packages
+that make very professional looking templates. This lab for example is
+in Robobook by Rmdformats. If you want to try these, instructions in
+installing the R packages and installing the templates on these website
+
+-   `PACKAGE Rmdformats` To use and install, click here:
+    <https://github.com/juba/rmdformats> (scroll to near the bottom for
+    installation) <br><br>
+
+-   `PACKAGE epuRate` Yo use and install go here.
+    <https://github.com/holtzy/epuRate>. To see what it looks like, see
+    here: <https://holtzy.github.io/Pimp-my-rmd/> <br><br>
+
+-   `PACKAGE epuRate` Yo use and install go here.
+    <https://github.com/holtzy/epuRate>. To see what it looks like, see
+    here: <https://holtzy.github.io/Pimp-my-rmd/> <br><br>
+
+Have fun..
+
+<br>
+
+## Add libraries & code options
+
+Edit the first "set-up" code chunk so it looks like this and run/knit to
+load. You might need additional libraries as you work through the lab.
+If so, add them here.
+
+```{r, eval=FALSE}
+
+knitr::opts_chunk$set(cache = TRUE,message=FALSE,warning=FALSE)
+
+# LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(sp)
+library(sf)
+library(tmap)
+```
+
+If you see a little yellow bar at the top asking you to install them,
+click yes!
+
+<br><br>
+
+# CODE SHOWCASE
+
+------------------------------------------------------------------------
+
+Make sure you have a code showcase section in your lab report.
+
+## Data Wrangling
+
+#### Learn about data wrangling {.unnumbered}
+
+To learn about "data wrangling", Skim-read Lab 2 in this wonderful lab
+book by Dr Noli Brazil: <https://crd150.github.io/lab2.html#Tibbles>
+<br><br>
+
+#### Test your knowledge {.unnumbered}
+
+Complete CHAPTER 1 of this datacamp course on the tidyverse. (See Canvas
+on how to access)
+<https://www.datacamp.com/courses/introduction-to-the-tidyverse>
+<br><br>
+
+Include a screenshot in your lab report to show you did it. <br><br>
+
+## Interesting graphics & "comments"
+
+Several of you have already found the R graph gallery. It's a great
+place to learn how to make professional graphics.
+
+#### Choose your favorite graphic {.unnumbered}
+
+-   Go here: <https://r-graph-gallery.com/> <br>
+-   Choose any plot you like - look around there are some beautiful ones
+    <br>
+
+#### Get the example code running {.unnumbered}
+
+-   EVERY PLOT contains "reproducible code" that you should be able to
+    simply copy/paste. So make a new code chunk, copy in the code and
+    run it. You might need to install some new packages (remember to
+    move any `library` commands to your set-up line) <br>
+-   You do not need to run this on your own data in any way.
+
+#### Add code comments {.unnumbered}
+
+Code comments are little snippets of text inside the code chunk itself.
+**This should never be for your main text**; instead it is used to
+explain the code itself to future users.
+
+```{r}
+# This is a comment, added after a #
+# lalalala
+x <- 1+1  # see the computer ignores after the #
+```
+
+Here is a better comment:
+
+```{r}
+#----------------------------------------------------
+# Counting letters
+#----------------------------------------------------
+
+# Choose input data and set to myword
+ my_word <- "Hello"
+ 
+ # nchar() counts the number of characters/letters in myword
+ wordyoutput <- nchar(my_word)
+```
+
+Use this example to add comments and tweak the formatting/indents of
+your R graph gallery code to make it easy to follow . Specifically, for
+each line or section, add a comment explaining what that bit of code
+does <br><br>
+
+Hint to work it out:
+
+-   R code is normally OUTPUT \<- `command`(Input) . So you can look at
+    the help file for the command, and View(), print() or click on the
+    inputs and outputs to look at them.
+
+-   For example, above<br>
+
+     +  The input is "Hello", saved as my_word. So I could type my_word
+        into the console to take a look if I wasn't sure <br>
+
+     +  The command is nchar and I could use ?nchar to look at the
+        helpfile. I can tell its a command because of the
+        parentheses <br>
+
+     +  This then makes an output, which I save as the variable
+        wordyoutput. So I could type wordyoutput into the console to
+        take a look if I wasn't sure what it was going on. <br>
+
+<br>
+
+# MAIN ANALYSIS
+
+Next month, your boss is moving to Sindian Dist., in New Taipei City, Taiwan.  They want to buy a house and have asked you to figure out what most impacts house price.  You found a dataset that might help
+
+Reading more about the data here: https://archive.ics.uci.edu/ml/datasets/Real+estate+valuation+data+set).
+
+<br>
+
+## Read in the data
+
+Download the "Lab03_house.xlsx" dataset from the Lab page on canvas and put it into your Lab 3 folder.  Use the `read_excel()` command to read it in and save it to a variable called house:
+
+```{r}
+# This only works if you are running your lab 3 project
+house <- readxl::read_excel("Lab03_house.xlsx")
+```
+
+Either click on the word house in environment, or use the command `View(house)` in the console to take a look.  
+
+<br>
+
+## Summarise the study
+
+Remember you are writing this report for your boss and 10/100 is on how professional your report looks.  Using a similar structure to last week to include this information (edit as you wish).  
+
+1. A [very] short background, just a few sentences summarizing the study/user <br><br>
+ 
+2. Data description, including: <br>
+     - The object of analysis <br>
+     - The population: 
+        + e.g. what population is your boss is interested in? Is this dataset a representative sample? <br>
+     - The variables INCLUDING UNITS.  Remember I included a link to the website above...
+     - The response variable you are interested in <br>
+
+```{r, include=FALSE}
+summary(house)
+hist(house$Distance.Station)
+```
+
+## Filter out some data 
+
+### Explore station distances: {-}
+
+Your boss does not want to live more than 3km from a station.  Create a professional looking histogram of the Distance.Station  column (e.g.`house$Distance.Station` ).  Remember R Graph gallery.  Describe the data in the text (e.g mean distance, range of distances, is the distribution skewed?)
+
+### Filter out stations {-}
+
+Use what you learned in code showcase to filter the dataset so that it only contains rows that are LESS than 3 km (3000 m) from a station.  Save it as a new variable called house_subset. 
+
+```{r, include=FALSE}
+house_subset <- house[house$Distance.Station < 3000,]
+```
+
+
+Write how many rows you removed.   
+ - *Hint, look at the environment tab, or use the `dim` command to get the number of rows and columns*
+
+## Exploratory analysis of the response 
+
+Your boss has a series of questions.  Analyse the data and include your code and answer in your report.
+
+ - On average, how much are house prices in this area?
+ - What's the range/distribution of prices?
+ 
+ - Does the price depend on the house age? (hint, make a scatterplot and then describe the result in words, no formal stats tests needed)
+      + *Hint Making scatterplots: https://r-graph-gallery.com/scatterplot.html* <br>
+      + *Hint: Describing scatterplots: https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/scatterplots-correlation/a/describing-scatterplots-form-direction-strength-outliers?modal=1* <br>
+      
+ - Similarly, (remember your Latitude column), are house prices cheaper, or more expensive in the South?
+
+## Spatial
+
+Finally, we wish to understand the spatial structure of the data
+
+ - Explain whether this dataset is vector or raster. If vector, what type of data is it?. <br>
+ 
+### Making maps {-}
+
+At the moment, R does not understand our data is "spatial" e.g that the longitude and latitude columns have some special meaning.  This is not a good map..
+
+```{r}
+plot(house$Longitude,house$Latitude)
+```
+
+The `st_as_sf` command explains to the computer that the data is "special" and tells it where the x-coordinates (Longitude) and the y-coordinates (Latitude) are.
+
+Add this code to your lab reports. 
+
+```{r}
+house.spatial <- st_as_sf(house,coords=c("Longitude","Latitude"),crs = 4326)
+# instant plot
+plot(house.spatial)
+```
+
+Let's make a better plot. Add this code to make a good looking plot of the house prices.
+
+
+```{r}
+# make interactive, for static set as "plot"
+tmap_mode("view")
+
+# Command from the tmap library
+# and plot
+tm_basemap("Esri.WorldTopoMap") + 
+     qtm(house.spatial, # data
+         symbols.col="House.Price", # which column for the symbols
+         symbols.alpha=0.9, # transparency
+         symbols.size=.2, # how big
+         symbols.palette="Spectral", #colors from https://colorbrewer2.org
+         symbols.style="fisher") # color breaks
+```
+
+
+Above, I asked you to analyse if houses were more expensive in the South. 
+
+ - Use this map to explain what is actually going on in terms of spatial distributions of price.  E,g, Is there some spatial characteristic that is more important than latitude in predicting house prices in your dataset?  <br>
+- How does this link to the "Non Uniformity of Space?"
+  + we will discuss this next week, but its in the textbook/google.
+
+
+# ABOVE & BEYOND
+
+Remember that an A is 94%, so you can ignore this section and still easily get an A. But here is your time to shine. Also, if you are struggling in another part of the lab, you can use this to gain back points.
+
+
+In the `st_as_sf` command, the final bit is crs = 4326. 
+
+Use google/ the help files to xplain what is going on.. What is this "4326"? Are there other numbers?  Two for a brief comment, four for something more detailed. 
+
+
+<br>
+
+# SUBMITTING YOUR LAB
+
+Remember to save your work throughout and to spell check your writing
+(next to the save button). Now, press the knit button again. If you have
+not made any mistakes in the code then R should create a html file in
+your Lab folder which includes your answers.
+
+## On laptops
+
+-   Go to your 364 folder and look for your lab folder. <br>
+
+-   You should see a .html file (edge/chrome) complete with a very
+    recent time-stamp.html file along with a .rmd file with a recent
+    time-stamp <br>
+
+-   In that folder, double click on the html file. This will open it in
+    your browser. CHECK THAT THIS IS WHAT YOU WANT TO SUBMIT. <br>
+
+-   Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+```{r, echo=FALSE}
+knitr::include_graphics("./Figures/Lab_ToSubmit.png")
+```
+
+<br> <br> <br>
+
+## On R studio cloud
+
+-   If you are on R studio cloud, see XXXXX for how to download your
+    files
+
+<br>
+
+-   Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+<br> <br> <br>
+
+# CHECK THIS BEFORE YOU SUBMIT! 
+
+People who use this section get better grades...
+
+## Predict your grade
+
+Here is LITERALLY how we are grading you. Predict your grade!
+
+**HTML FILE SUBMISSION - 8 marks**
+
+**RMD CODE SUBMISSION - 8 marks**
+
+**MARKDOWN/CODE STYLE - 10 MARKS**
+
+Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE
+IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check next
+to the save button. You have written your answers below the relevant
+code chunk in full sentences in a way that is easy to find and grade.
+For example, you have written in full sentences, it is clear what your
+answers are referring to.
+
+**CODE SHOWCASE - 40 MARKS**
+
+-25 for the data camp chapter
+-15 for the graphics
+
+**DATA ANALYSIS - 40 MARKS**
+
+-10 for your study design/write up
+-10 for correctly filtering out the data
+-10 for the rest of the code
+-10 for the thoughtfulness/quality of your answers
+
+**Above and beyond: 4 MARKS**
+
+See above
+
+[100 marks total]
+
+
+## What your grade means
+
+Why is 100% hard?  Overall, here is what your lab should correspond to:
+
+```{r, echo=FALSE}
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
+knitr::kable(rubric) %>%   
+  kable_classic_2() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+
+```

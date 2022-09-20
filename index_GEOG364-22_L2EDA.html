@@ -334,7 +334,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="index_GEOG364-22_Tutorial_R.html">NEW! R-TUTORIAL</a>
+  <a href="index_GEOG364-22_Tutorial_R.html">R-TUTORIAL</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -348,6 +348,9 @@ div.tocify {
     </li>
     <li>
       <a href="index_GEOG364-22_L2EDA.html">Lab 2: Exploratory Analysis</a>
+    </li>
+    <li>
+      <a href="index_GEOG364-22_L3Data.html">Lab 3: Data Wrangling</a>
     </li>
   </ul>
 </li>
@@ -543,7 +546,9 @@ class="uri">https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial
 <h2 class="unnumbered">3. Add Libraries</h2>
 <p>In the library section of your lab report, add a new code chunk and
 use this code to load the following libraries.</p>
-<pre class="r"><code># LIBRARIES
+<pre class="r"><code>knitr::opts_chunk$set(cache = TRUE,message=FALSE,warning=FALSE)
+
+# LIBRARIES
 library(tidyverse)
 library(dplyr)
 library(ggpubr)

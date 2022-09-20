@@ -190,7 +190,10 @@ TUTORIAL REPORT TEMPLATE: https://psu-spatial.github.io/Geog364-2022/index_GEOG3
 
 In the library section of your lab report, add a new code chunk and use this code to load the following libraries.
 
-```{r}
+```{r, eval=FALSE}
+
+knitr::opts_chunk$set(cache = TRUE,message=FALSE,warning=FALSE)
+
 # LIBRARIES
 library(tidyverse)
 library(dplyr)
