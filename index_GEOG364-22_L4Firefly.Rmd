@@ -301,7 +301,7 @@ In the data wrangling section, use either this tutorial  [FILTERING Tutorial 7D]
      
      
      
-### Making your data spatial
+### Making your data spatial 
 
 <p class="comment">If your datacamp/training gives you a better way of approaching this code, go for it!</p>
 
@@ -323,7 +323,7 @@ Use [your own knowledge or these instructions](https://psu-spatial.github.io/Geo
 
 Let's now see how our data looks plotted.  I have provided a few examples. Your job is to get them running and interpret them.
 
-#### Make a basic plot
+#### Make a basic map
 
 In a new code chunk enter the following code. You should see a basic plot with the firefly locations and the state borders.  If so, congrats!  If not, you need to adjust your projections or something has happened.
 
@@ -335,7 +335,7 @@ states.sf <- ne_states(country="united states of america",returnclass="sf")
 ```
 
 
-```{r}
+```{r,eval=FALSE}
 plot(st_geometry(firefly.sf),
      pch=16,
      col=rgb(0,0,1,.5),
@@ -345,7 +345,7 @@ plot(st_geometry(firefly.sf),
 plot(st_geometry(states.sf),add=TRUE)
 ```
 
-]Recreate this plot in your report.  Google the `rgb()` command and edit your plot so that the points are semi-transparent purple. (hint https://www.r-graph-gallery.com/43-rgb-colors.html )
+Recreate this plot in your report.  Google the `rgb()` command and edit your plot so that the points are semi-transparent purple. (hint https://www.r-graph-gallery.com/43-rgb-colors.html )
 
 Hint, you can also use tmap and QTM from the previous labs to explore the data.
 
@@ -356,7 +356,7 @@ The plot above is still pretty basic, so lets explore another of the big package
 
 Look at the command below, you can see that we're building a series of layers linked by the + symbol.
 
-```{r}
+```{r,eval=FALSE}
 tmap_mode("plot")                             # Set the static plot mode
 
 myplot <- tm_shape(firefly.sf) +               # Load the firefly data 
@@ -369,14 +369,14 @@ myplot
 
 I have saved it as a variable called myplot and printed its name so that it's saved in R.  This means I can now turn on the interactive view mode and re-plot
 
-```{r}
+```{r, eval=FALSE}
 tmap_mode("view")
 myplot
 ```
 
 and back to static:
 
-```{r}
+```{r,eval=FALSE}
 tmap_mode("plot")
 myplot
 ```
