@@ -1,0 +1,488 @@
+---
+title:  "<br> Lab 4: Spatial Wrangling"
+author: "Dr Greatrex"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+library(kableExtra)
+
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(raster)
+library(sp)
+library(sf)
+library(tmap)
+library(terra)
+library(rnaturalearth)
+```
+
+
+
+<br>
+
+# OVERVIEW
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+The aim of this week's lab is to get comfortable reading in and managing
+spatial datasets and the SP/SF packages
+
+SEE CANVAS FOR SUBMISSION DATES.
+
+## Get help
+
+If a link to a tutorial is broken, you should be able to go to the
+tutorial number and find it in the menu.
+
+Teams is the fastest way to get help. [CLICK THIS LINK FOR THE TEAMS
+WEBSITE FOR LAB
+HELP](https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGFVYc0fpUTM1%40thread.tacv2/conversations?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+
+<br>
+
+# LAB SET-UP
+
+<br>
+
+## Create a project
+
+ -   Using R-CLOUD? : click here. This also has instructions on
+    uploading/downloading code from your computers.
+    -   <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD>
+        <br><br>
+ -   Using YOUR LAPTOP? : Click here:
+    -   <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop>
+
+<br>
+
+## Use a template
+
+You are welcome to use your own template, but I suggest for ease using one of the professional ones, such as `PACKAGE rmdformats`  or `PACKAGE prettydoc`.  To use these, 
+
+ - (if you have not already) click on the packages tab, then the install button. Install the `rmdformats` package and the `prettydoc` package.<br><br>
+ - Same as normal, go to *File|New File|R Markdown*.  But NOW, click on the templates button on the left.  <br><br>
+ - You will see a whole load of templates from the different packages.  Each will give you professional formatting for very little work.  To explore what they look like without having to try each one, google the websites for rmdformats, prettydoc and others..<br><br>
+ 
+ 
+```{r, Lab4Fig1,fig.align='center', fig.height=3, echo=FALSE}
+knitr::include_graphics('./Figures/pg_Lab41_template.png')
+```
+ 
+ - To see what a template looks like, choose it, press OK, then press knit.  <br><br>
+ 
+ -  Choose your favourite. Finally, remember to add in the title and author lines at the top of your Rmd file.  For example here is the final YAML for this script.<br><br>
+ 
+```{r, Lab4Fig2,fig.align='center', fig.height=3, echo=FALSE}
+knitr::include_graphics('./Figures/pg_Lab42_YAML.png')
+```
+
+
+<br>
+
+## Add libraries & code options
+
+Edit the first "set-up" code chunk so it looks like this and run/knit to load. You might need additional libraries as you work through the lab.  If so, add them in this code chunk AND REMEMBER TO RERUN.  If you're template didn't have a "setup" code chunk, just create one at the top.
+
+If you see a little yellow bar at the top asking you to install them,click yes!
+
+
+```{r, eval=FALSE}
+
+knitr::opts_chunk$set(cache = TRUE,message=FALSE,warning=FALSE,echo=TRUE)
+
+# LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(raster)
+library(sp)
+library(sf)
+library(tmap)
+library(terra)
+library(palmerpenguins) #you might need to install this
+library(rnaturalearth)
+
+```
+
+
+<br><br>
+
+# CODE SHOWCASE
+
+## Spatial Data Wrangling in Data Camp [20 MARKS]
+
+Create a code showcase section in your lab report. Complete CHAPTER 1 AND CHAPTER 2 of this datacamp course on spatial data in R.  Include a screenshot in your lab report to show you did it.
+
+ - <https://app.datacamp.com/learn/courses/spatial-analysis-with-sf-and-raster-in-r>
+
+See Canvas for how to access data camp for free.
+
+<br><br>
+
+## Markdown and inline code 
+
+### Learn about inline code
+
+One of the best parts of R markdown is that you can embed code in your actual report text.  So imagine for example, you had written about the mean car year in Lab 1 then realised you had made a mistake.  Rather than have to change the answer in your write up, you can include  "inline" code which will auto-update with as you fix the mistake.
+
+To see it in action and learn how to do it, follow these three links:
+
+ - <https://rmarkdown.rstudio.com/lesson-4.html> : A nice example of how it looks
+ - <https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html> : How to do it 
+ - <https://campus.datacamp.com/courses/communicating-with-data-in-the-tidyverse/introduction-to-rmarkdown?ex=10> : test your knowledge
+ 
+ <br>
+ 
+ ### Test your learning [10 MARKS]
+ 
+1. Make a new code chunk and load the penguins dataset (from the package palmerpenguins).  <br>
+
+```{r, include=FALSE}
+data(penguins, package="palmerpenguins")
+flipper <- mean(penguins$flipper_length_mm)
+mass <- mean(penguins$body_mass_g)
+```
+
+```{r}
+data(penguins, package="palmerpenguins")
+```
+
+2. Click on penguins in the environment tab to view the data. More details here: https://allisonhorst.github.io/palmerpenguins/ <br>
+
+3. In the same code chunk, find the MEAN flipper length and the MAXIMUM body mass, and save to variables called flipper and mass. <br>
+   a. HINT, there is missing data in these columns, to ignore it use na.rm=TRUE (see here https://www.statology.org/na-rm/ ) <br>
+   
+4. In the code chunk options the { r } bit, add include=FALSE so that the code chunk is invisible.  When you press knit, it should look like nothing has happened. 
+
+5. Finally, below the code chunk, write this sentence, using inline code to replace the XXXX/YYYY with the actual average flipper length / max body mass. <br><br><br> **In the Palmer Penguins dataset, the mean flipper length is XXXX mm and the maximum body mass is YYYY g.**
+  
+
+<br><br>
+
+ 
+
+
+
+# MAIN ANALYSIS
+
+## Aim of the analysis
+
+You are writing a report for Dr Sara Stoudt at the department of Maths in Bucknell University (for real - I am going to share these with her).  Dr Stoudt is a spatial statistician who focuses on the analysis of crowd-sourced datasets.  <https://www.inaturalist.org/> and <https://journeynorth.org>.  Have a look at her bio here: https://sastoudt.github.io/.
+
+Specifically, we will be conducting an analysis on a new crowd-sourced dataset that she has never seen before (again for real), a crowd-sourced dataset on fireflies.  As before, with the entire report below, we will be grading on the professionality of your output.
+
+
+## Report set-up
+
+Create these headings and sub-headings in your report. 
+
+  - BACKGROUND ON CROWD-SOURCED DATA 
+    + What is crowd-sourced data?
+    + What are its strengths?
+    + What are its weaknesses?
+    + How do spatial fallacies impact it?
+  - STUDY SUMMARY
+    + Fireflies
+    + The Firefly Watch project
+  - DATA DESCRIPTION
+  - DATA WRANGLING
+  - SPATIAL ANALYSIS
+  - MAPS
+  - ANALYSIS
+    
+    
+For example, when you press knit, it should look something like this:
+
+
+  
+
+## Background on crowd sourced data.
+
+Although GEOG-364 is not a writing course, it is important to be able to describe the data and topics you are covering. We are grading you on content not on grammar.  Crowd sourced data is an important type of data which will only grow in popularity, so it's important to understand its strengths and weaknessses. 
+
+First, BRIEFLY skim read these three papers. I start by reading the abstracts and sub-headings then zoom in where I find interesting.
+
+ - <https://journals.sagepub.com/doi/10.1177/1745691619850561> (Scientific Utopia III: Crowdsourcing Science)
+ - <https://www.pnas.org/doi/full/10.1073/pnas.2110156119> (Dr Stoudt's most recent paper: Identifying engaging bird species and traits with community science observations)
+ - <https://www.geog.uni-heidelberg.de/md/chemgeo/geog/gis/europ_handb_of_crowds_geog_inf_chapter6_jacobs.pdf> Limitations of crowd sourcing data.
+ 
+### what to write up
+ 
+In the appropriate section of your report and referring to the sources above (plus other documents as you wish), write:
+
+ 1. One paragraph on what crowd-sourced nature data is [5 marks] <br><br>
+ 2. One paragraph on the strengths and opportunities for crowd sourced data in understanding the natural world around us [5 marks] <br><br>
+ 3. One paragraph on the weaknesses for crowd sourced data in understanding the natural world around us [5 marks]<br><br>
+ 3. One paragraph where you use the course notes to explain how the non-uniformity of space and the locational fallacy might impact some of these datasets [5 marks]<br><br>
+ 
+
+## Background on fireflies
+
+```{r}
+firefly <- readxl::read_excel("fireflydata.xlsx")
+```
+
+
+Fireflies are well loved insects, yet we don't actually have a map of where they are - or know if they are declining or increasing.  For example, we don't know how climate change, pesticides or light population are affecting their numbers. 
+
+ Refresh your knowledge on fireflies (these are just ideas.. spend 5-10mins on this max)
+
+ - here: https://www.massaudubon.org/learn/nature-wildlife/insects-arachnids/fireflies/about 
+ - or this video if you're a visual learner: https://www.youtube.com/watch?v=Y7RI1qjB2r8
+ - https://www.massaudubon.org/get-involved/community-science/firefly-watch/resources
+    
+To gain more data, a group of researchers started a citizen-science project called Firefly Watch where people could submit their firefly observations.  See more here:
+
+https://www.massaudubon.org/get-involved/community-science/firefly-watch
+ 
+The aim of this lab is to see if this crowd sourced dataset can show/explain spatial patterns in reported sightings of fireflies/lightning bugs.
+
+### what to write up
+
+In the appropriate sections of the Study Summary part of your report, 
+
+ - Introduce fireflies as a topic and explain why we might want to map them, summarising a few facts about fireflies from your reading.<br><br>
+ - Introduce the Firefly Watch Study <br><br>
+
+<p class="comment">There is a spell check next to the knit button at the top of the script. Press knit regularly to check it all looks good</p>
+
+
+## Data Analysis [10 MARKS]
+
+### Data description
+
+1. Go to the Canvas Lab 4 page and download the dataset ("firefly.xlsx").<br><br>
+2. Put it in your lab 4 project folder (or use the upload button in R-studio cloud to put it in your project)<br><br>
+3. Use [The Input/Output tutorial 61](https://psu-spatial.github.io/Geog364-2021/pg_Tut6_input_output.html) to read the data into R and save as a variable called `firefly`. (hint, readxl package) <br><br>
+4. View/summarise the data and get comfortable with it.  You could use some summary statistics from [Summary Stats Tutorial 8](https://psu-spatial.github.io/Geog364-2021/pg_Tut8_summarystat.html).  You do not need to include them all..<br><br>
+
+5. Write these details as a bullet point list in your data description section: <br><br>
+   + Object of analysis of the dataset <br><br>
+   + Population of the dataset (e.g. boundary in time and space)<br><br>
+   + Variables in the dataset<br><br>
+   + Number of objects/rows<br><br>
+   + Which years do we have data for?  How many observations in each year? (hint, apply  the `table()` command to the Year column of the firefly dataset)<br><br>
+   + Is Pennsylvania included in the dataset? How many observations were taken in PA?<br><br>
+   + In a new paragraph, explain if you think the firefly data is marked, and if so, give an example of a mark.
+
+See if you can include the numbers as inline code rather than typing them.. 
+
+<p class="comment">HINT, there is not one row for every firefly that has ever existed in the USA.. think about what each row is</p>
+
+<p class="comment">HINT 2, WE SHOULD BE ABLE TO SEE IN YOUR CODE WHERE YOU GOT EACH ANSWER (e.g. leave your code visible)</p>
+
+
+<br>
+
+### Data wrangling
+
+In the data wrangling section, use either this tutorial  [FILTERING Tutorial 7D](https://psu-spatial.github.io/Geog364-2021/pg_Tut7_wrangle.html) or or https://crd150.github.io/lab2.html#Filtering  to help you complete these tasks
+
+1. Use R-code to find the value of the second row and the 4th column in your data <br><br>
+
+2. In the MAIN firefly data, if you look closely at your summary, you might find there are some unusual temperature values.<br>.Let's assume that the temperature of 8000F is not likely to be true.  Filter the data so that the temperature is below 200F and overwrite (e.g. save the result as a variable called firefly)
+     
+     
+     
+### Making your data spatial
+
+<p class="comment">If your datacamp/training gives you a better way of approaching this code, go for it!</p>
+
+These tutorials should help [Tutorial 11A](https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tut11a_basics), along with the data camp course. [Tutorial 11B](https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tutorial_11B:_Vector_Data)
+
+
+The firefly data is in standard lat/lon, so EPSG=4326.<br>
+
+Use [your own knowledge or these instructions](https://psu-spatial.github.io/Geog364-2021//pg_Tut11_spatial101.html#b_Converting_a_dataframe_in_R_to_spatial_sf) to Make a sf version of your firefly data and assign it to a variable called firefly.sf.  You can leave it in lon/lat/4326 this lab.
+
+<br>
+
+26. Use [Tutorial 11Bc](https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tut11bc_read) to load rnaturalearth state-boundaries for US States. Assign to a variable called states.sf and use st_transform to convert to projection 4326.
+
+
+<br>
+
+## Making maps [5 MARKS]
+
+Let's now see how our data looks plotted.  I have provided a few examples. Your job is to get them running and interpret them.
+
+#### Make a basic plot
+
+In a new code chunk enter the following code. You should see a basic plot with the firefly locations and the state borders.  If so, congrats!  If not, you need to adjust your projections or something has happened.
+
+```{r,include=FALSE}
+firefly.sf <- st_as_sf(firefly,crs=4326,coords=c("Longitude","Latitude"))
+states.sf <- ne_states(country="united states of america",returnclass="sf")
+                       
+                     
+```
+
+
+```{r}
+plot(st_geometry(firefly.sf),
+     pch=16,
+     col=rgb(0,0,1,.5),
+     cex=.5,
+     main="Firefly locations")
+
+plot(st_geometry(states.sf),add=TRUE)
+```
+
+]Recreate this plot in your report.  Google the `rgb()` command and edit your plot so that the points are semi-transparent purple. (hint https://www.r-graph-gallery.com/43-rgb-colors.html )
+
+Hint, you can also use tmap and QTM from the previous labs to explore the data.
+
+
+#### Make a more detailed tmap plot
+
+The plot above is still pretty basic, so lets explore another of the big packages available to let you make spatial visualisations. We're going to extend your knowledge of tmap.
+
+Look at the command below, you can see that we're building a series of layers linked by the + symbol.
+
+```{r}
+tmap_mode("plot")                             # Set the static plot mode
+
+myplot <- tm_shape(firefly.sf) +               # Load the firefly data 
+          tm_dots(col="black", size=0.05) +    # Plot it as dots
+          tm_shape(states.sf) +                # Load the state borders
+          tm_borders(lwd=.5)                   # Plot them as just borders
+  
+myplot
+```
+
+I have saved it as a variable called myplot and printed its name so that it's saved in R.  This means I can now turn on the interactive view mode and re-plot
+
+```{r}
+tmap_mode("view")
+myplot
+```
+
+and back to static:
+
+```{r}
+tmap_mode("plot")
+myplot
+```
+
+Get the tmap plots working in your lab-script. If the interactive one crashes knit, you don't need to include it.  
+
+## Discussion [10 MARKS]
+
+ - Explore and summarise any spatial patterns you see in the data.
+ - Comment if the data appears to follow Tobler's law at this scale
+ 
+ - One commmon theory is that fireflies are only seen in areas with certain temperatures and elevations. Another is that firefly numbers are linked to light pollution and cities.<br>Change the base-maps in the INTERACTIVE MAP (there's a buttom that lets you change the layer on the map) to explore and discuss these theories . For example the terrain layer gives a sense of elevation and the open maps layer will let you see where the cities are.. You do not need to do any additional formal analysis.
+
+
+We will return to fireflies in future labs..
+
+
+
+# ABOVE & BEYOND
+
+In the plot commands above, we used `st_geometry()`.   Explain what it does and why it is useful (2), with an additional (2) for turning it on and off
+
+
+<br>
+
+# SUBMITTING YOUR LAB
+
+Remember to save your work throughout and to spell check your writing (next to the save button). Now, press the knit button again. If you have
+not made any mistakes in the code then R should create a html file inyour Lab folder which includes your answers.
+
+## On laptops
+
+-   Go to your 364 folder and look for your lab folder. <br>
+
+-   You should see a .html file (edge/chrome) complete with a very recent time-stamp.html file along with a .rmd file with a recenttime-stamp <br>
+
+-   In that folder, double click on the html file. This will open it inyour browser. CHECK THAT THIS IS WHAT YOU WANT TO SUBMIT. <br>
+
+-   Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+```{r, echo=FALSE}
+knitr::include_graphics("./Figures/Lab_ToSubmit.png")
+```
+
+<br> <br> 
+
+## On R studio cloud
+
+-   If you are on R studio cloud, see XXXXX for how to download your
+    files
+
+<br>
+
+-   Now go to Canvas and submit BOTH your html and your .Rmd file.
+
+<br> <br> 
+
+# CHECK THIS BEFORE YOU SUBMIT! 
+
+People who use this section get better grades...
+
+## Predict your grade
+
+Here is LITERALLY how we are grading you. Predict your grade!
+
+**HTML FILE SUBMISSION - 8 marks**
+
+**RMD CODE SUBMISSION - 8 marks**
+
+**MARKDOWN/CODE STYLE - 10 MARKS**
+
+Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE
+IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check next
+to the save button. You have written your answers below the relevant
+code chunk in full sentences in a way that is easy to find and grade.
+For example, you have written in full sentences, it is clear what your
+answers are referring to.
+
+**CODE SHOWCASE - 30 MARKS**
+
+- 20 for data camp
+- 10 for the inline code
+
+**DATA ANALYSIS - 40 MARKS**
+
+-15 for your study design/backgrounds
+-10 for your data description and filtering
+-5 for the mapping
+-10 for the thoughtfulness/quality of your discussion
+
+**Above and beyond: 4 MARKS**
+
+See above
+
+[100 marks total]
+
+
+## What your grade means
+
+Why is 100% hard?  Overall, here is what your lab should correspond to:
+
+```{r, echo=FALSE}
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
+knitr::kable(rubric) %>%   
+  kable_classic_2() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+
+```
