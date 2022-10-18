@@ -13,7 +13,7 @@
 
 <title>Tutorials</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -146,11 +146,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -179,8 +183,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -188,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -347,6 +344,9 @@ div.tocify {
     </li>
     <li>
       <a href="index_GEOG364-22_L4Firefly.html">Lab 4: Spatial Wrangling</a>
+    </li>
+    <li>
+      <a href="index_GEOG364-22_L5Short.html">Lab 5: SHORT-LAB CENSUS DATA</a>
     </li>
   </ul>
 </li>
@@ -2837,6 +2837,313 @@ libraries that you need to load.</p>
 GEOG364 folder. Now for future labs we can simply copy/paste this
 across.</p>
 <p><br> <br> <br></p>
+</div>
+<div id="downloading-census-data" class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Downloading Census
+Data</h1>
+<p>R allows you to access and download all of the US Census and American
+Community survey data with a few quick commands.</p>
+<div id="set-up" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Set up</h2>
+<div id="getting-your-password" class="section level3" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Getting your
+password</h3>
+<p>First, you need to sign up in advance for a password, called an API
+key.</p>
+<p><a href="https://api.census.gov/data/key_signup.html"
+class="uri">https://api.census.gov/data/key_signup.html</a></p>
+<p>You can use Penn State as the organisation. In a few minutes, e-mail
+you a personal access code called an API key. Click the link in the
+e-mail to activate.</p>
+<p>Sometimes your key will just stop working. No-one knows why - it’s
+fine to simply sign up for a new one and to re-teach your new one to R
+studio</p>
+</div>
+<div id="teach-r-your-api-key" class="section level3 unnumbered">
+<h3 class="unnumbered">Teach R your API key</h3>
+<p>You don’t need to type this password in every time you run R. Instead
+we will teach it to R once.</p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li><strong>IN THE CONSOLE</strong>, type this command, but replace
+“YOUR API KEY GOES HERE” with the password you were given</li>
+</ol>
+<p><br></p>
+<pre class="r"><code>tidycensus::census_api_key(&quot;YOUR API KEY GOES HERE&quot;, install=TRUE,overwrite=TRUE)
+
+# Here is an imaginary example, you need your own number
+# census_api_key(&quot;d2a990g429206c51b54n98ec51886c6cf01a7ef2&quot;, install=TRUE,overwrite=TRUE)</code></pre>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>This will now save the password on your system.</li>
+</ol>
+<p><br></p>
+<p><strong>FINALLY, RESTART R STUDIO</strong>. On your laptop, shut it
+all down and restart. On the cloud, go to the Session menu at the top
+and click “restart R and clear output”.</p>
+<p><strong>This is a one off process</strong>. If you run the command
+several times or include it in your lab report, it will give an error
+and will not allow you to knit. For Rstudio cloud folks it might be
+needed for every new lab. Make sure that the command is not in a code
+chunk or in your lab script.</p>
+</div>
+</div>
+<div id="downloading-data-using-get_acs" class="section level2"
+number="11.2">
+<h2><span class="header-section-number">11.2</span> Downloading data
+using Get_ACS</h2>
+<p>Make sure these libraries/packages are included in your library code
+chunk that that it runs correctly: <code>tidycensus</code>,
+<code>units</code> ,<code>sp</code> , <code>sf</code>,
+<code>tidyverse</code> and <code>tmap</code>.</p>
+<p>TidyCensus allows you access to many large data-sets. For example</p>
+<ul>
+<li><code>get_acs()</code> Obtains data and feature geometry for the
+American Community Survey</li>
+<li><code>get_decennial()</code> Obtains data and feature geometry for
+the decennial US Census</li>
+<li><code>get_estimates()</code> Gets data from the US Census Bureau
+Population Estimates APIs</li>
+<li><code>get_flows()</code> Obtains data and feature geometry for
+American Community Survey Migration Flows</li>
+<li><code>get_pums()</code> Loads data from the American Community
+Survey Public Use Microdata Series API</li>
+</ul>
+<div id="example" class="section level3" number="11.2.1">
+<h3><span class="header-section-number">11.2.1</span> Example</h3>
+<p>Each commans has similar arguments. Here is an example for get_acs()
+where I download county level American Community Survey data for
+Iowa.</p>
+<p>First, set up your code chunk carefully because it really likes to
+output spurious text. Add these code chunk options: {r,
+results=‘hide’,message=FALSE,warning=FALSE}</p>
+<p>Here is the command.</p>
+<pre class="r"><code># Download some data for Iowa using get_acs
+
+Example.sf &lt;- get_acs(geography = &quot;county&quot;, 
+                         year = 2019,
+                         variables = c(housevalue  = &quot;B25075_001&quot;,  # house value
+                                       total_pop   = &quot;B05012_001&quot;,  # total population
+                                       total_house = &quot;B25001_001&quot;,  # no. houses
+                                       med.income  = &quot;B19013_001&quot;), # median income  
+                         state = c(&quot;IA&quot;, &quot;IL&quot;),
+                         survey = &quot;acs5&quot;,geometry=TRUE,
+                         output = &quot;wide&quot;,show_call=FALSE)</code></pre>
+<p>Here is what each argument means:</p>
+<ul>
+<li><strong><code>geography</code>:</strong> The level of geography we
+want the data in; in our case, the county. Other geographic options
+include “tract” for census tracts, plus tens more can be found here in
+the table <a
+href="https://walker-data.com/tidycensus/articles/basic-usage.html"
+class="uri">https://walker-data.com/tidycensus/articles/basic-usage.html</a><br></li>
+<li><strong><code>year</code>:</strong> The end year of the
+data.<br></li>
+<li><strong><code>variables</code>:</strong> The variables we want to
+bring in as specified in a vector you create using the function c().
+Note that we created variable names of our own (e.g. “topop”) and we put
+the ACS IDs in quotes (“B03002_003”). Had we not done this, the variable
+names will come in as they are named in the ACS, which are not very
+descriptive.<br></li>
+<li><strong><code>state</code>:</strong> We can filter the counties to
+those in a specific state. Here it is c(“PA”, “NY”) for Pennsylvania and
+New York. If we don’t specify this, we get all counties in the United
+States - this is a HUGE download. <br></li>
+<li><strong><code>survey</code>:</strong> The specific Census survey
+were extracting data from. We want data from the 5-year American
+Community Survey, so we specify “acs5”. The ACS comes in 1-, 3-, and
+5-year varieties.<br></li>
+<li><strong><code>geometry</code>:</strong> If geometry is set to FALSE,
+it just brings in a standard non-spatial table. If it’s set to true, it
+makes the data into a spatial sf file.<br></li>
+<li><strong><code>wide</code>:</strong> This makes on column for each
+variable, setting it to false would make one single column for all the
+estimates and one for the margin of error. We normally want
+wide=TRUE<br></li>
+</ul>
+</div>
+<div id="how-to-find-variable-names" class="section level3"
+number="11.2.2">
+<h3><span class="header-section-number">11.2.2</span> How to find
+variable names</h3>
+<p>There are hundreds of variables you can download. You can see a full
+list here: <a
+href="https://www.socialexplorer.com/data/ACS2017_5yr/metadata/?ds=ACS17_5yr"
+class="uri">https://www.socialexplorer.com/data/ACS2017_5yr/metadata/?ds=ACS17_5yr</a></p>
+<p>For example:</p>
+<ul>
+<li>“B05012_001”, total population</li>
+<li>“B25001_001”, total housing units</li>
+<li>“B25075_001”, house value</li>
+<li>“B02001_004”, total who identify as native american</li>
+<li>“B03003_003”, total who identify as Hispanic</li>
+<li>“B03001_008”, total who identify as Hispanic Central A</li>
+<li>“B03001_016”, total who identify as Hispanic South A</li>
+<li>“B03002_003”, total who identify as white</li>
+<li>“B03002_004”, total who identify as black</li>
+<li>“B19013_001”, median income</li>
+<li>“B06010_011”, number of people making &gt; 75000 USD</li>
+<li>“B05012_003”, number of foreign born people</li>
+<li>“B25035_001”, average house age</li>
+<li>“B25105_001”, monthly house expenditures</li>
+<li>“B25064_001”, median rent</li>
+<li>“B08101_049”, number who work from home</li>
+<li>“B25003_002”, total owner occupied</li>
+<li>“B25041_001”, total number of beds in the house</li>
+<li>“B28002_004”, total with broadband access</li>
+<li>“B25047_003”, total without plumbing</li>
+<li>“B25047_002”, all mobile homes -</li>
+<li>“B25024_010”, native mobile homes</li>
+<li>“B25032E_010”,# total with complete plumbing</li>
+<li>“B15012_001” , total with at least a bachelors degree</li>
+</ul>
+<p>If you add new variables, make sure they are inside the parentheses
+for the variable argument! A common error is to add them as a new line,
+not adding to the list of variables.</p>
+</div>
+<div id="more-advanced-tutorials" class="section level3"
+number="11.2.3">
+<h3><span class="header-section-number">11.2.3</span> More advanced
+tutorials</h3>
+<p>These are two wonderful tutorials for using these functions in more
+depth.</p>
+<ul>
+<li><p><a
+href="https://walker-data.com/tidycensus/articles/basic-usage.html"
+class="uri">https://walker-data.com/tidycensus/articles/basic-usage.html</a></p></li>
+<li><p><a href="https://crd150.github.io/lab3.html#Using_the_Census_API"
+class="uri">https://crd150.github.io/lab3.html#Using_the_Census_API</a></p></li>
+</ul>
+</div>
+</div>
+<div id="understanding-the-output" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Understanding the
+output</h2>
+<div id="estimate-vs-margin-of-error" class="section level3 unnumbered">
+<h3 class="unnumbered">Estimate vs margin of error</h3>
+<p>If you got it working and click on/view ACS_county.sf, you should now
+see that it has downloaded each one of your variables for every county
+in Iowa and Illinois.</p>
+<p>In fact, for every one, it has downloaded the ESTIMATE of what they
+think that variable is for that region, but also has included the
+MARGIN-OF-ERROR, the 90% confidence interval on our result (90% of the
+time our result should be within this margin of error)</p>
+<p>So any columnname with an E at the end is the estimate and anything
+with an M at the end is the error on that estimate.</p>
+<p>e.g.</p>
+<pre class="r"><code>names(Example.sf)</code></pre>
+<pre><code>##  [1] &quot;GEOID&quot;        &quot;NAME&quot;         &quot;housevalueE&quot;  &quot;housevalueM&quot;  &quot;total_popE&quot;  
+##  [6] &quot;total_popM&quot;   &quot;total_houseE&quot; &quot;total_houseM&quot; &quot;med.incomeE&quot;  &quot;med.incomeM&quot; 
+## [11] &quot;geometry&quot;</code></pre>
+<p>Geometry is the spatial code that R uses to show it’s a spatial file,
+Finally GEOID and name describe the counties.</p>
+</div>
+</div>
+<div id="dealing-with-the-data" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Dealing with the
+data</h2>
+<p>Once we have the data, we want to do things with it. Here is a worked
+example for Iowa:</p>
+<pre class="r"><code>#First download the data and save as ACS_county.sf
+ACS_county.sf &lt;- get_acs(geography = &quot;county&quot;, 
+                         year = 2019,
+                         variables = c(housevalue  = &quot;B25075_001&quot;,  # house value
+                                       total_pop   = &quot;B05012_001&quot;,  # total population
+                                       total_house = &quot;B25001_001&quot;,  # no. houses
+                                       med.income  = &quot;B19013_001&quot;), # median income  
+                         state = c(&quot;IA&quot;),
+                         survey = &quot;acs5&quot;,geometry=TRUE,
+                         output = &quot;wide&quot;,show_call=FALSE)</code></pre>
+<pre class="r"><code># Change the map projection to UTM Iowa, or whatever you need
+ACS_county.sf &lt;- st_transform(ACS_county.sf,3744)
+
+# Find the areas in each county using the sf package
+ACS_county.sf$County.areaE &lt;- st_area(ACS_county.sf)
+
+# Change the units of the areas from metres squared to km squared and overwrite
+# This needs the units package
+ACS_county.sf$County.areaE &lt;- set_units(ACS_county.sf$County.areaE,&quot;km^2&quot;)
+
+# and divide the total population by the area to give the population density
+# here we are just doing basic maths
+ACS_county.sf &lt;- mutate(ACS_county.sf, PopulationDensityE = total_popE  / County.areaE)
+
+# Finally remove any empty values (e.g. counties in a lake or something)
+tracts_empty  &lt;- st_is_empty(ACS_county.sf)
+ACS_county.sf &lt;- ACS_county.sf[which(tracts_empty==FALSE), ] </code></pre>
+<div id="plotting-census-data" class="section level4" number="11.4.0.1">
+<h4><span class="header-section-number">11.4.0.1</span> Plotting census
+data</h4>
+<p>You can now plot the census data like any other spatial dataset. For
+example, here is how to plot three things together. Again, I suggest
+including message=FALSE and warning=FALSE in your code chunk
+options.</p>
+<pre class="r"><code># I make each map but save them rather than show them on the screen
+map_totalpop &lt;- qtm(ACS_county.sf,&quot;total_popE&quot;) +
+                tm_layout(legend.outside = TRUE)
+
+map_area     &lt;- qtm(ACS_county.sf,&quot;County.areaE&quot;)+
+                tm_layout(legend.outside = TRUE)
+
+map_popdens  &lt;- qtm(ACS_county.sf,&quot;PopulationDensityE&quot;)+
+                tm_layout(legend.outside = TRUE)
+
+# Now show them together
+tmap_mode(&quot;plot&quot;)
+tmap_arrange(map_totalpop,map_area,map_popdens)</code></pre>
+<p><img src="index_GEOG364-22_Tutorial_R_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>There are a load more ideas here for making pretty tmap plots: - <a
+href="http://zevross.com/blog/2018/10/02/creating-beautiful-demographic-maps-in-r-with-the-tidycensus-and-tmap-packages/"
+class="uri">http://zevross.com/blog/2018/10/02/creating-beautiful-demographic-maps-in-r-with-the-tidycensus-and-tmap-packages/</a></p>
+</div>
+<div id="bi-chloropleths" class="section level4" number="11.4.0.2">
+<h4><span class="header-section-number">11.4.0.2</span>
+Bi-chloropleths</h4>
+<p>There is a wonderful and detailed tutorial here. <a
+href="https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html"
+class="uri">https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html</a></p>
+<p>You can also make other plots such as bichloropleths using another
+plotting package, ggplot and a NEW PACKAGE, called “biscale”. Install
+this and load it in your library code chunk.</p>
+<p>To make the plots pretty, add a second new package called
+“cowplot”</p>
+<pre class="r"><code># bi_class is from the biscale package
+# create data to plot
+data_to_plot &lt;- bi_class(ACS_county.sf,
+                         x=&quot;housevalueE&quot;,
+                         y=&quot;med.incomeE&quot;,
+                         style=&quot;jenks&quot;,dim=3)
+
+# create map
+map &lt;-ggplot() +
+   geom_sf(fill=&quot;antiquewhite1&quot;) +
+   geom_sf(data=data_to_plot,
+           mapping=aes(fill=bi_class),
+           color=&quot;black&quot;,
+           size=0.1,
+           show.legend = FALSE)+
+  labs(
+    title = &quot;Houses and Income in Iowa&quot;,
+    subtitle = &quot;Dark Blue palette&quot;)+
+  bi_scale_fill(pal=&quot;DkBlue&quot;,dim=3) 
+
+# add a legend. See online tutorial for what I am doing
+legend &lt;- bi_legend(pal = &quot;DkBlue&quot;,
+                    dim = 3,
+                    xlab = &quot;Higher House Val. &quot;,
+                    ylab = &quot;Higher Med. Income &quot;,
+                    size = 7)
+
+# put them together
+ ggdraw() +
+  draw_plot(map,hjust=0, vjust = 0,width=0.8)+
+  draw_plot(legend,x=.8,width=0.2)</code></pre>
+<p><img src="index_GEOG364-22_Tutorial_R_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Again, if you’re unsure about this code, see <a
+href="https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html"
+class="uri">https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html</a></p>
+</div>
+</div>
 </div>
 
 

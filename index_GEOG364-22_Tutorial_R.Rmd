@@ -22,6 +22,7 @@ font-style: italic;
 }
 </style>
 ```
+
 ```{r setup, include=FALSE}
 # OPTIONS -----------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, 
@@ -39,6 +40,11 @@ library(tidyverse)
 library(plotly)
 library(readxl)
 library(rvest)
+library(biscale)
+library(tidycensus)
+library(cowplot)
+library(units)
+
 
 # FUNCTIONS -----------------------------------------------
 # Get R version
@@ -1806,3 +1812,275 @@ GEOG364 folder. Now for future labs we can simply copy/paste this
 across.
 
 <br> <br> <br>
+
+
+# Downloading Census Data
+
+R allows you to access and download all of the US Census and American Community survey data with a few quick commands.
+
+## Set up
+
+### Getting your password
+
+First, you need to sign up in advance for a password, called an API key.
+
+<https://api.census.gov/data/key_signup.html>
+
+You can use Penn State as the organisation. In a few minutes, e-mail you a personal access code called an API key. Click the link in the e-mail to activate.
+
+Sometimes your key will just stop working. No-one knows why - it's fine to simply sign up for a new one and to re-teach your new one to R studio
+
+### Teach R your API key {.unnumbered}
+
+You don't need to type this password in every time you run R. Instead we will teach it to R once.
+
+<br>
+
+1.  **IN THE CONSOLE**, type this command, but replace "YOUR API KEY GOES HERE" with the password you were given
+
+<br>
+
+```{r, eval=FALSE}
+tidycensus::census_api_key("YOUR API KEY GOES HERE", install=TRUE,overwrite=TRUE)
+
+# Here is an imaginary example, you need your own number
+# census_api_key("d2a990g429206c51b54n98ec51886c6cf01a7ef2", install=TRUE,overwrite=TRUE)
+```
+
+<br>
+
+2.  This will now save the password on your system.
+
+<br>
+
+**FINALLY, RESTART R STUDIO**. On your laptop, shut it all down and restart. On the cloud, go to the Session menu at the top and click "restart R and clear output".
+
+**This is a one off process**. If you run the command several times or include it in your lab report, it will give an error and will not allow you to knit. For Rstudio cloud folks it might be needed for every new lab. Make sure that the command is not in a code chunk or in your lab script.
+
+## Downloading data using Get_ACS
+
+Make sure these libraries/packages are included in your library code chunk that that it runs correctly: `tidycensus`, `units` ,`sp` , `sf`, `tidyverse` and `tmap`.
+
+```{r, include=FALSE}
+library(tidycensus)
+library(sp)
+library(sf)
+library(tmap)
+library(units)
+library(tidyverse)
+library(biscale)
+library(cowplot)
+```
+
+TidyCensus allows you access to many large data-sets. For example
+
+-   `get_acs()` Obtains data and feature geometry for the American Community Survey
+-   `get_decennial()` Obtains data and feature geometry for the decennial US Census
+-   `get_estimates()` Gets data from the US Census Bureau Population Estimates APIs
+-   `get_flows()` Obtains data and feature geometry for American Community Survey Migration Flows
+-   `get_pums()` Loads data from the American Community Survey Public Use Microdata Series API
+
+### Example
+
+Each commans has similar arguments. Here is an example for get_acs() where I download county level American Community Survey data for Iowa.
+
+First, set up your code chunk carefully because it really likes to output spurious text. Add these code chunk options: {r, results='hide',message=FALSE,warning=FALSE}
+
+Here is the command.
+
+```{r, results='hide',message=FALSE,warning=FALSE}
+# Download some data for Iowa using get_acs
+
+Example.sf <- get_acs(geography = "county", 
+                         year = 2019,
+                         variables = c(housevalue  = "B25075_001",  # house value
+                                       total_pop   = "B05012_001",  # total population
+                                       total_house = "B25001_001",  # no. houses
+                                       med.income  = "B19013_001"), # median income  
+                         state = c("IA", "IL"),
+                         survey = "acs5",geometry=TRUE,
+                         output = "wide",show_call=FALSE)
+```
+
+Here is what each argument means:
+
+-   **`geography`:** The level of geography we want the data in; in our case, the county. Other geographic options include "tract" for census tracts, plus tens more can be found here in the table <https://walker-data.com/tidycensus/articles/basic-usage.html><br>
+-   **`year`:** The end year of the data.<br>
+-   **`variables`:** The variables we want to bring in as specified in a vector you create using the function c(). Note that we created variable names of our own (e.g. "topop") and we put the ACS IDs in quotes ("B03002_003"). Had we not done this, the variable names will come in as they are named in the ACS, which are not very descriptive.<br>
+-   **`state`:** We can filter the counties to those in a specific state. Here it is c("PA", "NY") for Pennsylvania and New York. If we don't specify this, we get all counties in the United States - this is a HUGE download. <br>
+-   **`survey`:** The specific Census survey were extracting data from. We want data from the 5-year American Community Survey, so we specify "acs5". The ACS comes in 1-, 3-, and 5-year varieties.<br>
+-   **`geometry`:** If geometry is set to FALSE, it just brings in a standard non-spatial table. If it's set to true, it makes the data into a spatial sf file.<br>
+-   **`wide`:** This makes on column for each variable, setting it to false would make one single column for all the estimates and one for the margin of error. We normally want wide=TRUE<br>
+
+### How to find variable names
+
+There are hundreds of variables you can download. You can see a full list here: <https://www.socialexplorer.com/data/ACS2017_5yr/metadata/?ds=ACS17_5yr>
+
+For example:
+
+ -    "B05012_001",  total population
+ -   "B25001_001",  total housing units	
+ -   "B25075_001",  house value
+ -    "B02001_004",  total who identify as native american
+ -    "B03003_003",  total who identify as Hispanic
+ -   "B03001_008",  total who identify as Hispanic Central A
+ -   "B03001_016",  total who identify as Hispanic South A
+ -   "B03002_003",  total who identify as white
+ -   "B03002_004",  total who identify as black
+ -    "B19013_001",  median income
+ -   "B06010_011",  number of people making \> 75000 USD
+ -   "B05012_003",  number of foreign born people
+ -   "B25035_001",  average house age
+ -   "B25105_001",  monthly house expenditures
+ -   "B25064_001",  median rent
+ -   "B08101_049",  number who work from home
+ -    "B25003_002",  total owner occupied
+ -   "B25041_001",  total number of beds in the house
+ -    "B28002_004",  total with broadband access
+ -    "B25047_003",  total without plumbing
+ -   "B25047_002",  all mobile homes -
+ -   "B25024_010",  native mobile homes
+ -   "B25032E_010",# total with complete plumbing
+ -   "B15012_001" ,  total with at least a bachelors degree 
+
+If you add new variables, make sure they are inside the parentheses for the variable argument! A common error is to add them as a new line, not adding to the list of variables.
+
+### More advanced tutorials
+
+These are two wonderful tutorials for using these functions in more depth.
+
+-    <https://walker-data.com/tidycensus/articles/basic-usage.html>
+
+-   <https://crd150.github.io/lab3.html#Using_the_Census_API>
+
+## Understanding the output
+
+### Estimate vs margin of error {-}
+
+If you got it working and click on/view ACS_county.sf, you should now see that it has downloaded each one of your variables for every county in Iowa and Illinois.  
+
+In fact, for every one, it has downloaded the ESTIMATE of what they think that variable is for that region, but also has included the MARGIN-OF-ERROR, the 90% confidence interval on our result (90% of the time our result should be within this margin of error)
+
+So any columnname with an E at the end is the estimate and anything with an M at the end is the error on that estimate.
+
+e.g.
+
+```{r}
+names(Example.sf)
+```
+
+Geometry is the spatial code that R uses to show it's a spatial file,  Finally GEOID and name describe the counties.
+
+## Dealing with the data
+
+Once we have the data, we want to do things with it. Here is a worked example for Iowa:
+
+```{r, results='hide',message=FALSE,warning=FALSE}
+#First download the data and save as ACS_county.sf
+ACS_county.sf <- get_acs(geography = "county", 
+                         year = 2019,
+                         variables = c(housevalue  = "B25075_001",  # house value
+                                       total_pop   = "B05012_001",  # total population
+                                       total_house = "B25001_001",  # no. houses
+                                       med.income  = "B19013_001"), # median income  
+                         state = c("IA"),
+                         survey = "acs5",geometry=TRUE,
+                         output = "wide",show_call=FALSE)
+```
+
+```{r}
+# Change the map projection to UTM Iowa, or whatever you need
+ACS_county.sf <- st_transform(ACS_county.sf,3744)
+
+# Find the areas in each county using the sf package
+ACS_county.sf$County.areaE <- st_area(ACS_county.sf)
+
+# Change the units of the areas from metres squared to km squared and overwrite
+# This needs the units package
+ACS_county.sf$County.areaE <- set_units(ACS_county.sf$County.areaE,"km^2")
+
+# and divide the total population by the area to give the population density
+# here we are just doing basic maths
+ACS_county.sf <- mutate(ACS_county.sf, PopulationDensityE = total_popE  / County.areaE)
+
+# Finally remove any empty values (e.g. counties in a lake or something)
+tracts_empty  <- st_is_empty(ACS_county.sf)
+ACS_county.sf <- ACS_county.sf[which(tracts_empty==FALSE), ] 
+
+```
+
+
+#### Plotting census data
+
+You can now plot the census data like any other spatial dataset.  For example, here is how to plot three things together.  Again, I suggest including message=FALSE and warning=FALSE in your code chunk options.
+
+```{r, message=FALSE,warning=FALSE}
+
+# I make each map but save them rather than show them on the screen
+map_totalpop <- qtm(ACS_county.sf,"total_popE") +
+                tm_layout(legend.outside = TRUE)
+
+map_area     <- qtm(ACS_county.sf,"County.areaE")+
+                tm_layout(legend.outside = TRUE)
+
+map_popdens  <- qtm(ACS_county.sf,"PopulationDensityE")+
+                tm_layout(legend.outside = TRUE)
+
+# Now show them together
+tmap_mode("plot")
+tmap_arrange(map_totalpop,map_area,map_popdens)
+```
+
+There are a load more ideas here for making pretty tmap plots:
+ - http://zevross.com/blog/2018/10/02/creating-beautiful-demographic-maps-in-r-with-the-tidycensus-and-tmap-packages/
+
+
+#### Bi-chloropleths
+
+There is a wonderful and detailed tutorial here. https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html
+
+You can also make other plots such as bichloropleths using another plotting package, ggplot and a NEW PACKAGE, called "biscale".  Install this and load it in your library code chunk.
+
+To make the plots pretty, add a second new package called "cowplot"
+
+```{r}
+
+# bi_class is from the biscale package
+# create data to plot
+data_to_plot <- bi_class(ACS_county.sf,
+                         x="housevalueE",
+                         y="med.incomeE",
+                         style="jenks",dim=3)
+
+# create map
+map <-ggplot() +
+   geom_sf(fill="antiquewhite1") +
+   geom_sf(data=data_to_plot,
+           mapping=aes(fill=bi_class),
+           color="black",
+           size=0.1,
+           show.legend = FALSE)+
+  labs(
+    title = "Houses and Income in Iowa",
+    subtitle = "Dark Blue palette")+
+  bi_scale_fill(pal="DkBlue",dim=3) 
+
+# add a legend. See online tutorial for what I am doing
+legend <- bi_legend(pal = "DkBlue",
+                    dim = 3,
+                    xlab = "Higher House Val. ",
+                    ylab = "Higher Med. Income ",
+                    size = 7)
+
+# put them together
+ ggdraw() +
+  draw_plot(map,hjust=0, vjust = 0,width=0.8)+
+  draw_plot(legend,x=.8,width=0.2)
+
+```
+
+Again, if you're unsure about this code, see https://cran.r-project.org/web/packages/biscale/vignettes/biscale.html
+
+
+
+

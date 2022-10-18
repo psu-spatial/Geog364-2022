@@ -17,6 +17,8 @@ navbar:
           href: index_GEOG364-22_L3Data.html
         - text: "Lab 4: Spatial Wrangling"
           href: index_GEOG364-22_L4Firefly.html
+        - text: "Lab 5: SHORT-LAB CENSUS DATA"
+          href: index_GEOG364-22_L5Short.html
 output:  
   html_document:  
     self_contained: no  
