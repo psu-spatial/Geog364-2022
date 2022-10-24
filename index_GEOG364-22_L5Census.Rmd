@@ -40,15 +40,13 @@ library(units)
 
 ## Learning Objectives
 
-The aim of this week's lab is a ONE WEEK short lab to get us back on
-schedule. We will focus on using Census data
+The aim of this week's lab is a NORMAL TWO WEEK LAB (sorry for the confusion). We will focus on using Census data
 
 SEE CANVAS FOR SUBMISSION DATES.
 
 ## Get help
 
-If a link to a tutorial is broken, you should be able to go to the
-tutorial number and find it in the menu.
+If a link to a tutorial is broken, you should be able to go to the tutorial number and find it in the menu.
 
 Teams is the fastest way to get help. [CLICK THIS LINK FOR THE TEAMS
 WEBSITE FOR LAB
@@ -62,8 +60,7 @@ HELP](https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGF
 
 ## Create a project
 
--   Using R-CLOUD? : click here. This also has instructions on
-    uploading/downloading code from your computers. -
+-   Using R-CLOUD? : click here. This also has instructions on uploading/downloading code from your computers. 
     <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD>
     <br><br>
 -   Using YOUR LAPTOP? : Click here: -
