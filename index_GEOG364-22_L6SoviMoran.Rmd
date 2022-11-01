@@ -117,13 +117,15 @@ library(units)
 <br>
 
 
-# LAB OVERVIEW (READ THIS)
+# LAB OVERVIEW 
+
+## Your task (READ THIS)
 
 There are lots of data-sets out there on vulnerability, so in a weather disaster it is important to know which one to turn to.  One common task I did as a data analyst was to create "cheat sheets" of important datasets.
 
 You are a junior consultant.  You have been asked for an assessment of the Social Vulnerability Index (SVI) data for hurricane evacuations and to assess if vulnerability is clustered. You have been assigned 5-6 hrs salary on the analysis and keep reading for more information. 
 
-#### Readers of your report
+#### Readers of your report {-}
 
 The readers of the report are:
 
