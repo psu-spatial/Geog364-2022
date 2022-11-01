@@ -17,8 +17,10 @@ navbar:
           href: index_GEOG364-22_L3Data.html
         - text: "Lab 4: Spatial Wrangling"
           href: index_GEOG364-22_L4Firefly.html
-        - text: "Lab 5: CENSUS DATA"
+        - text: "Lab 5: Census Data"
           href: index_GEOG364-22_L5Census.html
+        - text: "Lab 6: Moran SOVI"
+          href: index_GEOG364-22_L6SoviMoran.html
 output:  
   html_document:  
     self_contained: no  

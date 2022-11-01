@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Dr Greatrex" />
+    
+        <meta name="date" content="2022-11-01" />
+    
+    <title>  Lab 6: SOVI Moran</title>
+
+        <script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <link href="site_libs/robobook-0.1/robobook.css" rel="stylesheet" />
+        <link href="site_libs/robobook-0.1/robobook_fonts_embed.css" rel="stylesheet" />
+        <script src="site_libs/robobook-0.1/robobook.js"></script>
+        <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+        <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          background-color: #ffffff;
+          color: #a0a0a0;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+      div.sourceCode
+        { color: #1f1c1b; background-color: #ffffff; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span { color: #1f1c1b; } /* Normal */
+      code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+      code span.an { color: #ca60ca; } /* Annotation */
+      code span.at { color: #0057ae; } /* Attribute */
+      code span.bn { color: #b08000; } /* BaseN */
+      code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+      code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #924c9d; } /* Char */
+      code span.cn { color: #aa5500; } /* Constant */
+      code span.co { color: #898887; } /* Comment */
+      code span.cv { color: #0095ff; } /* CommentVar */
+      code span.do { color: #607880; } /* Documentation */
+      code span.dt { color: #0057ae; } /* DataType */
+      code span.dv { color: #b08000; } /* DecVal */
+      code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+      code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+      code span.fl { color: #b08000; } /* Float */
+      code span.fu { color: #644a9b; } /* Function */
+      code span.im { color: #ff5500; } /* Import */
+      code span.in { color: #b08000; } /* Information */
+      code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+      code span.op { color: #1f1c1b; } /* Operator */
+      code span.ot { color: #006e28; } /* Other */
+      code span.pp { color: #006e28; } /* Preprocessor */
+      code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+      code span.sc { color: #3daee9; } /* SpecialChar */
+      code span.ss { color: #ff5500; } /* SpecialString */
+      code span.st { color: #bf0303; } /* String */
+      code span.va { color: #0057ae; } /* Variable */
+      code span.vs { color: #bf0303; } /* VerbatimString */
+      code span.wa { color: #bf0303; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+   	
+            <!-- robobook start -->   
+   <div class="book with-summary">
+      <div class="book-summary">
+        <ul>
+          <li class="title"><br> Lab 6: SOVI Moran</li>
+          <li class="divider"></li>
+        </ul>
+        <nav role="navigation" id="toc">
+          <ul>
+          <li><a href="#overview" id="toc-overview"><span
+          class="toc-section-number">1</span> OVERVIEW</a>
+          <ul>
+          <li><a href="#learning-objectives"
+          id="toc-learning-objectives"><span
+          class="toc-section-number">1.1</span> Learning
+          Objectives</a></li>
+          <li><a href="#get-help" id="toc-get-help"><span
+          class="toc-section-number">1.2</span> Get help</a></li>
+          </ul></li>
+          <li><a href="#lab-set-up" id="toc-lab-set-up"><span
+          class="toc-section-number">2</span> LAB SET-UP</a>
+          <ul>
+          <li><a href="#create-a-project"
+          id="toc-create-a-project"><span
+          class="toc-section-number">2.1</span> Create a
+          project</a></li>
+          <li><a href="#use-a-template" id="toc-use-a-template"><span
+          class="toc-section-number">2.2</span> Use a template</a></li>
+          <li><a href="#add-libraries-code-options"
+          id="toc-add-libraries-code-options"><span
+          class="toc-section-number">2.3</span> Add libraries &amp; code
+          options</a></li>
+          </ul></li>
+          <li><a href="#lab-overview-read-this"
+          id="toc-lab-overview-read-this"><span
+          class="toc-section-number">3</span> LAB OVERVIEW (READ
+          THIS)</a>
+          <ul>
+          <li><a href="#start-your-write-up"
+          id="toc-start-your-write-up"><span
+          class="toc-section-number">3.1</span> Start your write
+          up</a></li>
+          <li><a href="#download-the-data"
+          id="toc-download-the-data"><span
+          class="toc-section-number">3.2</span> Download the
+          data</a></li>
+          </ul></li>
+          <li><a href="#above-beyond" id="toc-above-beyond"><span
+          class="toc-section-number">4</span> ABOVE &amp;
+          BEYOND</a></li>
+          <li><a href="#submitting-your-lab"
+          id="toc-submitting-your-lab"><span
+          class="toc-section-number">5</span> SUBMITTING YOUR
+          LAB</a></li>
+          <li><a href="#check-this-before-you-submit"
+          id="toc-check-this-before-you-submit"><span
+          class="toc-section-number">6</span> CHECK THIS BEFORE YOU
+          SUBMIT!</a>
+          <ul>
+          <li><a href="#predict-your-grade"
+          id="toc-predict-your-grade"><span
+          class="toc-section-number">6.1</span> Predict your
+          grade</a></li>
+          <li><a href="#what-your-grade-means"
+          id="toc-what-your-grade-means"><span
+          class="toc-section-number">6.2</span> What your grade
+          means</a></li>
+          </ul></li>
+          </ul>
+        </nav>
+        <ul class="authors">
+          <li class="divider"></li>
+                                <li><span><i class="glyphicon glyphicon-user"></i> Dr
+Greatrex</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-11-01</span></li>
+                  </ul>     
+      </div>
+      <div class="book-body fixed">
+        <div class="body-inner">
+            <a class="btn pull-left js-toolbar-action toggle-sidebar" aria-label="Toggle Sidebar" title="Toggle Sidebar" href="#">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <div class="page-inner">
+              <section id="content" class="normal">
+      
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">GEOG-364</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="index_GEOG364-22_Tutorial_R.html">R-TUTORIAL</a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Labs
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="index_GEOG364-22_L1Basics.html">Lab 1: R-Basics</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L2EDA.html">Lab 2: Exploratory Analysis</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L3Data.html">Lab 3: Data Wrangling</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L4Firefly.html">Lab 4: Spatial Wrangling</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L5Census.html">Lab 5: Census Data</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L6SoviMoran.html">Lab 6: Moran SOVI</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title"><br> Lab 6: SOVI Moran</h1>
+      
+        
+
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<p><br></p>
+<div id="overview" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> OVERVIEW</h1>
+<hr />
+<div id="learning-objectives" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Learning
+Objectives</h2>
+<p>The aim of this week’s lab is to look at SOVI and Moran’s I data.</p>
+<p>SEE CANVAS FOR SUBMISSION DATES.</p>
+</div>
+<div id="get-help" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Get help</h2>
+<p>If a link to a tutorial is broken, you should be able to go to the
+tutorial number and find it in the menu.</p>
+<p>Teams is the fastest way to get help. <a
+href="https://teams.microsoft.com/l/team/19%3aSt_BHDOZLAgR9dsxgB2ly3-O77CnxyzoGFVYc0fpUTM1%40thread.tacv2/conversations?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&amp;tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e">CLICK
+THIS LINK FOR THE TEAMS WEBSITE FOR LAB HELP</a></p>
+<p><br></p>
+</div>
+</div>
+<div id="lab-set-up" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> LAB SET-UP</h1>
+<p><br></p>
+<div id="create-a-project" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Create a project</h2>
+<ul>
+<li>Using R-CLOUD? : click here. This also has instructions on
+uploading/downloading code from your computers. <a
+href="https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD"
+class="uri">https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD</a>
+<br><br></li>
+<li>Using YOUR LAPTOP? : Click here: - <a
+href="https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop"
+class="uri">https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="use-a-template" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Use a template</h2>
+<p>You are welcome to use your own template, but I suggest for ease
+using one of the professional ones, such as
+<code>PACKAGE rmdformats</code> or <code>PACKAGE prettydoc</code>. See
+the start of Lab 5 for instructions on how to do this.</p>
+<p><br></p>
+</div>
+<div id="add-libraries-code-options" class="section level2"
+number="2.3">
+<h2><span class="header-section-number">2.3</span> Add libraries &amp;
+code options</h2>
+<p>NOTE, I HAVE SPLIT THESE CODE CHUNKS IN TWO FOR THEM TO WORK BETTER.
+PLEASE DO THIS.</p>
+<p>Edit the first “set-up” code chunk so it looks like this and run/knit
+to load. You might need additional libraries as you work through the
+lab. If so, add them in this code chunk AND REMEMBER TO RERUN.</p>
+<p>If you see a little yellow bar at the top asking you to install
+them,click yes!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SET UP</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">TRUE</span>,<span class="at">message=</span><span class="cn">FALSE</span>,<span class="at">warning=</span><span class="cn">FALSE</span>,<span class="at">echo=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LIBRARIES</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span></code></pre></div>
+<p><br></p>
+</div>
+</div>
+<div id="lab-overview-read-this" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> LAB OVERVIEW (READ
+THIS)</h1>
+<p>There are lots of data-sets out there on vulnerability, so in a
+weather disaster it is important to know which one to turn to. One
+common task I did as a data analyst was to create “cheat sheets” of
+important datasets.</p>
+<p>You are a junior consultant. You have been asked for an assessment of
+the Social Vulnerability Index (SVI) data for hurricane evacuations and
+to assess if vulnerability is clustered. You have been assigned 5-6 hrs
+salary on the analysis and keep reading for more information.</p>
+<div id="readers-of-your-report" class="section level4"
+number="3.0.0.1">
+<h4><span class="header-section-number">3.0.0.1</span> Readers of your
+report</h4>
+<p>The readers of the report are:</p>
+<ul>
+<li>The Red Cross US analyst Andrew Kruczkiewicz <a
+href="https://old.climatecentre.org/about-us/our-people"
+class="uri">https://old.climatecentre.org/about-us/our-people</a>
+<br></li>
+<li>Dr Julita Chasco,Technical Coordination officer for the World
+Meteorological officer and ex-lead of the Head of Meteorology and
+Society Department at the Argentinian met service <a
+href="https://twitter.com/julitachasco"
+class="uri">https://twitter.com/julitachasco</a> <br></li>
+</ul>
+<p>I know this people in real life and will share exceptional reports
+with them! Your report readers know a lot about vulnerability, but very
+little about spatial statistics or this specific dataset.</p>
+</div>
+<div id="start-your-write-up" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Start your write
+up</h2>
+<p>The Social Vulnerability Index (SVI) indicates the relative
+vulnerability to hazardous events. Read these two pages:</p>
+<ul>
+<li><a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/fact_sheet/fact_sheet.html"
+class="uri">https://www.atsdr.cdc.gov/placeandhealth/svi/fact_sheet/fact_sheet.html</a></li>
+<li><a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/at-a-glance_svi.html"
+class="uri">https://www.atsdr.cdc.gov/placeandhealth/svi/at-a-glance_svi.html</a></li>
+</ul>
+<p>The full documentation with an explanation of the four themes can be
+found here:</p>
+<ul>
+<li><a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/documentation/pdf/SVI2020Documentation_08.05.22.pdf"
+class="uri">https://www.atsdr.cdc.gov/placeandhealth/svi/documentation/pdf/SVI2020Documentation_08.05.22.pdf</a></li>
+</ul>
+<div id="describe-the-dataset" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Describe the
+dataset</h3>
+<p>Make a report heading called “SVI Data Overview”</p>
+<p>Set a timer for around 30 mins. Create a summary of the dataset for
+your readers. You can use whatever report structure you like - you’re
+welcome to pictures/tables/bullet point lists etc as useful.</p>
+<p>Basically please make it as easy as possible for Mr Kruczkiewicz and
+Dr Chasco to understand - please use use sub-headings!</p>
+<ul>
+<li>What is the dataset?</li>
+<li>Who made it? How?</li>
+<li>How do the dataset owners suggest it might be useful.</li>
+<li>How often is the dataset published/updated?</li>
+<li>What are each of the four themes? How are they calculated?</li>
+<li>How should you cite this dataset (google citation SVI data, or on
+the data download page)</li>
+</ul>
+</div>
+<div id="example-of-researchuse" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Example of
+research/use</h3>
+<p>Make a report heading called “SVI use example”</p>
+<p>Summarise (about 5-6 sentences/paragraph) one example where SVI data
+has been used to support hurricane response. This should summarise what
+the example did, who did it and what they found out. You should also
+include a citation.</p>
+<p>Your example can either be a research paper or an operational case
+study Either choose one from here, <a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/publications/publications_materials.html"
+class="uri">https://www.atsdr.cdc.gov/placeandhealth/svi/publications/publications_materials.html</a>
+or alternately google things like <strong>“red cross” “SVI”
+hurricane</strong>.</p>
+</div>
+</div>
+<div id="download-the-data" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Download the
+data</h2>
+<p>In this report, you have to show an example analysis of how the data
+can be used.</p>
+<ol style="list-style-type: decimal">
+<li>Go to the data download page:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html"
+class="uri">https://www.atsdr.cdc.gov/placeandhealth/svi/data_documentation_download.html</a></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Hurricane states are FL, GA, LA, MS, NC, SC and TX. Choose a
+state that is different to your friends. On R studio cloud, choose one
+of the smaller ones.</p></li>
+<li><p>Download 2 zip files for BOTH the census tract and county
+scales.</p></li>
+</ol>
+<div class="figure">
+<img src="Figures/pg_Lab6_SVI.png" alt="DOWNLOAD TWO ZIP FILES" width="1246" />
+<p class="caption">
+DOWNLOAD TWO ZIP FILES
+</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Make a sub-heading called Data Download. Follow this tutorial to
+read it into your report. <a
+href="https://psu-spatial.github.io/Geog364-2021/364Data_TutorialDownload.html#Shapefiles"
+class="uri">https://psu-spatial.github.io/Geog364-2021/364Data_TutorialDownload.html#Shapefiles</a></p></li>
+<li><p>Make sure to include an appropriate citation!</p></li>
+</ol>
+<div id="explain-how-to-download-the-data" class="section level3"
+number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Explain how to
+download the data</h3>
+<p>Your report readers will also need to access the data. Your readers
+have basic R knowledge, but they’re pretty rusty.</p>
+<p>Write a mini tutorial on how to access and download the data. This
+should include things like which packages/code you need, what the
+download options are on the form, and how to cite the data when you have
+it. Bonus for common troubleshooting issues (but remember this is only
+10 marks..)</p>
+</div>
+</div>
+</div>
+<div id="above-beyond" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> ABOVE &amp; BEYOND</h1>
+<p>To get the 4 marks CHOOSE ONE of these options:</p>
+<ul>
+<li><p>Work out how to put tables in markdown and include your Khan
+scores as a neatly formatted table (look at Kable)</p></li>
+<li><p>Work out how to put equations in markdown text and include a
+fancy equation of your choice</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="submitting-your-lab" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> SUBMITTING YOUR
+LAB</h1>
+<p>Remember to save your work throughout and to spell check your writing
+(next to the save button). Now, press the knit button again. If you have
+not made any mistakes in the code then R should create a html file in
+your Lab folder which includes your answers.</p>
+<p><br> <br></p>
+</div>
+<div id="check-this-before-you-submit" class="section level1"
+number="6">
+<h1><span class="header-section-number">6</span> CHECK THIS BEFORE YOU
+SUBMIT!</h1>
+<p>People who use this section get better grades…</p>
+<div id="predict-your-grade" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Predict your
+grade</h2>
+<p>Here is LITERALLY how we are grading you. Predict your grade!</p>
+<p><strong>HTML FILE SUBMISSION - 8 marks</strong></p>
+<p><strong>RMD CODE SUBMISSION - 8 marks</strong></p>
+<p><strong>MARKDOWN/CODE STYLE - 10 MARKS</strong></p>
+<p>Your code and document is neat and easy to read. LOOK AT YOUR HTML
+FILE IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check
+next to the save button. You have written your answers below the
+relevant code chunk in full sentences in a way that is easy to find and
+grade. For example, you have written in full sentences, it is clear what
+your answers are referring to.</p>
+<p><strong>CHLOROPLETH PART - 40 MARKS</strong></p>
+<ul>
+<li><p>Make maps for your state [10]</p></li>
+<li><p>Interpret them for your state [10]</p></li>
+<li><p>MAUP explanation [10]</p></li>
+<li><p>Explaining breaks/jenks etc [5]</p></li>
+<li><p>Best practice [5]</p></li>
+</ul>
+<p><strong>KHAN ACADEMY - 30 MARKS</strong></p>
+<ul>
+<li>lose 2 for each incorrect question</li>
+</ul>
+<p><strong>Above and beyond: 4 MARKS</strong></p>
+<p>See above</p>
+<p>[100 marks total]</p>
+</div>
+<div id="what-your-grade-means" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> What your grade
+means</h2>
+<p>Why is 100% hard? Overall, here is what your lab should correspond
+to:</p>
+<table class=" lightable-classic-2 table table-striped table-hover table-responsive" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Grade
+</th>
+<th style="text-align:left;">
+% Mark
+</th>
+<th style="text-align:left;">
+Rubric
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A*
+</td>
+<td style="text-align:left;">
+98-100
+</td>
+<td style="text-align:left;">
+Exceptional.  Not only was it near perfect, but the graders learned
+something.  THIS IS HARD TO GET.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+96+
+</td>
+<td style="text-align:left;">
+You went above and beyond
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+94+:
+</td>
+<td style="text-align:left;">
+Everything asked for with high quality.   Class example
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A-
+</td>
+<td style="text-align:left;">
+90+
+</td>
+<td style="text-align:left;">
+The odd minor mistake, All code done but not written up in full
+sentences etc. A little less care
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B+
+</td>
+<td style="text-align:left;">
+87+
+</td>
+<td style="text-align:left;">
+More minor mistakes.  Things like missing units, getting the odd
+question wrong, no workings shown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+84+
+</td>
+<td style="text-align:left;">
+Solid work but the odd larger mistake or missing answer.  Completely
+misinterpreted something, that type of thing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B-
+</td>
+<td style="text-align:left;">
+80+
+</td>
+<td style="text-align:left;">
+Starting to miss entire/questions sections, or multiple larger mistakes.
+Still a solid attempt. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C+
+</td>
+<td style="text-align:left;">
+77+
+</td>
+<td style="text-align:left;">
+You made a good effort and did some things well, but there were a lot of
+problems. (e.g. you wrote up the text well, but messed up the code)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+It’s clear you tried and learned something.  Just attending labs will
+get you this much as we can help you get to this stage
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+60+
+</td>
+<td style="text-align:left;">
+You attempt the lab and submit something. Not clear you put in much
+effort or you had real issues
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+0+
+</td>
+<td style="text-align:left;">
+Didn’t submit, or incredibly limited attempt. 
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+   
+   
+           </section>
+  </div>
+  </div>
+  </div>
+  </div>
+      
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

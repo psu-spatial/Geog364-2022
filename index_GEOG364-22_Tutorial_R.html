@@ -13,7 +13,7 @@
 
 <title>Tutorials</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -183,8 +183,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -192,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -353,7 +346,10 @@ div.tocify {
       <a href="index_GEOG364-22_L4Firefly.html">Lab 4: Spatial Wrangling</a>
     </li>
     <li>
-      <a href="index_GEOG364-22_L5Census.html">Lab 5: CENSUS DATA</a>
+      <a href="index_GEOG364-22_L5Census.html">Lab 5: Census Data</a>
+    </li>
+    <li>
+      <a href="index_GEOG364-22_L6SoviMoran.html">Lab 6: Moran SOVI</a>
     </li>
   </ul>
 </li>
@@ -442,7 +438,7 @@ using, we need the most up-to-date version of the R commands.</em></p>
 <pre><code>## [1] &quot;R version 4.2.1 (2022-06-23) Funny-Looking Kid&quot;</code></pre>
 <p>As long as yours is above that you should be fine. The current most
 recent version of the language on the website is:</p>
-<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<pre><code>## [1] &quot;The latest release (2022-10-31, Innocent and Trusting)&quot;</code></pre>
 <p><br><br></p>
 </div>
 </div>
@@ -669,7 +665,7 @@ class="uri">https://cloud.r-project.org/bin/windows/base/</a> ,</li>
 <li>Download this version of R (the main download R for windows
 button)</li>
 </ul>
-<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<pre><code>## [1] &quot;The latest release (2022-10-31, Innocent and Trusting)&quot;</code></pre>
 <ul>
 <li>Run and click next through all the options</li>
 </ul></li>
@@ -701,7 +697,7 @@ itself for mac:</strong></p>
 class="uri">https://cloud.r-project.org/bin/macosx/</a> ,</li>
 <li>download this version of R (the .pkg file on the left menu)</li>
 </ul>
-<pre><code>## [1] &quot;The latest release (2022-06-23, Funny-Looking Kid)&quot;</code></pre>
+<pre><code>## [1] &quot;The latest release (2022-10-31, Innocent and Trusting)&quot;</code></pre>
 <ul>
 <li>Run and click next through all the options</li>
 </ul></li>
