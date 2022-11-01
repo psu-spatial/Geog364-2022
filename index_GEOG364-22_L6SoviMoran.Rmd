@@ -178,14 +178,14 @@ In this report, you  have to show an example analysis of how the data can be use
 
 2. Hurricane states are FL, GA, LA, MS, NC, SC and TX.  Choose a state that is different to your friends. On R studio cloud, choose one of the smaller ones.
 
-3. Download 2 zip files for BOTH the census tract and county scales. 
+3. Download 2 zip files for BOTH the census tract and county scales. Put them in your project folder, the same subfolder as your .Rmd file.
 
 ```{r, svi, echo=FALSE, fig.cap = "DOWNLOAD TWO ZIP FILES"}
 include_graphics("Figures/pg_Lab6_SVI.png")
 ```
 
 
-4. Make a sub-heading called Data Download.  Follow this tutorial to read it into your report and change it into an appropriate projection. https://psu-spatial.github.io/Geog364-2021/pg_364Lab6_moran_2021.html#Read_the_data_into_R
+4. Make a sub-heading called Data Download.  Follow this tutorial to read THE COUNTY DATA into your report and change it into an appropriate projection. https://psu-spatial.github.io/Geog364-2021/pg_364Lab6_moran_2021.html#Read_the_data_into_R
 
 5. Make sure to include an appropriate citation!
  
@@ -197,28 +197,76 @@ Write a mini tutorial on how to access and download the data, and how to read it
 
 This should include things like which packages/code you need, what the download options are on the form, and how to cite the data when you have it. Bonus for common troubleshooting issues (but remember this is only 10 marks..)
 
-###
+Also refer the reader to the dataset documentation. 
 
+## Example plots
 
- 
- 
- 
- 
+Make 4 plots showing the four vulnerability themes for your State. (RPL_THEME1, RPL_THEME2, RPL_THEME3, RPL_THEME4) You are welcome to use tmap/qtm or any other method of choice.  (see previous labs for tutorial).  There's an example here, but know this probably took a whole day to tweak the formatting.  
 
+https://www.atsdr.cdc.gov/placeandhealth/svi/fact_sheet/img/SVI-2020-Fulton-County-4-Theme-Map.png?_=01213
 
+So make it as good as you can in 30mins but remember that this is only 10 points.
+
+Choose a single theme and use the documentation to describe what variables went into it (or refer the reader to earlier in your report if you already did this).  State what the object of analysis is.
+
+## Spatial analysis
+
+We are now going to do a Moran's I analysis of the data, which we will cover in Wednesday's lecture
+
+You can also see examples of all code in my tutorial here:
+
+ - https://psu-spatial.github.io/Geog364-2021/pg_364Lab6_moran_2021.html#C:_Social_vulnerability_and_Moran%E2%80%99s_I_Tutorial
+
+and a full explanation here
+
+ - https://mgimond.github.io/Spatial/spatial-autocorrelation.html
+ 
+and here
+
+ - https://mgimond.github.io/Spatial/spatial-autocorrelation-in-r.html
+ 
+This is real data. Chances are you will get errors or issues.  USE TEAMS TO POST ABOUT THESE.  We will ignore emails/canvas messages until teams has been answered.
+
+The tutorials above cover all of this, and your analysis should include:
+
+1. Explain for the reader using clear sub-headings for grading e.g. 
+
+a. What is spatial autocorrelation and why is it important? <br>
+b. What is positive/negative/zero autocorrelation and what patterns/processes would you expect to see. <br>
+c. What is 1st/2nd order autocorrelation are and what you expect for this dataset <br>
+
+2. Converting the data from sf into sp. (bonus for tidy varible names) <br>
+
+3. Explaining what a spatial weights matrix is and what Queens 1st order means <br>
+
+4. Creating a spatial weights matrix from your data (Choose QUEENS 1ST ORDER) and plotting an example <br
+
+5. Creating a Moran's scatterplot AND FULLY INTERPRETING IN THE TEXT. For example, 
+ a. what would you expect for positive/negative etc - 
+ b. do you see what you are expecting. 
+ c. What assumptions did you make and are they correct (outliers, linearity..)
+ d. What do you conclude?
+
+6. Conducting AND FULLY INTERPRETING IN THE TEXT a Moran's Hypothesis Test on the dataset.
 
 
 
 
 # ABOVE & BEYOND
 
-To get the 4 marks CHOOSE ONE of these options:
+To get the 4 marks CHOOSE ONE of these options AND EXPLAIN WHAT YOU DID.
 
--   Work out how to put tables in markdown and include your Khan scores
-    as a neatly formatted table (look at Kable)
+ -  Formally put your references in Markdown (formally using the bibtex), google markdown academic references
 
--   Work out how to put equations in markdown text and include a fancy
-    equation of your choice
+ -   Work out how to do sub-plots in tmap e.g. like https://www.atsdr.cdc.gov/placeandhealth/svi/fact_sheet/img/SVI-2020-Fulton-County-4-Theme-Map.png?_=01213
+
+ - Make sure all your formatting is colorblind friendly.
+
+ - Make a pdf version of your report (may not work on the cloud) e.g. knit to pdf and get it working. Hint, follow the console instructions.  If you want to go back to html, just click the litle  arrow next to knit.  IF YOU ARE UNSURE ON R STUDIO, DO NOT CHOOSE THIS OPTION.
+
+
+
+
 
 <br>
 
@@ -233,7 +281,7 @@ your Lab folder which includes your answers.
 
 # CHECK THIS BEFORE YOU SUBMIT!
 
-People who use this section get better grades...
+People who use this section get better grades... YOU GET MORE MARKS FOR A REALLY NEAT AND THOUGHTFUL REPORT.
 
 ## Predict your grade
 
@@ -243,7 +291,7 @@ Here is LITERALLY how we are grading you. Predict your grade!
 
 **RMD CODE SUBMISSION - 8 marks**
 
-**MARKDOWN/CODE STYLE - 10 MARKS**
+**MARKDOWN/CODE STYLE - 20 MARKS**
 
 Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE
 IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check next
@@ -252,21 +300,8 @@ code chunk in full sentences in a way that is easy to find and grade.
 For example, you have written in full sentences, it is clear what your
 answers are referring to.
 
-**CHLOROPLETH PART - 40 MARKS**
 
--   Make maps for your state [10]
-
--   Interpret them for your state [10]
-
--   MAUP explanation [10]
-
--   Explaining breaks/jenks etc [5]
-
--   Best practice [5]
-
-**KHAN ACADEMY - 30 MARKS**
-
--   lose 2 for each incorrect question
+To be added
 
 **Above and beyond: 4 MARKS**
 
