@@ -213,6 +213,11 @@ Choose a single theme and use the documentation to describe what variables went 
 
 ## Spatial analysis
 
+```{r, include=FALSE}
+
+```
+
+
 We are now going to do a Moran's I analysis of the data, which we will cover in Wednesday's lecture
 
 You can also see examples of all code in my tutorial here:
@@ -232,25 +237,25 @@ This is real data. Chances are you will get errors or issues.  USE TEAMS TO POST
 The tutorials above cover all of this, and your analysis should include:
 
 1. Explain for the reader using clear sub-headings for grading e.g. 
+   a. What is spatial autocorrelation and why is it important? <br>
+   b. What is positive/negative/zero autocorrelation and what patterns/processes would you expect to see. <br>
+   c. What is 1st/2nd order autocorrelation are and what you expect for a single variable/mark/column in this dataset (E.g. one of your themes, population, any other column) <br>
 
-a. What is spatial autocorrelation and why is it important? <br>
-b. What is positive/negative/zero autocorrelation and what patterns/processes would you expect to see. <br>
-c. What is 1st/2nd order autocorrelation are and what you expect for this dataset <br>
-
-2. Converting the data from sf into sp. (bonus for tidy varible names) <br>
+2. Converting the data from sf into sp. (bonus for tidy variable names) <br>
 
 3. Explaining what a spatial weights matrix is and what Queens 1st order means <br>
 
 4. Creating a spatial weights matrix from your data (Choose QUEENS 1ST ORDER) and plotting an example <br
 
-5. Creating a Moran's scatterplot AND FULLY INTERPRETING IN THE TEXT. For example, 
- a. what would you expect for positive/negative etc - 
- b. do you see what you are expecting. 
- c. What assumptions did you make and are they correct (outliers, linearity..)
- d. What do you conclude?
+5. A Moran's scatterplot to understand the spatial structure of a single variable/mark/column.  
 
-6. Conducting AND FULLY INTERPRETING IN THE TEXT a Moran's Hypothesis Test on the dataset.
+6. Fully interpreting in the text what is happening,  see my tutorial for an example. Suggested subquestions <br>
+   a. Based on what you know of your variable and google, do you think that your variable should show positive autocorrelation at county level (clustering) or negative autocorrelation (chess-board effect)?  How should this look on a Moran's I scatter-plot? (see notes)   <br>
+   b. Does your plot show what you are expecting to see? 
+   c. What assumptions underpin the calculation of Moran's I (hint, similar to the ones underpinning the correlation coefficient).  <br>
+   d. Does your plot meet those assumptions? e.g. are your conclusions valid.  Here you could talk about individual outlier counties and see if it makes sense  (you can google them). <br>
 
+7. Conducting and fully interpreting a Moran's Hypothesis Test on the dataset. We will cover this on Monday.
 
 
 
@@ -281,11 +286,12 @@ your Lab folder which includes your answers.
 
 <br> <br>
 
-# CHECK THIS BEFORE YOU SUBMIT!
+# RUBRIC
 
-People who use this section get better grades... YOU GET MORE MARKS FOR A REALLY NEAT AND THOUGHTFUL REPORT.
+People who use the section get better grades... YOU GET MORE MARKS FOR A REALLY NEAT AND THOUGHTFUL REPORT.
 
 ## Predict your grade
+
 
 Here is LITERALLY how we are grading you. Predict your grade!
 

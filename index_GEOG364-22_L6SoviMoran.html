@@ -7,7 +7,7 @@
 
         <meta name="author" content="Dr Greatrex" />
     
-        <meta name="date" content="2022-11-01" />
+        <meta name="date" content="2022-11-08" />
     
     <title>  Lab 6: SOVI Moran</title>
 
@@ -240,10 +240,8 @@
           id="toc-submitting-your-lab"><span
           class="toc-section-number">5</span> SUBMITTING YOUR
           LAB</a></li>
-          <li><a href="#check-this-before-you-submit"
-          id="toc-check-this-before-you-submit"><span
-          class="toc-section-number">6</span> CHECK THIS BEFORE YOU
-          SUBMIT!</a>
+          <li><a href="#rubric" id="toc-rubric"><span
+          class="toc-section-number">6</span> RUBRIC</a>
           <ul>
           <li><a href="#predict-your-grade"
           id="toc-predict-your-grade"><span
@@ -260,7 +258,7 @@
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Dr
 Greatrex</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-11-01</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-11-08</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -594,36 +592,40 @@ teams has been answered.</p>
 <p>The tutorials above cover all of this, and your analysis should
 include:</p>
 <ol style="list-style-type: decimal">
-<li>Explain for the reader using clear sub-headings for grading
-e.g. </li>
-</ol>
+<li><p>Explain for the reader using clear sub-headings for grading
+e.g. </p>
 <ol style="list-style-type: lower-alpha">
 <li>What is spatial autocorrelation and why is it important? <br></li>
 <li>What is positive/negative/zero autocorrelation and what
 patterns/processes would you expect to see. <br></li>
-<li>What is 1st/2nd order autocorrelation are and what you expect for
-this dataset <br></li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
-<li><p>Converting the data from sf into sp. (bonus for tidy varible
+<li>What is 1st/2nd order autocorrelation are and what you expect for a
+single variable/mark/column in this dataset (E.g. one of your themes,
+population, any other column) <br></li>
+</ol></li>
+<li><p>Converting the data from sf into sp. (bonus for tidy variable
 names) <br></p></li>
 <li><p>Explaining what a spatial weights matrix is and what Queens 1st
 order means <br></p></li>
 <li><p>Creating a spatial weights matrix from your data (Choose QUEENS
 1ST ORDER) and plotting an example &lt;br</p></li>
-<li><p>Creating a Moran’s scatterplot AND FULLY INTERPRETING IN THE
-TEXT. For example,</p></li>
-</ol>
+<li><p>A Moran’s scatterplot to understand the spatial structure of a
+single variable/mark/column.</p></li>
+<li><p>Fully interpreting in the text what is happening, see my tutorial
+for an example. Suggested subquestions <br></p>
 <ol style="list-style-type: lower-alpha">
-<li>what would you expect for positive/negative etc -</li>
-<li>do you see what you are expecting.</li>
-<li>What assumptions did you make and are they correct (outliers,
-linearity..)</li>
-<li>What do you conclude?</li>
-</ol>
-<ol start="6" style="list-style-type: decimal">
-<li>Conducting AND FULLY INTERPRETING IN THE TEXT a Moran’s Hypothesis
-Test on the dataset.</li>
+<li>Based on what you know of your variable and google, do you think
+that your variable should show positive autocorrelation at county level
+(clustering) or negative autocorrelation (chess-board effect)? How
+should this look on a Moran’s I scatter-plot? (see notes) <br></li>
+<li>Does your plot show what you are expecting to see?</li>
+<li>What assumptions underpin the calculation of Moran’s I (hint,
+similar to the ones underpinning the correlation coefficient). <br></li>
+<li>Does your plot meet those assumptions? e.g. are your conclusions
+valid. Here you could talk about individual outlier counties and see if
+it makes sense (you can google them). <br></li>
+</ol></li>
+<li><p>Conducting and fully interpreting a Moran’s Hypothesis Test on
+the dataset. We will cover this on Monday.</p></li>
 </ol>
 </div>
 </div>
@@ -655,11 +657,9 @@ not made any mistakes in the code then R should create a html file in
 your Lab folder which includes your answers.</p>
 <p><br> <br></p>
 </div>
-<div id="check-this-before-you-submit" class="section level1"
-number="6">
-<h1><span class="header-section-number">6</span> CHECK THIS BEFORE YOU
-SUBMIT!</h1>
-<p>People who use this section get better grades… YOU GET MORE MARKS FOR
+<div id="rubric" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> RUBRIC</h1>
+<p>People who use the section get better grades… YOU GET MORE MARKS FOR
 A REALLY NEAT AND THOUGHTFUL REPORT.</p>
 <div id="predict-your-grade" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Predict your
