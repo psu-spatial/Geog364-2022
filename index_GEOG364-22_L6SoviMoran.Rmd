@@ -218,13 +218,13 @@ Choose a single theme and use the documentation to describe what variables went 
 ```
 
 
-We are now going to do a Moran's I analysis of the data, which we will cover in Wednesday's lecture
+We are now going to do a Moran's I analysis of the data.
 
 You can also see examples of all code in my tutorial here:
 
  - https://psu-spatial.github.io/Geog364-2021/pg_364Lab6_moran_2021.html#C:_Social_vulnerability_and_Moran%E2%80%99s_I_Tutorial
 
-and a full explanation here
+and a full explanation of the science here
 
  - https://mgimond.github.io/Spatial/spatial-autocorrelation.html
  
@@ -233,6 +233,8 @@ and here
  - https://mgimond.github.io/Spatial/spatial-autocorrelation-in-r.html
  
 This is real data. Chances are you will get errors or issues.  USE TEAMS TO POST ABOUT THESE.  We will ignore emails/canvas messages until teams has been answered.
+
+**HINT! Your code will likely not work. There is one package missing. Go back to the QTM exercise in Lab 2 or this tutorial https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#7_Getting_help** 
 
 The tutorials above cover all of this, and your analysis should include:
 
