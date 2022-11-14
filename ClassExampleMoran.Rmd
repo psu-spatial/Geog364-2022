@@ -6,7 +6,14 @@ output:
     highlight: kate
 ---
 
-**IF YOU WOULD LIKE TO DOWNLOAD THE CODE, CLICK HERE: **
+**IF YOU WOULD LIKE TO DOWNLOAD THE CODE,
+
+https://raw.githubusercontent.com/psu-spatial/Geog364-2022/main/ClassExampleMoran.Rmd
+RIGHT CLICK ON THIS AND CHOOSE SAVE AS.  THIS WILL DOWNLOAD IT ONTO YOUR COMPUTER
+
+
+
+
 
 
 DON'T HIDE CODE CHUNKS IN LABS
