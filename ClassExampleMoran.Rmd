@@ -1,0 +1,433 @@
+---
+title: "R code example"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+---
+
+**IF YOU WOULD LIKE TO DOWNLOAD THE CODE, CLICK HERE: **
+
+
+DON'T HIDE CODE CHUNKS IN LABS
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE,message=FALSE, warning=FALSE)
+```
+
+# Study Introduction
+
+## Background
+
+Broadband access is an important part of accessing resources in today's society. From free educational materials, to the ability to know when a hurricane is coming, the ability to use and access high speed internet Florida is especially interesting because mix of rich/poor areas, different political leanings, along with resident and tourist areas.
+
+### Study parameters
+
+The data was collected from the American Community Survey, taken in 2019. ADD MORE...
+
+-   **OBJECT OF OBSERVATION:** Per Person
+-   **OBJECT OF ANALYSIS:** Per County
+-   **Data-set population:** All the counties in Florida in the 2019 American community survey
+-   **Study population:** Tourist heavy states in the USA from 2019 to the present day (2022).
+-   **Mark/Variable**: Broadband access [in people per county]
+
+Comparing the dataset and study populations we see that our data is a sample of the study population. It is not randomly sampled out of all years and locations although we hope its representative of the study population, there are potentially some issues.
+
+-   The data was collected in a single year in 2019.
+
+-   It was collected before COVID and rapid technological advances, so may be out of date.
+
+-   Equally, we assume that the county statistics are averaged across all people in each county, but we know that the American Community Survey is also biased to miss out undocumented and other vulnerable populations, which are disproportionately less likely to have the internet. So it might not be representative of our underlying goal of examining broadband access
+
+## Study aim
+
+Dependent on the warnings above, the aim of this Lab is to examine the spatial autocorrelation of broadband access across counties in Florida, based on analysis of this dataset and more general research on broadband access.
+
+First we will assess the autocorrelation descriptively, attempting to answer questions such as: Is it clustered/chess-board like? Is there 1st order autocorrelation/2nd order? What are the potential patterns and processes underlying them? I will also use tract data to examine MAUP.
+
+### Initial data processing
+
+Note, I would normally hide this section. DO NOT DO THIS IN LABS OR IT IS HARD TO GRADE
+
+```{r}
+# LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(raster)
+library(sp)
+library(sf)
+library(tmap)
+library(terra)
+library(rnaturalearth)
+library(biscale)
+library(tidycensus)
+library(cowplot)
+library(units)
+library(spdep)
+```
+
+```{r, results="hide"}
+# I use results="hide" in the code chunk options to get rid of the output
+# View this full screen to see the layout of the command more easily
+ACS_county.sf <- get_acs(geography = "county", 
+                         year = 2019,
+                         variables = c(housevalue  = "B25075_001",  # house value
+                                       total_pop   = "B05012_001",  # total population
+                                       total_house = "B25001_001",  # no. houses
+                                       med.income  = "B19013_001",  # median income  
+                                       total_broad = "B28002_004"), # broadband  
+                         state = c("FL"),
+                         survey = "acs5",geometry=TRUE,
+                         output = "wide",show_call=FALSE)
+
+ACS_tract.sf <- get_acs(geography = "tract", 
+                         year = 2019,
+                         variables = c(housevalue  = "B25075_001",  # house value
+                                       total_pop   = "B05012_001",  # total population
+                                       total_house = "B25001_001",  # no. houses
+                                       med.income  = "B19013_001",  # median income  
+                                       total_broad = "B28002_004"), # broadband  
+                         state = c("FL"),
+                         survey = "acs5",geometry=TRUE,
+                         output = "wide",show_call=FALSE)
+
+names(ACS_county.sf)
+```
+
+Importantly, we must ALSO remove missing census tracts, calculate any density columns and change the map projection. I'm doing both counties and census tracts, you only need to do one unless you want to understand MAUP.
+
+```{r}
+#-------
+# COUNTIES
+#-------
+
+# Change the map projection to UTM Florida (I googled the epsg code)
+ACS_county.sf <- st_transform(ACS_county.sf,6346)
+
+# Get the areas of each county 
+ACS_county.sf$County.areaE <- st_area(ACS_county.sf)
+
+# Change the units of the areas from metres squared to km squared and overwrite
+ACS_county.sf$County.areaE <- set_units(ACS_county.sf$County.areaE,"km^2")
+
+# and divide the total population by the area, save as new column
+ACS_county.sf$PopulationDensityE <-ACS_county.sf$total_popE /  ACS_county.sf$County.areaE
+
+# and divide the total broadband by the number of houses, save as new column
+ACS_county.sf$PercentHouse_Broadband <-ACS_county.sf$total_broadE /  ACS_county.sf$total_houseE
+
+# look for empty counties (lakes etc) and remove
+tracts_empty <- st_is_empty(ACS_county.sf)
+ACS_county.sf <- ACS_county.sf[which(tracts_empty==FALSE), ] 
+```
+
+```{r}
+#-------
+# TRACTS
+#-------
+
+# Change the map projection to UTM Florida (I googled the epsg code)
+ACS_tract.sf <- st_transform(ACS_tract.sf,6346)
+
+# Get the areas of each tract
+ACS_tract.sf$Tract.areaE <- st_area(ACS_tract.sf)
+
+# Change the units of the areas from metres squared to km squared and overwrite
+ACS_tract.sf$Tract.areaE <- set_units(ACS_tract.sf$Tract.areaE,"km^2")
+
+# and divide the total population by the area, save as new column
+ACS_tract.sf$PopulationDensityE <-ACS_tract.sf$total_popE /  ACS_tract.sf$Tract.areaE
+
+# and divide the total broadband by the number of houses, save as new column
+ACS_tract.sf$PercentHouse_Broadband <-ACS_tract.sf$total_broadE /  ACS_tract.sf$total_houseE
+
+# look for empty tracts (lakes etc) and remove
+tracts_empty <- st_is_empty(ACS_tract.sf)
+ACS_tract.sf <- ACS_tract.sf[which(tracts_empty==FALSE), ] 
+```
+
+
+### Looking for skewed data
+
+Population density, wealth and housing density are often very skewed, making the statistics hard.  For example Moran's I is inappropriate for skewed data. To get around this and to see more detail outside cities, we can take the log and save as a new column. For example
+
+```{r}
+ACS_county.sf$Log_PopulationDensityE <- log(ACS_county.sf$PopulationDensityE)
+ACS_county.sf$Log_PercentHouse_Broadband <- log(ACS_county.sf$PercentHouse_Broadband)
+
+```
+
+Comparing histograms:
+
+```{r}
+par(mfrow=c(1,2))
+hist(ACS_county.sf$PopulationDensityE,
+     main=list("Population Density",cex=.7),
+     xlab="Population Density")
+
+hist(ACS_county.sf$Log_PopulationDensityE,
+     main=list("Log Population Density per Km^2",cex=.7),
+     xlab="Population Density")
+
+map1 <- qtm(ACS_county.sf,fill="PopulationDensityE",fill.palette="Greens")
+map2 <- qtm(ACS_county.sf,fill="Log_PopulationDensityE",fill.palette="Greens")
+tmap_arrange(map1,map2)
+
+```
+
+I think that it's clear that the log population density is less skewed and more intuative than the total.  E.g. 7 or 8 is a dense city, 0 or 1 is the countryside. Repeat for tract data.  YOu can see that this is so skewed that even taking the log doesn't quite fix it. 
+
+```{r}
+ACS_tract.sf$Log_PopulationDensityE <- log(ACS_tract.sf$PopulationDensityE)
+ACS_tract.sf$Log_PercentHouse_Broadband <- log(ACS_tract.sf$PercentHouse_Broadband)
+
+par(mfrow=c(1,2))
+hist(ACS_tract.sf$PopulationDensityE,
+     main=list("Population Density",cex=.7),
+     xlab="Population Density")
+
+hist(ACS_tract.sf$Log_PopulationDensityE,
+     main=list("Log Population Density per Km^2",cex=.7),
+     xlab="Population Density")
+
+map1 <- qtm(ACS_tract.sf,fill="PopulationDensityE",fill.palette="Greens")
+map2 <- qtm(ACS_tract.sf,fill="Log_PopulationDensityE",fill.palette="Greens")
+tmap_arrange(map1,map2)
+
+
+```
+
+
+
+##### Check for Broadband
+
+Let's do the same for our broadband access.  We can see that the original isn't very skewed, so I don't think we need a transformation.
+
+```{r}
+par(mfrow=c(1,2))
+hist(ACS_county.sf$PercentHouse_Broadband,
+     main=list("Percent houses with broadband",cex=.7),
+     xlab="% Broadband")
+
+hist(ACS_county.sf$Log_PercentHouse_Broadband,
+     main=list("Log Percent houses with broadband",cex=.7),
+     xlab="Log % Broadband")
+
+map1 <- qtm(ACS_county.sf,fill="PercentHouse_Broadband",fill.palette="Blues")
+map2 <- qtm(ACS_county.sf,fill="Log_PercentHouse_Broadband",fill.palette="Blues")
+tmap_arrange(map1,map2)
+
+```
+
+
+
+## Data description
+
+```{r}
+map_totalpop <- qtm(ACS_county.sf,"total_popE",fill.palette="YlGnBu")+tm_layout(legend.outside = TRUE)
+map_area     <- qtm(ACS_county.sf,"County.areaE")+tm_layout(legend.outside = TRUE)
+map_popdens  <- qtm(ACS_county.sf,"PopulationDensityE",fill.palette="Greens")+tm_layout(legend.outside = TRUE)
+map_income  <- qtm(ACS_county.sf,"med.incomeE",fill.palette="Purples")+tm_layout(legend.outside = TRUE)
+
+tmap_mode("plot")
+suppressWarnings(tmap_arrange(map_totalpop,map_area,map_popdens,map_income))
+```
+
+
+We can see clear clusters around major cities. They tend to be richer and have a higher population density.  Orlando and disney world also stand out. There is an interestingly rich county in the north east that appears to be quite rural.  If this was an actual lab I would google it and write a sentence on it.
+
+
+```{r}
+# better maps
+# create map 1
+map1 <- tm_shape(ACS_county.sf,  unit = "mi") +                      
+           tm_polygons(col="total_broadE",    
+                       style="pretty",    
+                       #border.col = NULL,  
+                       border.alpha = 0.1, 
+                       palette="YlGnBu",
+                       title = "", # using the more sophisticated tm_layout command
+                       legend.hist = TRUE)   +
+  tm_scale_bar(breaks = c(0, 10, 20)) +
+  tm_layout(main.title = "Total Dwellings with Broadband",  main.title.size = 0.95, frame = FALSE) +
+  tm_layout(legend.outside = TRUE) 
+   
+# create map 2
+map2 <- tm_shape(ACS_county.sf, unit = "mi") + 
+           tm_polygons(col = "PercentHouse_Broadband", 
+                       style = "quantile",
+                       palette = "Reds", 
+                       border.alpha = 0.1, 
+                       title = "") +  # using the more sophisticated tm_layout command
+  tm_scale_bar(breaks = c(0, 10, 20)) +
+  tm_compass(type = "4star", position = c("left", "bottom")) + 
+  tm_layout(main.title = "Percentage of dwellings with broadband ",  main.title.size = 0.95, frame = FALSE) +
+  tm_layout(legend.outside = TRUE) 
+
+tmap_options(check.and.fix = TRUE)
+
+# and print
+tmap_arrange(map1,map2)
+
+
+```
+
+Looking at the plots above, there appears to be some clustering, especially around cities. This makes sense given that urban areas are often prioritised for broadband access.
+
+I assume there will also be problems with MAUP.  Note, I'm choosing many palettes so you can see how the code works..
+
+```{r}
+
+map3 <- tm_shape(ACS_tract.sf,  unit = "mi") +                      
+           tm_polygons(col="total_broadE",    
+                       style="jenks",    
+                       border.col = NULL, title="", 
+                       palette="viridis")   +
+  tm_layout(title = "Total Dwellings with Broadband",  title.size = 0.95, frame = FALSE)+
+  tm_layout(legend.outside = TRUE) 
+   
+map4 <- tm_shape(ACS_tract.sf, unit = "mi") + 
+           tm_polygons(col = "PercentHouse_Broadband", 
+                       style = "pretty",
+                       palette = "magma", 
+                       border.alpha = 0, 
+                       title = "") +  # using the more sophisticated tm_layout command
+  tm_scale_bar(breaks = c(0, 10, 20)) +
+  tm_layout(frame = FALSE, title = "Percentage of dwellings with broadband",  main.title.size = 0.95)+
+  tm_layout(legend.outside = TRUE) 
+
+tmap_options(check.and.fix = TRUE)
+# and print
+suppressMessages(tmap_arrange(map3,map4))
+
+```
+
+
+There is clearly both a shape and zone effect.  The larger size of the county is masking some of the underlying patterns, and although there are county level reasons why internet access might differ (township rules etc), its likely that we would miss some nuance by just looking at counties.  For example, Miami is dominating the county level average, but really the census tracts doing this are almost too small to see.
+
+## Spatial Weights Matrix
+
+Because of MAUP, I will continue with both the county and the tract data.  I need spatial weights matrices for both.
+
+#### County
+
+Note how careful I am being with variable names
+
+```{r}
+# make an sp version
+ACS_county.sp <- as(ACS_county.sf,"Spatial")
+
+# calculate the spatial weights matrix, I put  zero.policy = T to capture missing data
+matrix.queen.county <-poly2nb(ACS_county.sp, queen=T)
+
+# calculate the spatial weights
+weights.queen.county <- nb2listw(matrix.queen.county, style='B', zero.policy = T)
+
+# looks interlinked!
+plot(matrix.queen.county, coordinates(ACS_county.sp), col='black', lwd=1, cex=.2)
+```
+
+#### Tract
+
+```{r}
+# make an sp version
+ACS_tract.sp <- as(ACS_tract.sf,"Spatial")
+
+# calculate the spatial weights matrix, I put  zero.policy = T to capture missing data
+matrix.queen.tract <-poly2nb(ACS_tract.sp, queen=T)
+
+# calculate the spatial weights
+weights.queen.tract <- nb2listw(matrix.queen.tract, style='B', zero.policy = T)
+
+# looks interlinked!
+plot(matrix.queen.tract, coordinates(ACS_tract.sp), col='black', lwd=1, cex=.2)
+```
+
+
+## Moran's I
+
+FOR ANY VARIABLE/MARK, we can calculate both a Moran's scatterplot and a global statisic, Moran's I, along with a hypothesis test.
+
+Here we look at total broadband by both county and tract
+
+```{r, eval=FALSE}
+moran.plot(ACS_county.sf$total_broadE, 
+           listw= weights.queen.county,
+           labels=ACS_county.sf$NAME,
+           xlab = "BB: total broadband access / total houses per county",
+           ylab = "Average BB for QUEEN NEIGHBOURS",
+           zero.policy = T)
+
+moran.plot(ACS_tract.sf$total_broadE, 
+           listw= weights.queen.tract,labels=ACS_tract.sf$NAME,
+           xlab = "BB: total broadband access / total houses per census tract",
+           ylab = "Average BB for QUEEN NEIGHBOURS",
+           zero.policy = T)
+
+```
+
+We can see in both cases that there appears to be positive autocorrelation (e.g. the correlation coefficient/moran's I is > 0), although the census tract data is dominated by Census tract 9112 in Sumter county.  Googling this, I can't see any reason this might be the case, so I would go back and carefully look at the data.
+https://data.gainesville.com/american-community-survey/sumter-county-florida/population/total-population/yty/05000US12119/
+
+
+Let's do a moran's test on the county level broadband access, to assess if it is more clustered than we would expect from a randomly generated pattern.  
+
+
+H0: We hypothesise that an IRP caused this pattern. If this was true the average Moran's I would be I=0
+H1: The data appears to be MORE clustered than expected from a pattern caused by an IRP.  Moran's I, I > 0
+
+```{r}
+moran.test(ACS_county.sf$total_broadE, 
+           listw= weights.queen.county,
+           zero.policy = T)
+```
+
+We can see that 
+
+1. the expected Moran's I from an IRP would be -0.15 (not zero due to the non uniformity of space and edge effects).
+2. the actual Moran's I from our dataset is 0.278.
+3. And... the probability of seeing something that extreme if H0 really was true is tiny, 0.000002483.  E.g. you would only see something this clustered by chance one in ~40000 times.
+
+So given that the p value is so small and the chance is so slim, we have enough evidence to REJECT H0 and suggest that the data is more clustered than expected from an IRP, so maybe another process is going on,.
+
+
+#### Census tract Hypothesis test
+
+How does it look at different scales?  This is a good way to understand effect vs significance
+
+```{r}
+moran.test(ACS_tract.sf$total_broadE, 
+           listw= weights.queen.tract,
+           zero.policy = T)
+```
+
+*IRP = independent random process.*
+
+H0: I hypothesise that an IRP caused this pattern. If this was true the average Moran's I would be I=0
+H1: The data appears to be MORE clustered than expected from a pattern caused by an IRP.  Moran's I, I > 0
+
+We see that:
+
+1. the expected Moran's I from an IRP would be  -2.377556e-04 
+2. the actual Moran's I from our dataset is 0.2888.  (note this is the same as before but they wrote it out in science notation)
+3. And... the probability of seeing something that extreme if H0 really was true is now essentially zero, 2.2e-16. E.g. the sun would be more likely to explode right now than seeing something this clustered,
+
+
+So here we see the two components of a test.
+
+The EFFECT SIZE: how clustered/uniform is it.
+The SIGNIFICANCE: how likely is it to have seen the result if I repeated it and H0 was true.
+
+
+For example, if I take a single hair from my head, I will "significantly" lose weight (e.g. if I repeated this a thousand times, I'm not likely to put weight on!),  But... the effect size itself is meaningles..
+
+
+
+
+

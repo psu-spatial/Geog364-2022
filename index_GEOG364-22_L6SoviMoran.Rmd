@@ -38,6 +38,10 @@ library(units)
 
 ------------------------------------------------------------------------
 
+SEE THE CLASS EXAMPLE IN THE TAB AT THE TOP FOR SUPPORT
+
+------------------------------------------------------------------------
+
 ## Learning Objectives
 
 The aim of this week's lab is to look at SOVI and Moran's I data.
