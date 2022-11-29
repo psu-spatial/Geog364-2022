@@ -298,28 +298,7 @@ People who use the section get better grades... YOU GET MORE MARKS FOR A REALLY 
 
 ## Predict your grade
 
-
-Here is LITERALLY how we are grading you. Predict your grade!
-
-**HTML FILE SUBMISSION - 8 marks**
-
-**RMD CODE SUBMISSION - 8 marks**
-
-**MARKDOWN/CODE STYLE - 20 MARKS**
-
-Your code and document is neat and easy to read. LOOK AT YOUR HTML FILE
-IN YOUR WEB-BROWSER BEFORE YOU SUBMIT. There is also a spell check next
-to the save button. You have written your answers below the relevant
-code chunk in full sentences in a way that is easy to find and grade.
-For example, you have written in full sentences, it is clear what your
-answers are referring to.
-
-
-To be added
-
-**Above and beyond: 4 MARKS**
-
-See above
+SEE THE RUBRIC HERE (scroll down) https://psu.instructure.com/courses/2191551/assignments/14391047
 
 [100 marks total]
 
