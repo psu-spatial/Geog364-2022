@@ -7,9 +7,9 @@
 
         <meta name="author" content="Dr Greatrex" />
     
-        <meta name="date" content="2022-11-29" />
+        <meta name="date" content="2022-12-12" />
     
-    <title>  Lab 7: Point Pattern</title>
+    <title>  Lab 7 point pattern</title>
 
         <script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -182,7 +182,7 @@
    <div class="book with-summary">
       <div class="book-summary">
         <ul>
-          <li class="title"><br> Lab 7: Point Pattern</li>
+          <li class="title"><br> Lab 7 point pattern</li>
           <li class="divider"></li>
         </ul>
         <nav role="navigation" id="toc">
@@ -253,7 +253,7 @@
           <li class="divider"></li>
                                 <li><span><i class="glyphicon glyphicon-user"></i> Dr
 Greatrex</span></li>
-                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-11-29</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-12-12</span></li>
                   </ul>     
       </div>
       <div class="book-body fixed">
@@ -325,7 +325,7 @@ Greatrex</span></li>
         </div><!--/.container -->
       </div><!--/.navbar -->
         
-      <h1 class="title"><br> Lab 7: Point Pattern</h1>
+      <h1 class="title"><br> Lab 7 point pattern</h1>
       
         
 
@@ -504,7 +504,7 @@ Remember to retype ALL the quote marks if you get a weird error.
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Download it into your project folder and read it into R</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">download.file</span>(url_data, <span class="at">destfile =</span> <span class="st">&quot;PA_fossils.csv&quot;</span> , <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;PA_fossils.csv&quot;</span>)</span></code></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> fossil <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;PA_fossils.csv&quot;</span>)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Take a look at the data (remember the <code>View()</code>
 command). <br></p></li>
@@ -548,22 +548,28 @@ href="https://warin.ca/posts/rcourse-howto-usechunkoptions/#:~:text=The%20chunk%
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> elevation.utm <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(state.border.utm, <span class="at">z =</span> <span class="dv">5</span>,<span class="at">clip=</span><span class="st">&quot;locations&quot;</span>)</span></code></pre></div>
 <ol start="8" style="list-style-type: decimal">
 <li>Using the help files and tutorials as needed, edit these commands so
-that your data is converted into sf format and the map projection is
+that your point is converted into sf format and the map projection is
 changed to EPSG code 26918</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------------------------</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data to sf format adn change the map projection. Rename the variables to something</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------------------------------------------------------</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert your fossil data to sf format adn change the map projection. Rename the variables to something</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sensible. crs=4326 is long/lat data.  YOU WILL NEED TO EDIT THIS TO MAKE IT WORK</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------------------------</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------------------------------------------------------</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> XXXX_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>( XXXX, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;COLUMN_NAME X COORDS&quot;</span>, <span class="st">&quot;COLUMN_NAME Y COORDS&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite with new map projection</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> XXXX_sf <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(XXXX_sf,<span class="at">crs=</span><span class="dv">26918</span>)</span></code></pre></div>
 <ol start="9" style="list-style-type: decimal">
-<li><p>Using this link, <a href="https://epsg.io/26918-15839"
+<li>Using this link, <a href="https://epsg.io/26918-15839"
 class="uri">https://epsg.io/26918-15839</a>, write below the code chunk
 what map projection the data has been converted to and whether the units
-are now in degrees or metres.</p></li>
+are now in degrees or metres.</li>
+</ol>
+<p><strong>IMPORTANT HINT! As it stands, YOUR DATA WILL NOT PLOT. THINK
+ABOUT WHAT YOU JUST DID WITH THE st_transform, then go back and check
+your state border projection.. (once you figure it out, re-run from the
+start</strong></p>
+<ol start="10" style="list-style-type: decimal">
 <li><p>Make a nice plot of the data showing me your skills from this
 semester.</p></li>
 <li><p>FOR THE SHOW ME SOMETHING NEW ADDITIONAL MARKS, make a nice map
@@ -581,6 +587,11 @@ that the ppp command requires 4 types of information: - x coordinates of
 each event and y coordinates of each event (or a “sp” data format) -
 window size (i.e., region size), - any marks (i.e., values/data for each
 event).</p>
+<p><strong>HINT! I THOUGHT ‘mydata’ was a stupid variable name. In my
+code, it is fossil, fossil_sf etc. Either go back and change your
+“mydata”, or going forwards, change the fossils to mydata. Or.. add in
+<code>fossil_sf &lt;- mydata_sf</code> and simply continue
+;)</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># This just converts stateowin to a &quot;window&quot; file format</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> state.window <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">as_Spatial</span>(state.border.utm), <span class="st">&quot;owin&quot;</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>

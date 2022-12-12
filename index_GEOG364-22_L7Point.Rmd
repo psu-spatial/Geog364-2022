@@ -1,5 +1,5 @@
 ---
-title:  "<br> Lab 7: Point Pattern"
+title:  "<br> Lab 7 point pattern"
 author: "Dr Greatrex"
 date: "`r Sys.Date()`"
 output:
@@ -207,7 +207,7 @@ I have given you much of the code here.
 
 #Download it into your project folder and read it into R
  download.file(url_data, destfile = "PA_fossils.csv" , verbose=TRUE)
- mydata <- read.csv("PA_fossils.csv")
+ fossil <- read.csv("PA_fossils.csv")
 ```
 
 2. Take a look at the data (remember the `View()` command). <br>
@@ -243,28 +243,28 @@ Make a new sub-section.
 
 
 
-8. Using the help files and tutorials as needed, edit these commands so that your data is converted into sf format and the map projection is changed to EPSG code 26918 
+8. Using the help files and tutorials as needed, edit these commands so that your point is converted into sf format and the map projection is changed to EPSG code 26918 
 
 ```{r,include=FALSE}
-#------------------------------------------------------------------------------------------------
-#  WRITE YOUR COMMENTS HERE TO DESCRIBE WHAT IS HAPPENING
-#------------------------------------------------------------------------------------------------
- fossil_sf <- st_as_sf(mydata, coords = c("Long", "Lat"),crs=4326)
+
+ fossil_sf <- st_as_sf(fossil, coords = c("Long", "Lat"),crs=4326)
  fossil_sf <- st_transform(fossil_sf,crs=6346)
 ```
 
 ```{r,eval=FALSE}
-#------------------------------------------------------------------------------------------------
-# Convert data to sf format adn change the map projection. Rename the variables to something
+#-----------------------------------------------------------------------------------
+# Convert your fossil data to sf format adn change the map projection. Rename the variables to something
 # sensible. crs=4326 is long/lat data.  YOU WILL NEED TO EDIT THIS TO MAKE IT WORK
-#------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
  XXXX_sf <- st_as_sf( XXXX, coords = c("COLUMN_NAME X COORDS", "COLUMN_NAME Y COORDS"), crs=4326)
 
 # overwrite with new map projection
  XXXX_sf <- st_transform(XXXX_sf,crs=26918)
 ```
 
-9. Using this link, https://epsg.io/26918-15839, write below the code chunk what map projection the data has been converted to and whether the units are now in degrees or metres. 
+9. Using this link, https://epsg.io/26918-15839, write below the code chunk what map projection the data has been converted to and whether the units are now in degrees or metres.   
+
+**IMPORTANT HINT! As it stands, YOUR DATA WILL NOT PLOT.  THINK ABOUT WHAT YOU JUST DID WITH THE st_transform, then go back and check your state border projection.. (once you figure it out, re-run from the start**
 
 10. Make a nice plot of the data showing me your skills from this semester. 
 
@@ -276,6 +276,8 @@ Make a new sub-section.
 We are now going to do a point pattern analysis, using a special package called spatstat. This package requires that we convert the data into a new data-format called ppp.
 
 I have provided the code.  By examining the as.ppp help file we see that the ppp command requires 4 types of information: - x coordinates of each event and y coordinates of each event (or a “sp” data format) - window size (i.e., region size), - any marks (i.e., values/data for each event).
+
+**HINT!  I THOUGHT 'mydata' was a stupid variable name. In my code, it is fossil, fossil_sf etc.  Either go back and change your "mydata", or going forwards, change the fossils to mydata.  Or..  add in `fossil_sf <- mydata_sf` and simply continue ;)**
 
 
 ```{r, include=FALSE}

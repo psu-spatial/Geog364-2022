@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="Dr Greatrex" />
+    
+        <meta name="date" content="2022-12-12" />
+    
+    <title>  TEMPERATURE LAB</title>
+
+        <script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <link href="site_libs/robobook-0.1/robobook.css" rel="stylesheet" />
+        <link href="site_libs/robobook-0.1/robobook_fonts_embed.css" rel="stylesheet" />
+        <script src="site_libs/robobook-0.1/robobook.js"></script>
+        <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+        <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          background-color: #ffffff;
+          color: #a0a0a0;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+      div.sourceCode
+        { color: #1f1c1b; background-color: #ffffff; }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span { color: #1f1c1b; } /* Normal */
+      code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+      code span.an { color: #ca60ca; } /* Annotation */
+      code span.at { color: #0057ae; } /* Attribute */
+      code span.bn { color: #b08000; } /* BaseN */
+      code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+      code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #924c9d; } /* Char */
+      code span.cn { color: #aa5500; } /* Constant */
+      code span.co { color: #898887; } /* Comment */
+      code span.cv { color: #0095ff; } /* CommentVar */
+      code span.do { color: #607880; } /* Documentation */
+      code span.dt { color: #0057ae; } /* DataType */
+      code span.dv { color: #b08000; } /* DecVal */
+      code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+      code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+      code span.fl { color: #b08000; } /* Float */
+      code span.fu { color: #644a9b; } /* Function */
+      code span.im { color: #ff5500; } /* Import */
+      code span.in { color: #b08000; } /* Information */
+      code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+      code span.op { color: #1f1c1b; } /* Operator */
+      code span.ot { color: #006e28; } /* Other */
+      code span.pp { color: #006e28; } /* Preprocessor */
+      code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+      code span.sc { color: #3daee9; } /* SpecialChar */
+      code span.ss { color: #ff5500; } /* SpecialString */
+      code span.st { color: #bf0303; } /* String */
+      code span.va { color: #0057ae; } /* Variable */
+      code span.vs { color: #bf0303; } /* VerbatimString */
+      code span.wa { color: #bf0303; } /* Warning */
+    </style>
+    
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+    
+    <!-- code download -->
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+   	
+            <!-- robobook start -->   
+   <div class="book with-summary">
+      <div class="book-summary">
+        <ul>
+          <li class="title"><br> TEMPERATURE LAB</li>
+          <li class="divider"></li>
+        </ul>
+        <nav role="navigation" id="toc">
+          <ul>
+          <li><a href="#welcome-to-the-temperature-lab"
+          id="toc-welcome-to-the-temperature-lab">Welcome to the
+          temperature lab!</a></li>
+          <li><a href="#get-help" id="toc-get-help">Get help</a></li>
+          <li><a href="#lab-set-up---read-this-you-will-be-graded"
+          id="toc-lab-set-up---read-this-you-will-be-graded"><span
+          class="toc-section-number">1</span> LAB SET-UP - READ THIS,
+          YOU WILL BE GRADED!</a>
+          <ul>
+          <li><a href="#create-project" id="toc-create-project"><span
+          class="toc-section-number">1.1</span> Create project</a></li>
+          <li><a href="#select-template."
+          id="toc-select-template."><span
+          class="toc-section-number">1.2</span> Select
+          template.</a></li>
+          <li><a href="#add-libraries" id="toc-add-libraries"><span
+          class="toc-section-number">1.3</span> Add libraries</a></li>
+          </ul></li>
+          <li><a href="#getting-set-up" id="toc-getting-set-up"><span
+          class="toc-section-number">2</span> GETTING SET UP</a>
+          <ul>
+          <li><a href="#download-and-read-in-the-data"
+          id="toc-download-and-read-in-the-data"><span
+          class="toc-section-number">2.1</span> Download and read-in the
+          data</a></li>
+          <li><a href="#make-spatial-and-plot"
+          id="toc-make-spatial-and-plot"><span
+          class="toc-section-number">2.2</span> Make Spatial and
+          Plot</a></li>
+          </ul></li>
+          <li><a href="#above-beyond" id="toc-above-beyond"><span
+          class="toc-section-number">3</span> ABOVE &amp;
+          BEYOND</a></li>
+          <li><a href="#predict-your-grade"
+          id="toc-predict-your-grade"><span
+          class="toc-section-number">4</span> Predict your grade</a>
+          <ul>
+          <li><a href="#what-your-grade-means"
+          id="toc-what-your-grade-means"><span
+          class="toc-section-number">4.1</span> What your grade
+          means</a></li>
+          </ul></li>
+          </ul>
+        </nav>
+        <ul class="authors">
+          <li class="divider"></li>
+                                <li><span><i class="glyphicon glyphicon-user"></i> Dr
+Greatrex</span></li>
+                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2022-12-12</span></li>
+                  </ul>     
+      </div>
+      <div class="book-body fixed">
+        <div class="body-inner">
+            <a class="btn pull-left js-toolbar-action toggle-sidebar" aria-label="Toggle Sidebar" title="Toggle Sidebar" href="#">
+              <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </a>
+            <div class="page-inner">
+              <section id="content" class="normal">
+      
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">GEOG-364</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="index_GEOG364-22_Tutorial_R.html">R-TUTORIAL</a>
+      </li>
+      <li>
+        <a href="ClassExampleMoran.html">CLASS EXAMPLE MORAN'S I LAB 6</a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Labs
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="index_GEOG364-22_L1Basics.html">Lab 1: R-Basics</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L2EDA.html">Lab 2: Exploratory Analysis</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L3Data.html">Lab 3: Data Wrangling</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L4Firefly.html">Lab 4: Spatial Wrangling</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L5Census.html">Lab 5: Census Data</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L6SoviMoran.html">Lab 6: Moran SOVI</a>
+          </li>
+          <li>
+            <a href="index_GEOG364-22_L7Point.html">Lab 7: Point Pattern</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title"><br> TEMPERATURE LAB</h1>
+      
+        
+
+   
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="welcome-to-the-temperature-lab"
+class="section level2 unnumbered">
+<h2 class="unnumbered">Welcome to the temperature lab!</h2>
+<p><br></p>
+<p>This lab can replace EITHER</p>
+<ul>
+<li>One of your exams. (e.g. none of your exams count! In real life
+there are ppl who are great at statistics who suck at exams)</li>
+<li>One of your labs AS WELL AS YOUR DROP</li>
+<li>20 participation points.</li>
+</ul>
+<p>SUBMISSION THURSDAY NIGHT FINAL DEADLINE. I have to get the grades
+out on Fri</p>
+<p>Overall, here is what your lab should correspond to. If you get to
+the end and do the bare minimum that’s probably going to be a C. 100% is
+going to be hard.</p>
+<table class=" lightable-classic-2 table table-striped table-hover table-responsive" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Grade
+</th>
+<th style="text-align:left;">
+% Mark
+</th>
+<th style="text-align:left;">
+Rubric
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A*
+</td>
+<td style="text-align:left;">
+98-100
+</td>
+<td style="text-align:left;">
+Exceptional.  Not only was it near perfect, but the graders learned
+something.  THIS IS HARD TO GET.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+96+
+</td>
+<td style="text-align:left;">
+You went above and beyond
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+94+:
+</td>
+<td style="text-align:left;">
+Everything asked for with high quality.   Class example
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A-
+</td>
+<td style="text-align:left;">
+90+
+</td>
+<td style="text-align:left;">
+The odd minor mistake, All code done but not written up in full
+sentences etc. A little less care
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B+
+</td>
+<td style="text-align:left;">
+87+
+</td>
+<td style="text-align:left;">
+More minor mistakes.  Things like missing units, getting the odd
+question wrong, no workings shown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+84+
+</td>
+<td style="text-align:left;">
+Solid work but the odd larger mistake or missing answer.  Completely
+misinterpreted something, that type of thing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B-
+</td>
+<td style="text-align:left;">
+80+
+</td>
+<td style="text-align:left;">
+Starting to miss entire/questions sections, or multiple larger mistakes.
+Still a solid attempt. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C+
+</td>
+<td style="text-align:left;">
+77+
+</td>
+<td style="text-align:left;">
+You made a good effort and did some things well, but there were a lot of
+problems. (e.g. you wrote up the text well, but messed up the code)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+It’s clear you tried and learned something.  Just attending labs will
+get you this much as we can help you get to this stage
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+60+
+</td>
+<td style="text-align:left;">
+You attempt the lab and submit something. Not clear you put in much
+effort or you had real issues
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+0+
+</td>
+<td style="text-align:left;">
+Didn’t submit, or incredibly limited attempt. 
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="get-help" class="section level2 unnumbered">
+<h2 class="unnumbered">Get help</h2>
+<p>If a link to a tutorial is broken, you should be able to go to the
+tutorial number and find it in the menu.</p>
+<p>Teams is the fastest way to get help. <a
+href="https://teams.microsoft.com/l/channel/19%3a9b475a4ed1684397a290b96a60c8377d%40thread.tacv2/TEMPERATURE%2520LABS?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&amp;tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e">CLICK
+THIS LINK FOR THE TEAMS WEBSITE FOR LAB HELP</a></p>
+<p><br></p>
+</div>
+<div id="lab-set-up---read-this-you-will-be-graded"
+class="section level1" number="1">
+<h1><span class="header-section-number">1</span> LAB SET-UP - READ THIS,
+YOU WILL BE GRADED!</h1>
+<p><br></p>
+<div id="create-project" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Create project</h2>
+<ul>
+<li>Using R-CLOUD? : click here. This also has instructions on
+uploading/downloading code from your computers. <a
+href="https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD"
+class="uri">https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD</a>
+<br><br></li>
+<li>Using YOUR LAPTOP? : Click here: - <a
+href="https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop"
+class="uri">https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="select-template." class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Select template.</h2>
+<p>Create your markdown file and choose a professional template, such as
+<code>PACKAGE rmdformats</code>, <code>PACKAGE rtemps</code> or
+<code>PACKAGE prettydoc</code>. You simply need to install the package
+from the “app store”, then go to new Markdown FROM TEMPLATE. See the
+start of Lab 5 for a reminder. To browse the formats, see here:</p>
+<ul>
+<li>rmdformats : <a href="https://github.com/juba/rmdformats"
+class="uri">https://github.com/juba/rmdformats</a></li>
+<li>pretty docs : <a href="https://prettydoc.statr.me/themes.html"
+class="uri">https://prettydoc.statr.me/themes.html</a></li>
+<li>rtemps : <a href="https://github.com/bblodfon/rtemps"
+class="uri">https://github.com/bblodfon/rtemps</a></li>
+</ul>
+<p>If you want to make websites or other formats, see here: <a
+href="https://r4ds.had.co.nz/r-markdown-formats.html"
+class="uri">https://r4ds.had.co.nz/r-markdown-formats.html</a>, here: <a
+href="https://bookdown.org/yihui/rmarkdown/tufte-handouts.html"
+class="uri">https://bookdown.org/yihui/rmarkdown/tufte-handouts.html</a>
+or here <a href="https://rmarkdown.rstudio.com/formats.html"
+class="uri">https://rmarkdown.rstudio.com/formats.html</a>.</p>
+<p><br></p>
+</div>
+<div id="add-libraries" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Add libraries</h2>
+<p><strong>Edit the first “set-up” code chunk so it looks like this and
+run/knit. You might need additional libraries as you work through the
+lab. If so, add them in this code chunk AND REMEMBER TO RE-RUN THE CODE
+CHUNK.</strong></p>
+<p>If you see a little yellow bar at the top asking you to install
+them,click yes! If you find a library doesn’t exist, install it from the
+app store, then add the library command in here to load.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SET UP</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">cache =</span> <span class="cn">TRUE</span>,<span class="at">message=</span><span class="cn">FALSE</span>,<span class="at">warning=</span><span class="cn">FALSE</span>,<span class="at">echo=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>NOTE, I HAVE SPLIT THESE CODE CHUNKS IN TWO FOR THE TOP COMMAND TO
+PRINT.</p>
+<p><strong>PLEASE ALSO SPLIT THEM</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LIBRARIES</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biscale)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(units)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptools)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(USAboundaries)</span></code></pre></div>
+<p>Note, if you don’t have elevatr, you will need to first install the
+<code>remotes</code> package, then run this code IN THE CONSOLE to get
+the package. Same with rnaturalearth and USA boundaries</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhollist/elevatr&quot;</span>)</span></code></pre></div>
+<p>If a package doesn’t work, don’t panic,see if you can (re) install
+it, or just remove from the code chunk.</p>
+<p><br></p>
+</div>
+</div>
+<div id="getting-set-up" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> GETTING SET UP</h1>
+<div id="download-and-read-in-the-data" class="section level2"
+number="2.1">
+<h2><span class="header-section-number">2.1</span> Download and read-in
+the data</h2>
+<ol style="list-style-type: decimal">
+<li>Use this code to automatically download the data and read it into R.
+Remember to retype ALL the quote marks if you get a weird error.
+<br></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Where the data is stored</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> url_data <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/hgreatrex/GEOG364_Labs/blob/master/GEOG364_Summary_TemperatureData.xlsx?raw=true&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Download it into your project folder and read it into R</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">download.file</span>(url_data, <span class="at">destfile =</span> <span class="st">&quot;Temperature_Data.xlsx&quot;</span> , <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> temperature_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Temperature_Data.xlsx&quot;</span>)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Take a look at the data (remember the <code>View()</code> command).
+<br> It has these columns</li>
+</ol>
+<ul>
+<li>“Serial” - The serial number of the sensor</li>
+<li>“Lab” - The lab that placed it<br />
+</li>
+<li>“Long” - The longitude<br />
+</li>
+<li>“Lat” - The latitude<br />
+</li>
+<li>“Location” - The location specified on Canvas<br />
+</li>
+<li>“Feet_From_Water” - Number of feet from Water (Tues Lab)<br />
+</li>
+<li>“Temp_Min” - Min Thanksgiving Temperature (celcius) (Nov 24)</li>
+<li>“Temp_Max” - Max Thanksgiving Temp</li>
+<li>“Temp_IQR” - The interquartile range of thanksgiving
+temperature</li>
+<li>“Temp_sd” - The standard deviation of thanksgiving temperature</li>
+<li>“Light_Min” - Min Thanksgiving Light levels (Lux) (Nov 24)</li>
+<li>“Light_Max” - Max Thanksgiving Light levels</li>
+<li>“Light_IQR” - The interquartile range of thanksgiving Light
+levels</li>
+<li>“Light_sd” - The standard deviation of thanksgiving Light
+levels<br />
+</li>
+<li>“Frost_Hrs” - Number of frost hours during Thanksgiving
+(hours)<br />
+</li>
+<li>“Frost_FirstFrostHr” - Time in decimal hours of the first frost hr
+(e.g 12.5 = 12:30 PM)</li>
+</ul>
+<p>If your sensor isn’t there, sorry! I got most of them figured out
+(yours is safe Clarissa, just couldn’t get the data to load).</p>
+<ol start="3" style="list-style-type: decimal">
+<li>We now need to do some quality control. These commands will remove
+any missing locations and</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>temperature_data <span class="ot">&lt;-</span> temperature_data[<span class="fu">is.na</span>(temperature_data<span class="sc">$</span>Long)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temperature_data <span class="ot">&lt;-</span> temperature_data[<span class="fu">is.na</span>(temperature_data<span class="sc">$</span>Lat)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temperature_data<span class="sc">$</span>Lab <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(temperature_data<span class="sc">$</span>Lab)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Now, <a
+href="https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html">USING
+MY LAB 6 TEMPLATE AS AN EXAMPLE OF STYLE/CONTENT</a> and what you
+learned from the data/the website, write a BRIEF background section
+containing all relevant information about the dataset. Feel free to
+copy/paste my example and change the details. Within this, explain</li>
+</ol>
+<ul>
+<li>If the data is marked <br></li>
+<li>If it is raster/vector <br></li>
+<li>What types of process you think might influence the pattern of
+temperatures (think back to your temp sampling lab)<br></li>
+<li>What pattern(s) you predict/expect to see <br></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Use the table command to work out how many sensors were placed by
+each lab. <br></p></li>
+<li><p>Make an sf version of the data e.g. make it spatial. Hint
+<br></p></li>
+<li><p>BONUS FOR STUDENTS AIMING FOR AN A: Transform the map projection
+of the data into an appropriate UTM map projection system. (hint
+<br></p></li>
+</ol>
+</div>
+<div id="make-spatial-and-plot" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Make Spatial and
+Plot</h2>
+<p>Make a new sub-section.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Use this code to download the state borders. Note, some people said
+Tigris is better for borders. Feel free to use that</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------#  us_states is from the USAboundaries package</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------------------------------------------------- </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> state.border <span class="ot">&lt;-</span> <span class="fu">us_states</span>(<span class="at">states =</span> <span class="st">&quot;pennsylvania&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> state.border.utm <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(state.border,<span class="dv">6346</span>)</span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>Use this code to download a raster of elevations for PA. Edit the
+code chunk options so that it doesn’t output any text (<a
+href="https://warin.ca/posts/rcourse-howto-usechunkoptions/#:~:text=The%20chunk%20option%20results%20%3D%20hide,of%20a%20spreadsheet%20in%20R">hint</a>).</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  get_elev_raster is from the elevatr package. Might take a second to download</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> elevation.utm <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(state.border.utm, <span class="at">z =</span> <span class="dv">5</span>,<span class="at">clip=</span><span class="st">&quot;locations&quot;</span>)</span></code></pre></div>
+<ol start="12" style="list-style-type: decimal">
+<li><p>Copy the code above into a new code chunk and make sure it runs.
+You might get errors about Discarded datum Unknown based on GRS80
+ellipsoid in CRS definition, or only first attribute column is used for
+marks. Ignore them.</p></li>
+<li><p>Look at the output of the plot, which shows the points plotted
+over elevation data. Below the code chunk, write your assessment of the
+spatial structure of the fossils. In your opinion do the locations show
+positive or negative autocorrelation? What processess (if any) do you
+think caused this pattern?</p></li>
+</ol>
+</div>
+</div>
+<div id="above-beyond" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> ABOVE &amp; BEYOND</h1>
+<p>To get the 4 marks <strong>CHOOSE ONE</strong> of these options AND
+EXPLAIN WHAT YOU DID.</p>
+<ul>
+<li>OPTION 1: Try the fancy plot challenge in step 11 above</li>
+</ul>
+<p><br></p>
+<ul>
+<li>OPTION 2: Fully and completely interpret the L analysis above,
+including explaining what a Monte Carlo process is and what the cloud
+means</li>
+</ul>
+<p><br></p>
+<p>Or….. OPTION: 3 the old school ‘show me something new’</p>
+<ul>
+<li>You get 2/4 for doing something new in any way</li>
+<li>You get 4/4 for something really impressive</li>
+</ul>
+<p>To help with this, you could also look at some other point pattern
+tutorials because they are all linked into spatstat. There are loads of
+things you could do to build your knowledge of point pattern
+analysis</p>
+<ul>
+<li><a href="http://spatstat.org/Melb2018/solutions/solution03.html"
+class="uri">http://spatstat.org/Melb2018/solutions/solution03.html</a>
+(density)</li>
+<li><a href="http://spatstat.org/Melb2018/solutions/solution04.html"
+class="uri">http://spatstat.org/Melb2018/solutions/solution04.html</a>
+(poisson)</li>
+<li><a href="http://spatstat.org/Melb2018/solutions/solution05.html"
+class="uri">http://spatstat.org/Melb2018/solutions/solution05.html</a>
+(marked)</li>
+<li><a href="http://spatstat.org/Melb2018/solutions/solution06.html"
+class="uri">http://spatstat.org/Melb2018/solutions/solution06.html</a>
+(K and L functions)</li>
+<li><a
+href="https://mgimond.github.io/Spatial/point-pattern-analysis-in-r.html"
+class="uri">https://mgimond.github.io/Spatial/point-pattern-analysis-in-r.html</a></li>
+<li><a
+href="https://bhaskarvk.github.io/user2017.geodataviz/notebooks/02-Static-Maps.nb.html"
+class="uri">https://bhaskarvk.github.io/user2017.geodataviz/notebooks/02-Static-Maps.nb.html</a><br />
+</li>
+<li><a
+href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html"
+class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html</a></li>
+<li><a href="https://www.r-bloggers.com/2018/08/how-to-cite-packages/"
+class="uri">https://www.r-bloggers.com/2018/08/how-to-cite-packages/</a></li>
+</ul>
+<p>Remember to say what you did in the report.</p>
+</div>
+<div id="predict-your-grade" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Predict your grade</h1>
+<p><strong>HTML AND RMD FILE SUBMISSION - 20 marks</strong></p>
+<p><strong>REPORT STYLE: Text/Markdown/code style - 10
+MARKS</strong></p>
+<p><strong>REPORT COMPLETENESS</strong> - are all the steps followed? -
+10 MARKS</p>
+<p><strong>DATASET BACKGROUND </strong> - 10 MARKS</p>
+<ul>
+<li>I am assessing you both on knowing WHAT to include and on your
+communication</li>
+</ul>
+<p><strong>BEAUTIFUL MAPS</strong> - 10 MARKS</p>
+<ul>
+<li>This includes understanding the projection of the
+data/graphics.</li>
+</ul>
+<p><strong>POINT PATTERN DESCRIPTIVE STATS AND STANDARD ELLIPSE</strong>
+- 10 MARKS</p>
+<p><strong>DENSITY BASED MEASURES</strong> - 10 MARKS</p>
+<p><strong>DISTANCE BASED MEASURES Inc hyp test</strong> - 16 MARKS</p>
+<p><strong>ABOVE AND BEYOND</strong> (4 Marks). You MUST write what you
+did, see above for instructions.</p>
+<p>**</p>
+<div id="what-your-grade-means" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> What your grade
+means</h2>
+<p>Why is 100% hard? Overall, here is what your lab should correspond
+to:</p>
+<table class=" lightable-classic-2 table table-striped table-hover table-responsive" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Grade
+</th>
+<th style="text-align:left;">
+% Mark
+</th>
+<th style="text-align:left;">
+Rubric
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A*
+</td>
+<td style="text-align:left;">
+98-100
+</td>
+<td style="text-align:left;">
+Exceptional.  Not only was it near perfect, but the graders learned
+something.  THIS IS HARD TO GET.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+96+
+</td>
+<td style="text-align:left;">
+You went above and beyond
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+94+:
+</td>
+<td style="text-align:left;">
+Everything asked for with high quality.   Class example
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A-
+</td>
+<td style="text-align:left;">
+90+
+</td>
+<td style="text-align:left;">
+The odd minor mistake, All code done but not written up in full
+sentences etc. A little less care
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B+
+</td>
+<td style="text-align:left;">
+87+
+</td>
+<td style="text-align:left;">
+More minor mistakes.  Things like missing units, getting the odd
+question wrong, no workings shown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+84+
+</td>
+<td style="text-align:left;">
+Solid work but the odd larger mistake or missing answer.  Completely
+misinterpreted something, that type of thing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B-
+</td>
+<td style="text-align:left;">
+80+
+</td>
+<td style="text-align:left;">
+Starting to miss entire/questions sections, or multiple larger mistakes.
+Still a solid attempt. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C+
+</td>
+<td style="text-align:left;">
+77+
+</td>
+<td style="text-align:left;">
+You made a good effort and did some things well, but there were a lot of
+problems. (e.g. you wrote up the text well, but messed up the code)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+70+
+</td>
+<td style="text-align:left;">
+It’s clear you tried and learned something.  Just attending labs will
+get you this much as we can help you get to this stage
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+60+
+</td>
+<td style="text-align:left;">
+You attempt the lab and submit something. Not clear you put in much
+effort or you had real issues
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+0+
+</td>
+<td style="text-align:left;">
+Didn’t submit, or incredibly limited attempt. 
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+   
+   
+           </section>
+  </div>
+  </div>
+  </div>
+  </div>
+      
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 		
+	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>
