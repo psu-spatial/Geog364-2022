@@ -24,7 +24,9 @@ navbar:
         - text: "Lab 6: Moran SOVI"
           href: index_GEOG364-22_L6SoviMoran.html
         - text: "Lab 7: Point Pattern"
-          href: index_GEOG364-22_L7Point.html         
+          href: index_GEOG364-22_L7Point.html   
+        - text: "TEMPERATURE LAB"
+          href: index_GEOG364-22_Temp.html    
 output:  
   html_document:  
     self_contained: no  

@@ -212,14 +212,29 @@
           id="toc-download-and-read-in-the-data"><span
           class="toc-section-number">2.1</span> Download and read-in the
           data</a></li>
-          <li><a href="#make-spatial-and-plot"
-          id="toc-make-spatial-and-plot"><span
-          class="toc-section-number">2.2</span> Make Spatial and
-          Plot</a></li>
+          <li><a href="#make-spatial" id="toc-make-spatial"><span
+          class="toc-section-number">2.2</span> Make Spatial</a></li>
+          <li><a href="#make-cool-plots-and-tell-a-story-about-the-data"
+          id="toc-make-cool-plots-and-tell-a-story-about-the-data"><span
+          class="toc-section-number">2.3</span> Make cool plots and tell
+          a story about the data</a></li>
+          <li><a href="#make-voronoi-polygons"
+          id="toc-make-voronoi-polygons"><span
+          class="toc-section-number">2.4</span> Make voronoi
+          polygons,</a></li>
+          <li><a href="#spatial-weights-matrix"
+          id="toc-spatial-weights-matrix"><span
+          class="toc-section-number">2.5</span> Spatial weights
+          matrix</a></li>
+          <li><a href="#now-for-the-variable-of-your-choice"
+          id="toc-now-for-the-variable-of-your-choice"><span
+          class="toc-section-number">2.6</span> Now FOR THE VARIABLE OF
+          YOUR CHOICE</a></li>
           </ul></li>
-          <li><a href="#above-beyond" id="toc-above-beyond"><span
-          class="toc-section-number">3</span> ABOVE &amp;
-          BEYOND</a></li>
+          <li><a href="#above-beyond---at-dr-gs-discretion"
+          id="toc-above-beyond---at-dr-gs-discretion"><span
+          class="toc-section-number">3</span> ABOVE &amp; BEYOND - at Dr
+          G’s discretion</a></li>
           <li><a href="#predict-your-grade"
           id="toc-predict-your-grade"><span
           class="toc-section-number">4</span> Predict your grade</a>
@@ -297,6 +312,9 @@ Greatrex</span></li>
           <li>
             <a href="index_GEOG364-22_L7Point.html">Lab 7: Point Pattern</a>
           </li>
+          <li>
+            <a href="index_GEOG364-22_Temp.html">TEMPERATURE LAB</a>
+          </li>
         </ul>
       </li>
             </ul>
@@ -329,8 +347,9 @@ there are ppl who are great at statistics who suck at exams)</li>
 <p>SUBMISSION THURSDAY NIGHT FINAL DEADLINE. I have to get the grades
 out on Fri</p>
 <p>Overall, here is what your lab should correspond to. If you get to
-the end and do the bare minimum that’s probably going to be a C. 100% is
-going to be hard.</p>
+the end and do the bare minimum that’s probably going to be a C. To get
+a B, you need to do at least some of the BONUS options. To get an A you
+need to attempt them all. 100% is hard.</p>
 <table class=" lightable-classic-2 table table-striped table-hover table-responsive" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -568,7 +587,8 @@ PRINT.</p>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatstat)</span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maptools)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(USAboundaries)</span></code></pre></div>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(USAboundaries)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span></code></pre></div>
 <p>Note, if you don’t have elevatr, you will need to first install the
 <code>remotes</code> package, then run this code IN THE CONSOLE to get
 the package. Same with rnaturalearth and USA boundaries</p>
@@ -593,8 +613,9 @@ Remember to retype ALL the quote marks if you get a weird error.
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> url_data <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/hgreatrex/GEOG364_Labs/blob/master/GEOG364_Summary_TemperatureData.xlsx?raw=true&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Download it into your project folder and read it into R</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">download.file</span>(url_data, <span class="at">destfile =</span> <span class="st">&quot;Temperature_Data.xlsx&quot;</span> , <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> temperature_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Temperature_Data.xlsx&quot;</span>)</span></code></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">download.file</span>(url_data, <span class="at">destfile =</span> <span class="st">&quot;temp_data.xlsx&quot;</span> , <span class="at">verbose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> temp_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;temp_data.xlsx&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">summary</span>(temp_data)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Take a look at the data (remember the <code>View()</code> command).
 <br> It has these columns</li>
@@ -635,9 +656,15 @@ levels<br />
 <li>We now need to do some quality control. These commands will remove
 any missing locations and</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>temperature_data <span class="ot">&lt;-</span> temperature_data[<span class="fu">is.na</span>(temperature_data<span class="sc">$</span>Long)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temperature_data <span class="ot">&lt;-</span> temperature_data[<span class="fu">is.na</span>(temperature_data<span class="sc">$</span>Lat)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temperature_data<span class="sc">$</span>Lab <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(temperature_data<span class="sc">$</span>Lab)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For some reason they&#39;re recording as text</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temp_data<span class="sc">$</span>Long <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp_data<span class="sc">$</span>Long)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temp_data<span class="sc">$</span>Lat <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(temp_data<span class="sc">$</span>Lat)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove missing rows just for locations</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>temp_data <span class="ot">&lt;-</span> temp_data[<span class="fu">is.na</span>(temp_data<span class="sc">$</span>Long)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>temp_data <span class="ot">&lt;-</span> temp_data[<span class="fu">is.na</span>(temp_data<span class="sc">$</span>Lat)<span class="sc">==</span><span class="cn">FALSE</span>,]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>temp_data<span class="sc">$</span>Lab <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(temp_data<span class="sc">$</span>Lab)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Now, <a
 href="https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html">USING
@@ -656,102 +683,169 @@ temperatures (think back to your temp sampling lab)<br></li>
 <ol start="4" style="list-style-type: decimal">
 <li><p>Use the table command to work out how many sensors were placed by
 each lab. <br></p></li>
-<li><p>Make an sf version of the data e.g. make it spatial. Hint
-<br></p></li>
-<li><p>BONUS FOR STUDENTS AIMING FOR AN A: Transform the map projection
-of the data into an appropriate UTM map projection system. (hint
+<li><p>Make an sf version of the data in long/lat. (Hint 4326)
 <br></p></li>
 </ol>
 </div>
-<div id="make-spatial-and-plot" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Make Spatial and
-Plot</h2>
-<p>Make a new sub-section.</p>
+<div id="make-spatial" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Make Spatial</h2>
+<p>Make a new sub-section. I will help you with the code</p>
 <ol start="6" style="list-style-type: decimal">
-<li>Use this code to download the state borders. Note, some people said
-Tigris is better for borders. Feel free to use that</li>
+<li><p>Use this code to download the state borders and the elevations
+for PA.</p>
+<ol style="list-style-type: lower-alpha">
+<li><strong>BONUS FOR STUDENTS AIMING FOR A: Edit the code chunk options
+so that it doesn’t output any text.</strong></li>
+</ol></li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------#  us_states is from the USAboundaries package</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#--------------------------------------------------------------------------------- </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> state.border <span class="ot">&lt;-</span> <span class="fu">us_states</span>(<span class="at">states =</span> <span class="st">&quot;pennsylvania&quot;</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> state.border.utm <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(state.border,<span class="dv">6346</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the temp data spatial and merge</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> temp_data.sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(temp_data, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;Long&quot;</span>, <span class="st">&quot;Lat&quot;</span>),<span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------#</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we will use the tigris package to get state college borders </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># State College borders</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> PA.Towns <span class="ot">&lt;-</span> <span class="fu">places</span>(<span class="at">state =</span> <span class="st">&quot;PA&quot;</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>, <span class="at">year=</span><span class="dv">2017</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> SCE.border.sf <span class="ot">&lt;-</span> <span class="fu">filter</span>(PA.Towns, NAME <span class="sc">==</span> <span class="st">&quot;State College&quot;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Centre County</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a> PA.Counties <span class="ot">&lt;-</span> <span class="fu">counties</span>(<span class="at">state =</span> <span class="st">&quot;PA&quot;</span>, <span class="at">resolution =</span> <span class="st">&quot;500k&quot;</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a> CentreCounty.border.sf <span class="ot">&lt;-</span> <span class="fu">filter</span>(PA.Counties, NAME <span class="sc">==</span> <span class="st">&quot;Centre&quot;</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#  get_elev_raster is from the elevatr package. Might take a second to download</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># If it takes too long, take z from 13 to say 6. Lower the number the faster.</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a> SCE.elevation <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(temp_data.sf,<span class="at">z =</span><span class="dv">14</span>,<span class="at">clip=</span><span class="st">&quot;locations&quot;</span>,<span class="at">expand=</span><span class="fl">0.005</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a> temp_data.sf<span class="sc">$</span>Elevation <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">extract</span>(SCE.elevation,temp_data.sf)</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
-<li>Use this code to download a raster of elevations for PA. Edit the
-code chunk options so that it doesn’t output any text (<a
-href="https://warin.ca/posts/rcourse-howto-usechunkoptions/#:~:text=The%20chunk%20option%20results%20%3D%20hide,of%20a%20spreadsheet%20in%20R">hint</a>).</li>
-</ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  get_elev_raster is from the elevatr package. Might take a second to download</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#---------------------------------------------------------------------------------</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> elevation.utm <span class="ot">&lt;-</span> <span class="fu">get_elev_raster</span>(state.border.utm, <span class="at">z =</span> <span class="dv">5</span>,<span class="at">clip=</span><span class="st">&quot;locations&quot;</span>)</span></code></pre></div>
-<ol start="12" style="list-style-type: decimal">
-<li><p>Copy the code above into a new code chunk and make sure it runs.
-You might get errors about Discarded datum Unknown based on GRS80
-ellipsoid in CRS definition, or only first attribute column is used for
-marks. Ignore them.</p></li>
-<li><p>Look at the output of the plot, which shows the points plotted
-over elevation data. Below the code chunk, write your assessment of the
-spatial structure of the fossils. In your opinion do the locations show
-positive or negative autocorrelation? What processess (if any) do you
-think caused this pattern?</p></li>
+<li><p>Get the code above running in your script.</p></li>
+<li><p>**FOR STUDENTS AIMING FOR AN A: Transform the map projection of
+EVERY sf dataset into an appropriate UTM map projection system. <a
+href="https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tut11ab_proj">hint
+see here</a> or lab 7. <br></p></li>
 </ol>
 </div>
+<div id="make-cool-plots-and-tell-a-story-about-the-data"
+class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Make cool plots and
+tell a story about the data</h2>
+<p>Now.. it’s time to be creative.</p>
+<p>Explore the data! Make AT LEAST 4 maps showing different aspects of
+the data.</p>
+<p>There are about 20 different variables - so think about what you what
+to show. Is it something about frost times? Temperature extremes?
+Looking at what each lab did? Looking at the relationship between light
+and temperature? Here’s how I will grade it</p>
+<ul>
+<li>Full Marks: Beautiful professional exploratory analysis that you
+could show in a job interview</li>
+<li>A: You tell an interesting story and you have beautiful plots</li>
+<li>A-: Get the plots working but it’s not clear there’s a coherent
+story</li>
+<li>B: Get the plots working OR explain what you want to show</li>
+<li>C: Real attempt</li>
+<li>D: You start the section</li>
+</ul>
+<p>If you want ideas, see here: <a
+href="https://psu-spatial.github.io/Geog364-2021/364Data_TutorialWranglePoint.html#Cropping_to_a_stateshapefile"
+class="uri">https://psu-spatial.github.io/Geog364-2021/364Data_TutorialWranglePoint.html#Cropping_to_a_stateshapefile</a></p>
 </div>
-<div id="above-beyond" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> ABOVE &amp; BEYOND</h1>
-<p>To get the 4 marks <strong>CHOOSE ONE</strong> of these options AND
-EXPLAIN WHAT YOU DID.</p>
+<div id="make-voronoi-polygons" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Make voronoi
+polygons,</h2>
+<p>We now need to make Voronoi polygons to allow us to do Moran’s I etc.
+Again I will provide the code.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy and paste this code. It should run.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>st_voronoi_point <span class="ot">&lt;-</span> <span class="cf">function</span>(points){</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="do">## points must be POINT geometry</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># check for point geometry and execute if true</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">all</span>(<span class="fu">st_geometry_type</span>(points) <span class="sc">==</span> <span class="st">&quot;POINT&quot;</span>)){</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stop</span>(<span class="st">&quot;Input not  POINT geometries&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    g <span class="ot">=</span> <span class="fu">st_combine</span>(<span class="fu">st_geometry</span>(points)) <span class="co"># make multipoint</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    v <span class="ot">=</span> <span class="fu">st_voronoi</span>(g)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    v <span class="ot">=</span> <span class="fu">st_collection_extract</span>(v)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(v[<span class="fu">unlist</span>(<span class="fu">st_intersects</span>(points, v))])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>v <span class="ot">=</span> <span class="fu">st_voronoi_point</span>(temp_data.sf)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">st_voronoi</span>(temp_data.sf)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>pv <span class="ot">=</span> <span class="fu">st_set_geometry</span>(p, v)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(pv)  <span class="ot">&lt;-</span> <span class="fu">st_crs</span>(SCE.border.sf)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>temp_data.polygon.sf <span class="ot">&lt;-</span>  <span class="fu">ms_clip</span>(<span class="at">target =</span> pv, <span class="at">clip =</span> SCE.border.sf, </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                              <span class="at">remove_slivers =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete all the unneessary stuff</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(v)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(p)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(pv)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(PA.Towns)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(PA.Counties)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(st_voronoi_point)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(rubric)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(url_data)</span></code></pre></div>
+<p>OK we now have several data-sets:</p>
 <ul>
-<li>OPTION 1: Try the fancy plot challenge in step 11 above</li>
+<li>Centre County borders: CentreCounty.border.sf</li>
+<li>State College City borders: SCE.border.sf</li>
+<li>State College Elevation: SCE.elevation</li>
+<li>The raw temperature data: temp_data</li>
+<li>The spatial temperature data: temp_data.sf</li>
+<li>Voronoi polygons of temperature data: temp_data.polygon.sf</li>
 </ul>
-<p><br></p>
-<ul>
-<li>OPTION 2: Fully and completely interpret the L analysis above,
-including explaining what a Monte Carlo process is and what the cloud
-means</li>
-</ul>
-<p><br></p>
-<p>Or….. OPTION: 3 the old school ‘show me something new’</p>
-<ul>
-<li>You get 2/4 for doing something new in any way</li>
-<li>You get 4/4 for something really impressive</li>
-</ul>
-<p>To help with this, you could also look at some other point pattern
-tutorials because they are all linked into spatstat. There are loads of
-things you could do to build your knowledge of point pattern
-analysis</p>
-<ul>
-<li><a href="http://spatstat.org/Melb2018/solutions/solution03.html"
-class="uri">http://spatstat.org/Melb2018/solutions/solution03.html</a>
-(density)</li>
-<li><a href="http://spatstat.org/Melb2018/solutions/solution04.html"
-class="uri">http://spatstat.org/Melb2018/solutions/solution04.html</a>
-(poisson)</li>
-<li><a href="http://spatstat.org/Melb2018/solutions/solution05.html"
-class="uri">http://spatstat.org/Melb2018/solutions/solution05.html</a>
-(marked)</li>
-<li><a href="http://spatstat.org/Melb2018/solutions/solution06.html"
-class="uri">http://spatstat.org/Melb2018/solutions/solution06.html</a>
-(K and L functions)</li>
-<li><a
-href="https://mgimond.github.io/Spatial/point-pattern-analysis-in-r.html"
-class="uri">https://mgimond.github.io/Spatial/point-pattern-analysis-in-r.html</a></li>
-<li><a
-href="https://bhaskarvk.github.io/user2017.geodataviz/notebooks/02-Static-Maps.nb.html"
-class="uri">https://bhaskarvk.github.io/user2017.geodataviz/notebooks/02-Static-Maps.nb.html</a><br />
-</li>
-<li><a
-href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html"
-class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html</a></li>
-<li><a href="https://www.r-bloggers.com/2018/08/how-to-cite-packages/"
-class="uri">https://www.r-bloggers.com/2018/08/how-to-cite-packages/</a></li>
-</ul>
+<ol start="9" style="list-style-type: decimal">
+<li>Get the code running and make some QTM plots to explain what voronoi
+polygons are.</li>
+</ol>
+</div>
+<div id="spatial-weights-matrix" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Spatial weights
+matrix</h2>
+<p>Use the tutorial here to make a spatial weights matrix from the
+polygon data.</p>
+<p><a
+href="https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html#spatial-weights-matrix"
+class="uri">https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html#spatial-weights-matrix</a></p>
+<p>ALTERNATIVELY - you can use any of the techniques here (genuine bonus
+marks - <a href="https://rspatial.org/raster/analysis/analysis.pdf"
+class="uri">https://rspatial.org/raster/analysis/analysis.pdf</a>)</p>
+</div>
+<div id="now-for-the-variable-of-your-choice" class="section level2"
+number="2.6">
+<h2><span class="header-section-number">2.6</span> Now FOR THE VARIABLE
+OF YOUR CHOICE</h2>
+<p>Conduct a Moran’s I analyis including hypothesis test.</p>
+<p>Hint, <a
+href="https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html"
+class="uri">https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html</a></p>
+<p>Interpret the results. Do you see what you were expecting.</p>
+</div>
+</div>
+<div id="above-beyond---at-dr-gs-discretion" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> ABOVE &amp; BEYOND - at
+Dr G’s discretion</h1>
+<p>Want to jump several grades? You need to try something to get
+100%</p>
+<p>Do a wonderful analysis of an interesting question with the
+temperature data? For exmaple: + Can you see the urban heat island
+effect?<br />
++ Can you see a relationship with elevation? + Can you see one of the
+original lab relationships? Which was the coldest bar? Can you prove
+it?</p>
 <p>Remember to say what you did in the report.</p>
 </div>
 <div id="predict-your-grade" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Predict your grade</h1>
 <p><strong>HTML AND RMD FILE SUBMISSION - 20 marks</strong></p>
-<p><strong>REPORT STYLE: Text/Markdown/code style - 10
+<p><strong>REPORT STYLE: Text/Markdown/code style - 20
 MARKS</strong></p>
 <p><strong>REPORT COMPLETENESS</strong> - are all the steps followed? -
 10 MARKS</p>
@@ -760,17 +854,10 @@ MARKS</strong></p>
 <li>I am assessing you both on knowing WHAT to include and on your
 communication</li>
 </ul>
-<p><strong>BEAUTIFUL MAPS</strong> - 10 MARKS</p>
-<ul>
-<li>This includes understanding the projection of the
-data/graphics.</li>
-</ul>
-<p><strong>POINT PATTERN DESCRIPTIVE STATS AND STANDARD ELLIPSE</strong>
-- 10 MARKS</p>
-<p><strong>DENSITY BASED MEASURES</strong> - 10 MARKS</p>
-<p><strong>DISTANCE BASED MEASURES Inc hyp test</strong> - 16 MARKS</p>
-<p><strong>ABOVE AND BEYOND</strong> (4 Marks). You MUST write what you
-did, see above for instructions.</p>
+<p><strong>BEAUTIFUL MAPS</strong> - 20 MARKS</p>
+<p><strong>MORAN’S I ANALYSIS</strong> - 20 MARKS</p>
+<p><strong>ABOVE AND BEYOND</strong> (as many as Dr G wants). You MUST
+write what you did, see above for instructions.</p>
 <p>**</p>
 <div id="what-your-grade-means" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> What your grade

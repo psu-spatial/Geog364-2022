@@ -10,8 +10,13 @@ output:
 ---
 
 ```{r setup, include=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
-''
+```
+
+
+```{r, include=FALSE,warning=FALSE,message=FALSE}
+
 library(corrplot)
 library(hrbrthemes)
 library(kableExtra)
@@ -57,7 +62,7 @@ This lab can replace EITHER
 
 SUBMISSION THURSDAY NIGHT FINAL DEADLINE. I have to get the grades out on Fri
 
-Overall, here is what your lab should correspond to. If you get to the end and do the bare minimum that's probably going to be a C.  100% is going to be hard.
+Overall, here is what your lab should correspond to. If you get to the end and do the bare minimum that's probably going to be a C.  To get a B, you need to do at least some of the BONUS options.  To get an A you need to attempt them all. 100% is hard.
 
 ```{r, echo=FALSE}
 rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
@@ -162,6 +167,7 @@ library(spatstat)
 library(car)
 library(maptools)
 library(USAboundaries)
+library(tigris)
 
 ```
 
@@ -181,13 +187,14 @@ If a package doesn't work, don't panic,see if you can (re) install it, or just r
 
 1.  Use this code to automatically download the data and read it into R. Remember to retype ALL the quote marks if you get a weird error.   <br>
 
-```{r}
+```{r, results="hide"}
 #Where the data is stored
  url_data <- "https://github.com/hgreatrex/GEOG364_Labs/blob/master/GEOG364_Summary_TemperatureData.xlsx?raw=true"
 
 #Download it into your project folder and read it into R
- download.file(url_data, destfile = "Temperature_Data.xlsx" , verbose=TRUE)
- temperature_data <- read_excel("Temperature_Data.xlsx")
+ download.file(url_data, destfile = "temp_data.xlsx" , verbose=TRUE)
+ temp_data <- read_excel("temp_data.xlsx")
+ summary(temp_data)
 ```
 
 2. Take a look at the data (remember the `View()` command). <br>
@@ -214,9 +221,15 @@ If your sensor isn't there, sorry!  I got most of them figured out (yours is saf
 3. We now need to do some quality control.  These commands will remove any missing locations and 
 
 ```{r}
-temperature_data <- temperature_data[is.na(temperature_data$Long)==FALSE,]
-temperature_data <- temperature_data[is.na(temperature_data$Lat)==FALSE,]
-temperature_data$Lab <- as.factor(temperature_data$Lab)
+# For some reason they're recording as text
+temp_data$Long <- as.numeric(temp_data$Long)
+temp_data$Lat <- as.numeric(temp_data$Lat)
+
+
+# Remove missing rows just for locations
+temp_data <- temp_data[is.na(temp_data$Long)==FALSE,]
+temp_data <- temp_data[is.na(temp_data$Lat)==FALSE,]
+temp_data$Lab <- as.factor(temp_data$Lab)
 ```
 
 
@@ -228,77 +241,157 @@ temperature_data$Lab <- as.factor(temperature_data$Lab)
 
 4. Use the table command to work out how many sensors were placed by each lab. <br>
 
-5. Make an sf version of the data e.g. make it spatial. Hint <br>
+5. Make an sf version of the data in long/lat. (Hint 4326) <br>
 
-6. BONUS FOR STUDENTS AIMING FOR AN A: Transform the map projection of the data into an appropriate UTM map projection system. (hint   <br>
+## Make Spatial
+
+Make a new sub-section. I will help you with the code
+
+6. Use this code to download the state borders and the elevations for PA.  
+
+   a. **BONUS FOR STUDENTS AIMING FOR A: Edit the code chunk options so that it doesn't output any text.**
 
 
-## Make Spatial and Plot
+```{r, results="hide"}
 
-Make a new sub-section.
+#---------------------------------------------------------------------------------
+# Make the temp data spatial and merge
+#---------------------------------------------------------------------------------
+ temp_data.sf <- st_as_sf(temp_data, coords = c("Long", "Lat"),crs=4326)
 
-6. Use this code to download the state borders.  Note, some people said Tigris is better for borders. Feel free to use that
+ 
+#---------------------------------------------------------------------------------#
+# Now we will use the tigris package to get state college borders 
+#---------------------------------------------------------------------------------
 
-```{r}
-#---------------------------------------------------------------------------------#  us_states is from the USAboundaries package
-#--------------------------------------------------------------------------------- 
- state.border <- us_states(states = "pennsylvania")
- state.border.utm <- st_transform(state.border,6346)
-```
+# State College borders
+ PA.Towns <- places(state = "PA", cb = TRUE, year=2017)
+ SCE.border.sf <- filter(PA.Towns, NAME == "State College")
 
-7. Use this code to download a raster of elevations for PA. Edit the code chunk options so that it doesn't output any text ([hint](https://warin.ca/posts/rcourse-howto-usechunkoptions/#:~:text=The%20chunk%20option%20results%20%3D%20hide,of%20a%20spreadsheet%20in%20R)).
+# Centre County
+ PA.Counties <- counties(state = "PA", resolution = "500k")
+ CentreCounty.border.sf <- filter(PA.Counties, NAME == "Centre")
 
-```{r, results=FALSE}
 #---------------------------------------------------------------------------------
 #  get_elev_raster is from the elevatr package. Might take a second to download
+# If it takes too long, take z from 13 to say 6. Lower the number the faster.
 #---------------------------------------------------------------------------------
- elevation.utm <- get_elev_raster(state.border.utm, z = 5,clip="locations")
+ SCE.elevation <- get_elev_raster(temp_data.sf,z =14,clip="locations",expand=0.005)
+ temp_data.sf$Elevation <- raster::extract(SCE.elevation,temp_data.sf)
+
 
 ```
 
-12. Copy the code above into a new code chunk and make sure it runs. You might get errors about Discarded datum Unknown based on GRS80 ellipsoid in CRS definition, or only first attribute column is used for marks. Ignore them.
+7. Get the code above running in your script.  
 
-13. Look at the output of the plot, which shows the points plotted over elevation data. Below the code chunk, write your assessment of the spatial structure of the fossils. In your opinion do the locations show positive or negative autocorrelation?  What processess (if any) do you think caused this pattern? 
-
-
+8. **FOR STUDENTS AIMING FOR AN A: Transform the map projection of EVERY sf dataset into an appropriate UTM map projection system. [hint see here]( https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tut11ab_proj) or lab 7. <br>
 
 
-# ABOVE & BEYOND
+## Make cool plots and tell a story about the data
 
-To get the 4 marks **CHOOSE ONE** of these options AND EXPLAIN WHAT YOU DID.
+Now.. it's time to be creative. 
 
- -  OPTION 1: Try the fancy plot challenge in step 11 above
+Explore the data!  Make AT LEAST 4 maps showing different aspects of the data.  
+
+There are about 20 different variables - so think about what you what to show.  Is it something about frost times?  Temperature extremes?  Looking at what each lab did? Looking at the relationship between light and temperature?  Here's how I will grade it
+
+ - Full Marks: Beautiful professional exploratory analysis that you could show in a job interview
+ - A: You tell an interesting story and you have beautiful plots
+ - A-: Get the plots working but it's not clear there's a coherent story
+ - B: Get the plots working OR explain what you want to show
+ - C: Real attempt
+ - D: You start the section
  
- <br>
+ If you want ideas, see here: https://psu-spatial.github.io/Geog364-2021/364Data_TutorialWranglePoint.html#Cropping_to_a_stateshapefile
+
+## Make voronoi polygons,
+
+We now need to make Voronoi polygons to allow us to do Moran's I etc. Again I will provide the code.
+
+```{r}
+# Copy and paste this code. It should run.
+
+st_voronoi_point <- function(points){
+    ## points must be POINT geometry
+    # check for point geometry and execute if true
+    if(!all(st_geometry_type(points) == "POINT")){
+        stop("Input not  POINT geometries")
+    }
+    g = st_combine(st_geometry(points)) # make multipoint
+    v = st_voronoi(g)
+    v = st_collection_extract(v)
+    return(v[unlist(st_intersects(points, v))])
+}
+
+v = st_voronoi_point(temp_data.sf)
+p <- st_voronoi(temp_data.sf)
+pv = st_set_geometry(p, v)
+st_crs(pv)  <- st_crs(SCE.border.sf)
+
+temp_data.polygon.sf <-  ms_clip(target = pv, clip = SCE.border.sf, 
+                              remove_slivers = TRUE)
+
+# Delete all the unneessary stuff
+rm(v)
+rm(p)
+rm(pv)
+rm(PA.Towns)
+rm(PA.Counties)
+rm(st_voronoi_point)
+rm(rubric)
+rm(url_data)
+```
+
+OK we now have several data-sets:
+
+ - Centre County borders: CentreCounty.border.sf
+ - State College City borders: SCE.border.sf
+ - State College Elevation: SCE.elevation
+ - The raw temperature data: temp_data
+ - The spatial temperature data: temp_data.sf
+ - Voronoi polygons of temperature data: temp_data.polygon.sf
  
- -  OPTION 2: Fully and completely interpret the L analysis above, including explaining what a Monte Carlo process is and what the cloud means
+ 9. Get the code running and make some QTM plots to explain what voronoi polygons are.
  
-  <br>
-
-Or..... OPTION: 3 the old school 'show me something new'
-
- - You get 2/4 for doing something new in any way
- - You get 4/4 for something really impressive
-
-
-To help with this, you could also look at some other point pattern tutorials because they are all linked into spatstat. There are loads of things you could do to build your knowledge of point pattern analysis
-
- - http://spatstat.org/Melb2018/solutions/solution03.html (density)
- - http://spatstat.org/Melb2018/solutions/solution04.html (poisson)
- - http://spatstat.org/Melb2018/solutions/solution05.html (marked)
- - http://spatstat.org/Melb2018/solutions/solution06.html (K and L functions)
- - https://mgimond.github.io/Spatial/point-pattern-analysis-in-r.html
- - https://bhaskarvk.github.io/user2017.geodataviz/notebooks/02-Static-Maps.nb.html  
- - https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html
- - https://www.r-bloggers.com/2018/08/how-to-cite-packages/
  
+## Spatial weights matrix 
+
+Use the tutorial here to make a spatial weights matrix from the polygon data.
+
+https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html#spatial-weights-matrix
+
+ALTERNATIVELY - you can use any of the techniques here (genuine bonus marks - https://rspatial.org/raster/analysis/analysis.pdf)
+ 
+## Now FOR THE VARIABLE OF YOUR CHOICE
+
+Conduct a Moran's I analyis including hypothesis test.
+
+Hint, https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html
+
+Interpret the results. Do you see what you were expecting.
+
+
+# ABOVE & BEYOND - at Dr G's discretion
+
+Want to jump several grades? You need to try something to get 100% 
+
+
+Do a wonderful analysis of an interesting question with the temperature data?  For exmaple:
+  + Can you see the urban heat island effect?  
+  + Can you see a relationship with elevation?
+  + Can you see one of the original lab relationships?  Which was the coldest bar? Can you prove it?
+  
+
  Remember to say what you did in the report.
+ 
+ 
+ 
 
 # Predict your grade
 
 **HTML AND RMD FILE SUBMISSION - 20 marks**
 
-**REPORT STYLE: Text/Markdown/code style - 10 MARKS**
+**REPORT STYLE: Text/Markdown/code style - 20 MARKS**
 
 **REPORT COMPLETENESS** - are all the steps followed? - 10 MARKS
 
@@ -306,17 +399,12 @@ To help with this, you could also look at some other point pattern tutorials bec
 
  - I am assessing you both on knowing WHAT to include and on your communication
 
-**BEAUTIFUL MAPS** - 10 MARKS
+**BEAUTIFUL MAPS** - 20 MARKS
 
- - This includes understanding the projection of the data/graphics.
+**MORAN'S I ANALYSIS** - 20 MARKS
 
-**POINT PATTERN DESCRIPTIVE STATS AND STANDARD ELLIPSE** - 10 MARKS
-
-**DENSITY BASED MEASURES** - 10 MARKS
-
-**DISTANCE BASED MEASURES Inc hyp test** - 16 MARKS
-
-**ABOVE AND BEYOND** (4 Marks). You MUST write what you did, see above for instructions.
+**ABOVE AND BEYOND** (as many as Dr G wants). 
+You MUST write what you did, see above for instructions.
 
 **
 
