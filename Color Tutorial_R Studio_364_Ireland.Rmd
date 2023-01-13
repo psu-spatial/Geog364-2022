@@ -1,0 +1,322 @@
+---
+title: "Choosing Color for Maps in R: A Tutorial"
+author: "Ireland Hackman"
+date: "2022-12-03"
+output: 
+  prettydoc::html_pretty:
+  theme: leonids
+  highlight: github
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(ggpubr)
+library(tmap)
+library(sf)
+library(shinyjs)
+library(viridis)
+```
+
+# Significance of Color on Maps
+
+When creating maps, whether said map is shown in a magazine, on a website, or even on presented to your boss as part of a report, a very important decision has to be made first: What color scheme will be used. While this may seem like a rather unimportant decision to some, the color scheme of a map should be a well-thought-out choice when putting forth a map that will be viewed by others.
+
+Color can be used as a way to display data on different types of maps in various ways. Not to mention, depending on the individual, they may interpret the overall takeaway of the mapped data differently. Before we fully dive into this topic, though, let's start with some quick information on why color matters.
+
+## The three parts of color
+
+There are three main components that make up what each one of us define as "color". These three components are known as hue, lightness, and saturation.
+
+### Hue
+
+Hue is what most people know think about when they think about color. In Cynthia Brewer's book "Designing Better Maps: A Guide for GIS Users", she defines hue as "the perceptual dimension of color that we associate with color names, such as red and yellow" (Brewer, 130).
+
+Some more common hue combinations that people tend to think of are cyan, magenta, and yellow or red, green, and blue. Also, we can just use different hues to map things such as area or types of crop harvest across various counties in the United States.
+
+```{r, echo=FALSE, fig.align='center', out.width="70%", fig.cap= "*Mapping Crop Harvest with Different Hues, image from https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/better-colors-for-better-mapping/.*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Mapping with Hues.jpg")
+
+```
+
+### Lightness
+
+The next component that makes up color is lightness. Lightness is defined as "how much light appears to reflect (or emit) from an object compared to what looks white in the scene" (Brewer, 134). In the image below, a range of lightness for four colors is shown.
+
+```{r, echo=FALSE, fig.align='center', out.width="40%", fig.cap= "*Lightness scales for gray, blue, purple, and brown (left to right), image from: https://en.wikipedia.org/wiki/Lightness*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Lightness in Four Colors.png")
+
+```
+
+As we can see, white is the lightest and black is the least light. However, for all four of these examples (especially for blue, purple, and brown), each respective color shares the same hue from eight to one while lightness is what changes.
+
+Lightness is used quite often for mapping data with a range of various values, whether that's a change in elevation (such as shown in DEM files) or whether it's used to indicate a change in quantity (such as change in population density.)
+
+Generally speaking, water depth, population change, and other similar types of data tend to have lighter colors when it comes to showing less change in the data. Therefore, darker colors will also show more change in the data.
+
+```{r, echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Predicted Change in Sea Level Rise by the year 2100, image from: https://inhabitat.com/new-map-of-sea-level-rise-projections-highlights-worlds-most-at-risk-cities/*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Sea Level Change_lightness_cropped.jpg")
+
+```
+
+The third and final aspect of color we will be discussing is saturation.
+
+### Saturation
+
+Saturation is defined as "a measure of the vividness of a color" (Brewer, 134). Based on this definition alone, saturation is a hard concept to understand. There are a fair number of more specific terms to define saturation, depending upon which field of studies one is interested in, but since this is just for a basic understanding of color components, we will avoid the nitty-gritty details.
+
+The most basic understanding of saturation is that less saturation equals a more gray shade. Speaking from a practical point of view, using change in saturation as a range for mapping symbols is not a great option.
+
+While this next picture is not a mapping example, I find it better helps to display what change in saturation looks like.
+
+```{r, echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Change in Saturation, image from: https://digitalartsworkshop.wordpress.com/2014/03/01/agenda-31/*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Saturation Example.jpg")
+
+```
+
+The best option to create attractive maps is use all three parts of color together. Now that we've learned about the basic parts of color, we can discuss the different ways hue, lightness, and saturation interact with each other.
+
+## Visualizing Color Space
+
+There are a handful of different ways to visualize color space, and some are more difficult to understand than others. Here are three different options to understand the relationships between hue, lightness, and saturation. Please take a moment to look around the websites listed in this section.
+
+### Munsell Color Space
+
+Munsell color space can be visualized as either two-dimensional(2D), a volume, or a color solid. The website listed below has multiple options to view color space, as well as options for visualizing some of the complex aspects of saturation mentioned above.
+
+Munsell Color Space Website: <https://munsell.com/about-munsell-color/how-color-notation-works/>
+
+### HSV
+
+Visualizing HSV color space can be seen either in the two-dimensional sense or as a color solid. The website listed below is an interactive cone which shows the relationship between Hue, Saturation, and Lightness (aka Value).
+
+HSV Color Space Website: <http://color.lukas-stratmann.com/color-systems/hsv.html>
+
+### Color Cubes
+
+I find color cubes to be the most complex way to visualize color space, but the website listed below shows the relationships between the three aspects of color, using the RGB color scheme. It also includes an interactive way of seeing the relationships, similar to the interactive activity on the HSV Color Space website. If you're interested in this interactive visualization, be sure to scroll down far enough - it's located close to the bottom of the page.
+
+Color Cube Website: <https://alexanderell.is/posts/rgb-color-space/>
+
+## Pitfalls to Avoid When Utilizing Color
+
+We have one more thing to talk about before we get to the coding part of this tutorial: pitfalls and things to be aware of when we start to use color for mapping. There are two main things I want to focus on in this section, but let's start with the concept of color blindness.
+
+### Color Blindness
+
+According to www.mayoclinic.org, color blindness is defined as "an inability to see the difference between colors" (Mayo Clinic, 2022). There are multiple types of color blindness, ranging from red-green (the inability to see the difference between red and green), blue-yellow (the inability to see the difference between blue and yellow), and complete color blindness. Some examples are shown below.
+
+```{r, echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Types of Red Green Color Blindness, image from: https://eyesteve.com/color-blind-christmas/*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Red Green Color Blind.jpg")
+
+```
+
+
+```{r, echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Example of Blue-Yellow Color Blindness, image from: https://www.insider.com/what-it-looks-like-to-be-color-blind-2018-1*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Blue Yellow Color Blindness.webp")
+
+```
+
+
+```{r,echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Types of Color Blindness and Their Rarity, image from: https://en.wikipedia.org/wiki/Color_blindness*"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Color Blindness Types and Rarity.png")
+
+```
+
+
+If you'd like a more comprehensive understanding about how color blindness works and what can cause it, feel free to visit the article about this topic listed on the Mayo Clinic's website (<https://www.mayoclinic.org/diseases-conditions/poor-color-vision/symptoms-causes/syc-20354988>).
+
+Additionally, this article from Insider.com shows multiple images of how one individual with color blindness sees the world, if you're interested in more examples (<https://www.insider.com/what-it-looks-like-to-be-color-blind-2018-1>).
+
+Since some individuals are not able to see colors as well as the rest of us, it is important to consider our color schemes when making maps. Some color scheme programs do offer color-blind friendly options (like ColorBrewer), but this is just something to be aware of when choosing color schemes to map data. One more thing to keep in mind is to be careful of choosing stereotypical color schemes for certain types of data.
+
+### Avoid Using Stereotypical Color Schemes
+
+When choosing a color scheme for a map, keeping color blindness in mind is a good practice. In making these color choices, though, we also want to make sure we avoid using stereotypical colors for certain groups of people (i.e. using brown or black to represent African Americans, yellow to represent Asian individuals, red to represent Native Americans, etc). Below is an example of what NOT to do.
+
+```{r, echo=FALSE, fig.align='center', out.width="60%", fig.cap= "*Stereotypical Skin Colors to Represent Various People Groups, image from Cynthia Brewer's book* Designing Better Maps: A Guide for GIS Users"}
+
+knitr::include_graphics("C:\\Users\\Lindy\\Documents\\School Assignments_Fall_22\\Pictures for 364_ColorTut\\Bad Map.jpg")
+
+
+```
+
+Additionally, it is also a good idea to avoid using red and blue as a color scheme for political maps. While this is a tempting idea and a common color scheme for many political maps, using these colors might be a poor decision if one of the mentioned colors is "associated with a controversial political party in the region mapped" (Brewer, 159).
+
+Now that you're well read-up on smart mapping choices concerning color, let's talk a little bit about how to make these color choices when coding in R.
+
+## Using Color on Maps
+
+Let's start with the one of the more basic options: using qtm for color choices.
+
+### Using qtm
+
+```{r}
+
+##Reading in the data##
+data(World, rivers, metro)
+##The most basic option for mapping.##
+qtm(World, fill = "lightgreen")
+
+```
+
+Figure 1: A basic world map, with all of the countries one color.
+
+With figure 1, we chose a simple color with which to fill in all the countries. We can choose different color names, instead of light green, but this time, let's try creating a map that has multiple colors to indicate some type of data being shown.
+
+```{r}
+
+##Using qtm to create a quick map where we use different colors to show the different types of income group in the world.
+
+##The fill option can be either used to indicate a color, as seen with figure 1, or it can be used to indicate what kind of data we want R to color code by.##
+qtm(World, fill="income_grp", format= "World")
+
+```
+
+Figure 2: Income group for each country.
+
+As we can see here, this is a rather quick approach for putting some color on a map. The colors are pre-chosen by RStudio, so we don't get much say in how these color combinations happen. In order to get more variety in our color choices, we'd want to use tmap instead of qtm.
+
+Let's take a look at how to get some more options for color choices.
+
+### Using tmap package
+
+```{r}
+##Basic way to map things using the tmap package without using the qtm function.##
+tm_shape(World)+tm_polygons('pink')
+
+```
+
+Figure 3: Using the tmap function to do the same thing we did in figure 1.
+
+Additionally, using the tmap function also allows us the ability to view more than one data layer at a time. For example, in figure 4 below, we not only are able to see all the countries in the world, but also which continent each of these countries belong to.
+
+```{r}
+
+##Choosing a different color palette from the available options.##
+tm_shape(World) + tm_polygons(col='continent', palette = "Set2")
+
+##In order to see all possible palette options for different types of maps, enter tmaptools::palette_explorer()  in the console area to see the various palette options. 
+##If you choose to use this method, make sure to close the window after you're done using this tab. Otherwise, it WILL keep running in the background.##
+
+```
+
+Figure 4: Choosing a different color palette for our map.
+
+There are a lot of different options of how to use tmap in terms of mapping different datasets. 
+For more information on how to map with tmap functions, be sure to take a look through this link: <https://geocompr.github.io/post/2019/tmap-color-scales/>
+
+Now, let's take a look on how to choose colors using ggplot2.
+
+### Using ggplot2
+
+```{r}
+##Taking a look at the dataset##
+##view(mtcars)
+
+##Turning our data into a graph. 
+##Aes specifies which variable(s) should be plotted on the graph that we are creating. 
+##Geom_density says that we're creating a plot with a smooth line. 
+##Color chooses which color we want the line on top of the graph to be. 
+##Fill chooses the fill color we want the graph to be. 
+##Size will change the thickness of the line.
+
+##For choosing fill colors, feel free to use this website to change your wanted color: https://hslpicker.com/ The code you'd want to put in the fill option of your geom_density is the miscellaneous number/letter combination in the farthest left location.
+
+ggplot(mtcars, aes(x=drat)) +
+  geom_density(
+    color="blue",
+    fill="#d02fa5",
+    size=1.5
+  )
+
+```
+
+Figure 5: Plotting some data using the ggplot2 package.
+
+This is not the only way to use colors for certain datasets.
+
+```{r}
+##Taking a look at the data##
+##view(iris)
+
+##Creating a scatterplot of the data with Sepal.Length as the x-variable, Sepal.Width as the y-variable, and each different species will get a different color.
+##And the size option in the geom_point tells us how big they'll be making the points.##
+ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) +
+  geom_point(size=4)
+
+```
+
+Figure 6: Plotting different iris species, with unique colors for each of the iris species.
+
+As we can see in figure 6, ggplot will choose default colors for our graph. However, if we don't like these colors for our graph, we can choose another color scheme. 
+
+```{r}
+##Same as the data from example 6. However, we're giving it a name so we can define which color scheme we want to use when R displays the graph.##
+iris_print <-ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species))
+
+##Defining the color scheme.##
+iris_print +
+  geom_point(size=4) + scale_color_viridis(discrete=TRUE)
+
+```
+
+Figure 7: Using the Viridis color scale to map the same data from figure 6.
+
+The color scheme chosen in Figure 7 is a color-blind friendly option.
+
+### Links for more information
+
+If you're interested in learning more about any of these topics in detail, here's a list of some websites I found which give a bit more background about these topics than what was able to fit inside this tutorial. 
+
+#### Tmap package notes and more color options
+
+-   <https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html>
+
+-   <https://geocompr.github.io/post/2019/tmap-color-scales/>
+
+#### General Color Notes
+
+-   <https://bookdown.org/rdpeng/exdata/plotting-and-color-in-r.html>
+
+
+By now, you've gained knowledge about the different aspects of color and their relationships between each other, as well as how to choose color schemes via different packages and their functions. 
+As you venture out into the professional world, please keep what you have learned here in mind and create some amazing and intelligible maps.
+
+#### References and Sources Utilized
+
+##### Books and Articles
+
+-   Brewer, Cynthia A. "Chapter 7-8." *Designing Better Maps: A Guide for GIS Users*, 2nd ed., ESRI Press, Redlands, CA, 2016, pp. 130--159.
+-   Mayo Clinic Staff. \"Color Blindness.\" *Mayo Clinic*, Mayo Foundation, 28 Dec. 2019, <https://www.mayoclinic.org/diseases-conditions/poor-color-vision/symptoms-causes/syc-20354988.>
+
+##### Pictures
+
+-   Sasso, Davide. *Insider*, Insider Inc., 18 Jan. 2018, <https://www.insider.com/what-it-looks-like-to-be-color-blind-2018-1.> Accessed 30 Nov. 2022.
+
+-   *ArcGIS Blog*, Esri, 14 Jan. 2020, <https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/better-colors-for-better-mapping/.> Accessed 30 Nov. 2022.
+
+-   *Designing Better Maps: A Guide for GIS Users*, Esri Press, Redlands, CA, 2016, p. 159.
+
+-   *Digital Arts Workshop*, Brad Olson, 1 Mar. 2014, <https://digitalartsworkshop.wordpress.com/2014/03/01/agenda-31/.> Accessed 30 Nov. 2022.
+
+-   *EyeSteve*, Wordpress, 24 Dec. 2013, <https://eyesteve.com/color-blind-christmas/.> Accessed 30 Nov. 2022.
+
+-   *InHabitat*, 8 Feb. 2013, <https://inhabitat.com/new-map-of-sea-level-rise-projections-highlights-worlds-most-at-risk-cities/.> Accessed 30 Nov. 2022.
+
+-   *Wikipedia*, Wikimedia Foundation, Inc., 12 Oct. 2022, <https://en.wikipedia.org/wiki/Lightness.> Accessed 30 Nov. 2022.
+
+-   *Wikipedia*, Wikimedia Foundation, Inc., 23 Nov. 2022, <https://en.wikipedia.org/wiki/Color_blindness>. Accessed 30 Nov. 2022.

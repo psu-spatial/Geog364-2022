@@ -95,27 +95,12 @@ practice..
 
 <br>
 
-### You 'speak' R in a CONSOLE {.unnumbered}
-
-You can "have a conversation" with your computer in the R-Langauge using
-a Console. There are many different ways you can access this, described
-later on.
-
-```{r, Tut_Fig1, echo=FALSE, fig.cap = "*The basic R console. You write in blue, the computer replies in black. The > means it is waiting for a command*",fig.align='center',out.width="80%"}
-knitr::include_graphics('./Figures/Tut_Fig2_markdown.png')
-```
-
-<br>
-
 ### The "VERSION" of R you use is important! {.unnumbered}
 
-Just like English has changed since Shakesperean times, the R language
-is always evolving. We keep track using Versions. For example, in the
-screenshot above, at the top of the console you can see it was made with
+Just like English has changed since Shakesperean times, the R language is always evolving. We keep track using Versions. For example, in the screenshot above, at the top of the console you can see it was made with
 `R version 4.1.0 Camp Pontanzen`
 
-*Because there are some important new spatial commands we will be using,
-we need the most up-to-date version of the R commands.*
+*To make sure we are all on the same page, we need the most up-to-date version of the R commands.*
 
 The version of R I am using is :
 
@@ -123,8 +108,7 @@ The version of R I am using is :
 paste(R.version$version.string,R.version$nickname,sep=" ")
 ```
 
-As long as yours is above that you should be fine. The current most
-recent version of the language on the website is:
+As long as yours is above that you should be fine. The current most recent version of the language on the website is:
 
 ```{r, echo=FALSE}
 GetRLatest()
