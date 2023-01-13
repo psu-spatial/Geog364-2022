@@ -28,7 +28,7 @@ navbar:
         - text: "TEMPERATURE LAB"
           href: index_GEOG364-22_Temp.html    
     - text: "Color-Tutorial"
-      href: Color-Tutorial_R-Studio_364_Ireland.html          
+      href: ColorTutorial_R-Studio_364_Ireland.html            
 output:  
   html_document:  
     self_contained: no  
