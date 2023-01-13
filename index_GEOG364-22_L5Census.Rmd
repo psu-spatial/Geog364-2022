@@ -42,6 +42,7 @@ library(units)
 
 The aim of this week's lab is a NORMAL TWO WEEK LAB (sorry for the confusion). We will focus on using Census data
 
+
 SEE CANVAS FOR SUBMISSION DATES.
 
 ## Get help

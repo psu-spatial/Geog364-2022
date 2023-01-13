@@ -1,0 +1,422 @@
+---
+title:  "<br> TEMPERATURE LAB"
+author: "Dr Greatrex"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    highlight: kate
+    number_sections: yes
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+
+```{r, include=FALSE,warning=FALSE,message=FALSE}
+
+library(corrplot)
+library(hrbrthemes)
+library(kableExtra)
+library(olsrr)
+library(plotly)
+library(raster)
+library(readxl)
+library(rnaturalearth)
+library(rmapshaper)
+library(sf)
+library(sp)
+library(skimr)
+library(spatialreg)
+library(spatialEco)
+library(spdep)
+library(tidyverse)
+library(tidycensus)
+library(tigris)
+library(tmap)
+library(units)
+library(USAboundaries)
+library(viridis)
+library(VIM)
+
+library(elevatr)
+library(RColorBrewer)
+library(spatstat)
+library(car)
+library(maptools)
+
+
+```
+
+## Welcome to the temperature lab! {.unnumbered}
+
+<br>
+
+This lab can replace EITHER
+
+ - One of your exams. (e.g. none of your exams count! In real life there are ppl who are great at statistics who suck at exams)
+ - One of your labs AS WELL AS YOUR DROP
+ - 20 participation points.
+
+SUBMISSION THURSDAY NIGHT FINAL DEADLINE. I have to get the grades out on Fri
+
+Overall, here is what your lab should correspond to. If you get to the end and do the bare minimum that's probably going to be a C.  To get a B, you need to do at least some of the BONUS options.  To get an A you need to attempt them all. 100% is hard.
+
+```{r, echo=FALSE}
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
+knitr::kable(rubric) %>%   
+  kable_classic_2() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+
+```
+
+
+
+## Get help {.unnumbered}
+
+If a link to a tutorial is broken, you should be able to go to the
+tutorial number and find it in the menu.
+
+Teams is the fastest way to get help. [CLICK THIS LINK FOR THE TEAMS
+WEBSITE FOR LAB
+HELP](https://teams.microsoft.com/l/channel/19%3a9b475a4ed1684397a290b96a60c8377d%40thread.tacv2/TEMPERATURE%2520LABS?groupId=5e74a2d7-3a10-409a-b38d-50875fd02455&tenantId=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+
+
+
+<br>
+
+# LAB SET-UP - READ THIS, YOU WILL BE GRADED!
+
+<br>
+
+## Create project
+
+-   Using R-CLOUD? : click here. This also has instructions on
+    uploading/downloading code from your computers.
+    <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#2_R-Studio_CLOUD>
+    <br><br>
+-   Using YOUR LAPTOP? : Click here: -
+    <https://psu-spatial.github.io/Geog364-2022/index_GEOG364-22_Tutorial_R.html#3_R-Studio_Desktop>
+
+<br>
+
+## Select template.
+
+Create your markdown file and choose a professional template, such as
+`PACKAGE rmdformats`, `PACKAGE rtemps` or `PACKAGE prettydoc`. You
+simply need to install the package from the "app store", then go to new
+Markdown FROM TEMPLATE. See the start of Lab 5 for a reminder. To browse
+the formats, see here:
+
+-   rmdformats : <https://github.com/juba/rmdformats>
+-   pretty docs : <https://prettydoc.statr.me/themes.html>
+-   rtemps : <https://github.com/bblodfon/rtemps>
+
+If you want to make websites or other formats, see here:
+<https://r4ds.had.co.nz/r-markdown-formats.html>, here:
+<https://bookdown.org/yihui/rmarkdown/tufte-handouts.html> or here
+<https://rmarkdown.rstudio.com/formats.html>.
+
+<br>
+
+## Add libraries
+
+**Edit the first "set-up" code chunk so it looks like this and run/knit.
+You might need additional libraries as you work through the lab. If so,
+add them in this code chunk AND REMEMBER TO RE-RUN THE CODE CHUNK.**
+
+If you see a little yellow bar at the top asking you to install
+them,click yes! If you find a library doesn't exist, install it from the app store, then
+add the library command in here to load.
+
+```{r, eval=FALSE}
+# SET UP
+knitr::opts_chunk$set(cache = TRUE,message=FALSE,warning=FALSE,echo=TRUE)
+```
+
+NOTE, I HAVE SPLIT THESE CODE CHUNKS IN TWO FOR THE TOP COMMAND TO PRINT.
+
+**PLEASE ALSO SPLIT THEM**
+
+```{r, eval=FALSE}
+# LIBRARIES
+library(tidyverse)
+library(dplyr)
+library(ggpubr)
+library(skimr)
+library(ggplot2)
+library(plotly)
+library(knitr)
+library(raster)
+library(sp)
+library(sf)
+library(tmap)
+library(terra)
+library(rnaturalearth)
+library(biscale)
+library(tidycensus)
+library(cowplot)
+library(units)
+library(remotes)
+library(elevatr)
+library(RColorBrewer)
+library(spatstat)
+library(car)
+library(maptools)
+library(USAboundaries)
+library(tigris)
+
+```
+
+Note, if you don't have elevatr, you will need to first install the `remotes` package, then run this code IN THE CONSOLE to get the package. Same with rnaturalearth and USA boundaries
+
+```{r, eval=FALSE}
+remotes::install_github("jhollist/elevatr")
+```
+
+If a package doesn't work, don't panic,see if you can (re) install it, or just remove from the code chunk.
+
+<br>
+
+# GETTING SET UP
+
+## Download and read-in the data
+
+1.  Use this code to automatically download the data and read it into R. Remember to retype ALL the quote marks if you get a weird error.   <br>
+
+```{r, results="hide"}
+#Where the data is stored
+ url_data <- "https://github.com/hgreatrex/GEOG364_Labs/blob/master/GEOG364_Summary_TemperatureData.xlsx?raw=true"
+
+#Download it into your project folder and read it into R
+ download.file(url_data, destfile = "temp_data.xlsx" , verbose=TRUE)
+ temp_data <- read_excel("temp_data.xlsx")
+ summary(temp_data)
+```
+
+2. Take a look at the data (remember the `View()` command). <br>
+It has these columns
+  + "Serial" - The serial number of the sensor
+  + "Lab" - The lab that placed it              
+  + "Long" - The longitude              
+  + "Lat" - The latitude              
+  + "Location"  - The location specified on Canvas         
+  + "Feet_From_Water" - Number of feet from Water (Tues Lab)   
+  + "Temp_Min" - Min Thanksgiving Temperature (celcius) (Nov 24)
+  + "Temp_Max" - Max Thanksgiving Temp
+  + "Temp_IQR" - The interquartile range of thanksgiving temperature
+  + "Temp_sd" - The standard deviation of thanksgiving temperature 
+  + "Light_Min" - Min Thanksgiving Light levels (Lux) (Nov 24)
+  + "Light_Max" - Max Thanksgiving Light levels
+  + "Light_IQR" - The interquartile range of thanksgiving Light levels
+  + "Light_sd"  - The standard deviation of thanksgiving Light levels   
+  + "Frost_Hrs" - Number of frost hours during Thanksgiving  (hours)        
+  + "Frost_FirstFrostHr" - Time in decimal hours of the first frost hr (e.g 12.5 = 12:30 PM) 
+
+If your sensor isn't there, sorry!  I got most of them figured out (yours is safe Clarissa, just couldn't get the data to load).
+
+3. We now need to do some quality control.  These commands will remove any missing locations and 
+
+```{r}
+# For some reason they're recording as text
+temp_data$Long <- as.numeric(temp_data$Long)
+temp_data$Lat <- as.numeric(temp_data$Lat)
+
+
+# Remove missing rows just for locations
+temp_data <- temp_data[is.na(temp_data$Long)==FALSE,]
+temp_data <- temp_data[is.na(temp_data$Lat)==FALSE,]
+temp_data$Lab <- as.factor(temp_data$Lab)
+```
+
+
+3.  Now, [USING MY LAB 6 TEMPLATE AS AN EXAMPLE OF STYLE/CONTENT](https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html) and what you learned from the data/the website, write a BRIEF background section containing all relevant information about the dataset.  Feel free to copy/paste my example and change the details.  Within this, explain 
++ If the data is marked <br>
++ If it is raster/vector <br>
++ What types of process you think might influence the pattern of temperatures (think back to your temp sampling lab)<br>
++ What pattern(s) you predict/expect to see <br>
+
+4. Use the table command to work out how many sensors were placed by each lab. <br>
+
+5. Make an sf version of the data in long/lat. (Hint 4326) <br>
+
+## Make Spatial
+
+Make a new sub-section. I will help you with the code
+
+6. Use this code to download the state borders and the elevations for PA.  
+
+   a. **BONUS FOR STUDENTS AIMING FOR A: Edit the code chunk options so that it doesn't output any text.**
+
+
+```{r, results="hide"}
+
+#---------------------------------------------------------------------------------
+# Make the temp data spatial and merge
+#---------------------------------------------------------------------------------
+ temp_data.sf <- st_as_sf(temp_data, coords = c("Long", "Lat"),crs=4326)
+
+ 
+#---------------------------------------------------------------------------------#
+# Now we will use the tigris package to get state college borders 
+#---------------------------------------------------------------------------------
+
+# State College borders
+ PA.Towns <- places(state = "PA", cb = TRUE, year=2017)
+ SCE.border.sf <- filter(PA.Towns, NAME == "State College")
+
+# Centre County
+ PA.Counties <- counties(state = "PA", resolution = "500k")
+ CentreCounty.border.sf <- filter(PA.Counties, NAME == "Centre")
+
+#---------------------------------------------------------------------------------
+#  get_elev_raster is from the elevatr package. Might take a second to download
+# If it takes too long, take z from 13 to say 6. Lower the number the faster.
+#---------------------------------------------------------------------------------
+ SCE.elevation <- get_elev_raster(temp_data.sf,z =14,clip="locations",expand=0.005)
+ temp_data.sf$Elevation <- raster::extract(SCE.elevation,temp_data.sf)
+
+
+```
+
+7. Get the code above running in your script.  
+
+8. **FOR STUDENTS AIMING FOR AN A: Transform the map projection of EVERY sf dataset into an appropriate UTM map projection system. [hint see here]( https://psu-spatial.github.io/Geog364-2021/pg_Tut11_spatial101.html#Tut11ab_proj) or lab 7. <br>
+
+
+## Make cool plots and tell a story about the data
+
+Now.. it's time to be creative. 
+
+Explore the data!  Make AT LEAST 4 maps showing different aspects of the data.  
+
+There are about 20 different variables - so think about what you what to show.  Is it something about frost times?  Temperature extremes?  Looking at what each lab did? Looking at the relationship between light and temperature?  Here's how I will grade it
+
+ - Full Marks: Beautiful professional exploratory analysis that you could show in a job interview
+ - A: You tell an interesting story and you have beautiful plots
+ - A-: Get the plots working but it's not clear there's a coherent story
+ - B: Get the plots working OR explain what you want to show
+ - C: Real attempt
+ - D: You start the section
+ 
+ If you want ideas, see here: https://psu-spatial.github.io/Geog364-2021/364Data_TutorialWranglePoint.html#Cropping_to_a_stateshapefile
+
+## Make voronoi polygons,
+
+We now need to make Voronoi polygons to allow us to do Moran's I etc. Again I will provide the code.
+
+```{r}
+# Copy and paste this code. It should run.
+
+st_voronoi_point <- function(points){
+    ## points must be POINT geometry
+    # check for point geometry and execute if true
+    if(!all(st_geometry_type(points) == "POINT")){
+        stop("Input not  POINT geometries")
+    }
+    g = st_combine(st_geometry(points)) # make multipoint
+    v = st_voronoi(g)
+    v = st_collection_extract(v)
+    return(v[unlist(st_intersects(points, v))])
+}
+
+v = st_voronoi_point(temp_data.sf)
+p <- st_voronoi(temp_data.sf)
+pv = st_set_geometry(p, v)
+st_crs(pv)  <- st_crs(SCE.border.sf)
+
+temp_data.polygon.sf <-  ms_clip(target = pv, clip = SCE.border.sf, 
+                              remove_slivers = TRUE)
+
+# Delete all the unneessary stuff
+rm(v)
+rm(p)
+rm(pv)
+rm(PA.Towns)
+rm(PA.Counties)
+rm(st_voronoi_point)
+rm(rubric)
+rm(url_data)
+```
+
+OK we now have several data-sets:
+
+ - Centre County borders: CentreCounty.border.sf
+ - State College City borders: SCE.border.sf
+ - State College Elevation: SCE.elevation
+ - The raw temperature data: temp_data
+ - The spatial temperature data: temp_data.sf
+ - Voronoi polygons of temperature data: temp_data.polygon.sf
+ 
+ 9. Get the code running and make some QTM plots to explain what voronoi polygons are.
+ 
+ 
+## Spatial weights matrix 
+
+Use the tutorial here to make a spatial weights matrix from the polygon data.
+
+https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html#spatial-weights-matrix
+
+ALTERNATIVELY - you can use any of the techniques here (genuine bonus marks - https://rspatial.org/raster/analysis/analysis.pdf)
+ 
+## Now FOR THE VARIABLE OF YOUR CHOICE
+
+Conduct a Moran's I analyis including hypothesis test.
+
+Hint, https://psu-spatial.github.io/Geog364-2022/ClassExampleMoran.html
+
+Interpret the results. Do you see what you were expecting.
+
+
+# ABOVE & BEYOND - at Dr G's discretion
+
+Want to jump several grades? You need to try something to get 100% 
+
+
+Do a wonderful analysis of an interesting question with the temperature data?  For exmaple:
+  + Can you see the urban heat island effect?  
+  + Can you see a relationship with elevation?
+  + Can you see one of the original lab relationships?  Which was the coldest bar? Can you prove it?
+  
+
+ Remember to say what you did in the report.
+ 
+ 
+ 
+
+# Predict your grade
+
+**HTML AND RMD FILE SUBMISSION - 20 marks**
+
+**REPORT STYLE: Text/Markdown/code style - 20 MARKS**
+
+**REPORT COMPLETENESS** - are all the steps followed? - 10 MARKS
+
+**DATASET BACKGROUND ** - 10 MARKS
+
+ - I am assessing you both on knowing WHAT to include and on your communication
+
+**BEAUTIFUL MAPS** - 20 MARKS
+
+**MORAN'S I ANALYSIS** - 20 MARKS
+
+**ABOVE AND BEYOND** (as many as Dr G wants). 
+You MUST write what you did, see above for instructions.
+
+**
+
+## What your grade means
+
+Why is 100% hard? Overall, here is what your lab should correspond to:
+
+```{r, echo=FALSE}
+rubric <- readxl::read_excel("index_GEOG364_22_LRubric.xlsx")
+knitr::kable(rubric) %>%   
+  kable_classic_2() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "responsive"))
+
+
+```
